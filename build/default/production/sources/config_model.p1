@@ -1,0 +1,179 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"24 Include/datos_venta.h
+[; ;Include/datos_venta.h: 24: void DatosVenta_Init(void);
+[v _DatosVenta_Init `(v ~T0 @X0 0 ef ]
+"9 sources/config_model.c
+[; ;sources/config_model.c: 9: uint16_t ConfigModel_Get(config_param_id_t id)
+[c E36 0 1 2 3 .. ]
+[n E36 . CFG_PRECIO1 CFG_PRECIO2 CFG_TIEMPO1 CFG_TIEMPO2  ]
+"12 Include/datos_venta.h
+[; ;Include/datos_venta.h: 12: typedef struct {
+[s S1 `us 1 `us 1 `us 1 `us 1 `us 1 `us 1 ]
+[n S1 . Precio1 Precio2 Tiempo1 Tiempo2 Contador1 Contador2 ]
+"27
+[; ;Include/datos_venta.h: 27: const DATOS_VENTA_t* DatosVenta_Get(void);
+[v _DatosVenta_Get `(*CS1 ~T0 @X0 0 ef ]
+"30
+[; ;Include/datos_venta.h: 30: _Bool DatosVenta_SetPrecio1(uint16_t v);
+[v _DatosVenta_SetPrecio1 `(a ~T0 @X0 0 ef1`us ]
+"31
+[; ;Include/datos_venta.h: 31: _Bool DatosVenta_SetPrecio2(uint16_t v);
+[v _DatosVenta_SetPrecio2 `(a ~T0 @X0 0 ef1`us ]
+"32
+[; ;Include/datos_venta.h: 32: _Bool DatosVenta_SetTiempo1(uint16_t v);
+[v _DatosVenta_SetTiempo1 `(a ~T0 @X0 0 ef1`us ]
+"33
+[; ;Include/datos_venta.h: 33: _Bool DatosVenta_SetTiempo2(uint16_t v);
+[v _DatosVenta_SetTiempo2 `(a ~T0 @X0 0 ef1`us ]
+"40
+[; ;Include/datos_venta.h: 40: void DatosVenta_Save(void);
+[v _DatosVenta_Save `(v ~T0 @X0 0 ef ]
+"4 sources/config_model.c
+[; ;sources/config_model.c: 4: void ConfigModel_Init(void)
+[v _ConfigModel_Init `(v ~T0 @X0 1 ef ]
+"5
+[; ;sources/config_model.c: 5: {
+{
+[e :U _ConfigModel_Init ]
+[f ]
+"6
+[; ;sources/config_model.c: 6:     DatosVenta_Init();
+[e ( _DatosVenta_Init ..  ]
+"7
+[; ;sources/config_model.c: 7: }
+[e :UE 2 ]
+}
+"9
+[; ;sources/config_model.c: 9: uint16_t ConfigModel_Get(config_param_id_t id)
+[v _ConfigModel_Get `(us ~T0 @X0 1 ef1`E36 ]
+"10
+[; ;sources/config_model.c: 10: {
+{
+[e :U _ConfigModel_Get ]
+"9
+[; ;sources/config_model.c: 9: uint16_t ConfigModel_Get(config_param_id_t id)
+[v _id `E36 ~T0 @X0 1 r1 ]
+"10
+[; ;sources/config_model.c: 10: {
+[f ]
+"11
+[; ;sources/config_model.c: 11:     const DATOS_VENTA_t *d = DatosVenta_Get();
+[v _d `*CS1 ~T0 @X0 1 a ]
+[e = _d ( _DatosVenta_Get ..  ]
+"13
+[; ;sources/config_model.c: 13:     switch (id) {
+[e $U 5  ]
+{
+"14
+[; ;sources/config_model.c: 14:         case CFG_PRECIO1: return d->Precio1;
+[e :U 6 ]
+[e ) . *U _d 0 ]
+[e $UE 3  ]
+"15
+[; ;sources/config_model.c: 15:         case CFG_PRECIO2: return d->Precio2;
+[e :U 7 ]
+[e ) . *U _d 1 ]
+[e $UE 3  ]
+"16
+[; ;sources/config_model.c: 16:         case CFG_TIEMPO1: return d->Tiempo1;
+[e :U 8 ]
+[e ) . *U _d 2 ]
+[e $UE 3  ]
+"17
+[; ;sources/config_model.c: 17:         case CFG_TIEMPO2: return d->Tiempo2;
+[e :U 9 ]
+[e ) . *U _d 3 ]
+[e $UE 3  ]
+"18
+[; ;sources/config_model.c: 18:         default: return 0;
+[e :U 10 ]
+[e ) -> -> 0 `i `us ]
+[e $UE 3  ]
+"19
+[; ;sources/config_model.c: 19:     }
+}
+[e $U 4  ]
+[e :U 5 ]
+[e [\ -> _id `ui , $ -> . `E36 0 `ui 6
+ , $ -> . `E36 1 `ui 7
+ , $ -> . `E36 2 `ui 8
+ , $ -> . `E36 3 `ui 9
+ 10 ]
+[e :U 4 ]
+"20
+[; ;sources/config_model.c: 20: }
+[e :UE 3 ]
+}
+"22
+[; ;sources/config_model.c: 22: _Bool ConfigModel_Set(config_param_id_t id, uint16_t value)
+[v _ConfigModel_Set `(a ~T0 @X0 1 ef2`E36`us ]
+"23
+[; ;sources/config_model.c: 23: {
+{
+[e :U _ConfigModel_Set ]
+"22
+[; ;sources/config_model.c: 22: _Bool ConfigModel_Set(config_param_id_t id, uint16_t value)
+[v _id `E36 ~T0 @X0 1 r1 ]
+[v _value `us ~T0 @X0 1 r2 ]
+"23
+[; ;sources/config_model.c: 23: {
+[f ]
+"24
+[; ;sources/config_model.c: 24:     switch (id) {
+[e $U 13  ]
+{
+"25
+[; ;sources/config_model.c: 25:         case CFG_PRECIO1: return DatosVenta_SetPrecio1(value);
+[e :U 14 ]
+[e ) ( _DatosVenta_SetPrecio1 (1 _value ]
+[e $UE 11  ]
+"26
+[; ;sources/config_model.c: 26:         case CFG_PRECIO2: return DatosVenta_SetPrecio2(value);
+[e :U 15 ]
+[e ) ( _DatosVenta_SetPrecio2 (1 _value ]
+[e $UE 11  ]
+"27
+[; ;sources/config_model.c: 27:         case CFG_TIEMPO1: return DatosVenta_SetTiempo1(value);
+[e :U 16 ]
+[e ) ( _DatosVenta_SetTiempo1 (1 _value ]
+[e $UE 11  ]
+"28
+[; ;sources/config_model.c: 28:         case CFG_TIEMPO2: return DatosVenta_SetTiempo2(value);
+[e :U 17 ]
+[e ) ( _DatosVenta_SetTiempo2 (1 _value ]
+[e $UE 11  ]
+"29
+[; ;sources/config_model.c: 29:         default: return 0;
+[e :U 18 ]
+[e ) -> -> 0 `i `a ]
+[e $UE 11  ]
+"30
+[; ;sources/config_model.c: 30:     }
+}
+[e $U 12  ]
+[e :U 13 ]
+[e [\ -> _id `ui , $ -> . `E36 0 `ui 14
+ , $ -> . `E36 1 `ui 15
+ , $ -> . `E36 2 `ui 16
+ , $ -> . `E36 3 `ui 17
+ 18 ]
+[e :U 12 ]
+"31
+[; ;sources/config_model.c: 31: }
+[e :UE 11 ]
+}
+"33
+[; ;sources/config_model.c: 33: void ConfigModel_Save(void)
+[v _ConfigModel_Save `(v ~T0 @X0 1 ef ]
+"34
+[; ;sources/config_model.c: 34: {
+{
+[e :U _ConfigModel_Save ]
+[f ]
+"35
+[; ;sources/config_model.c: 35:     DatosVenta_Save();
+[e ( _DatosVenta_Save ..  ]
+"36
+[; ;sources/config_model.c: 36: }
+[e :UE 19 ]
+}

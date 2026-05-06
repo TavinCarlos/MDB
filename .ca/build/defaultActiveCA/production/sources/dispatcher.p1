@@ -1,0 +1,392 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"15 sources/dispatcher.c
+[; ;sources/dispatcher.c: 15: static DispatcherEvent_t queue[16];
+[c E36 0 1 2 3 4 5 .. ]
+[n E36 . SRC_NONE SRC_MDB SRC_CREDIT SRC_VEND SRC_UI SRC_APP  ]
+"22 Include/dispatcher.h
+[; ;Include/dispatcher.h: 22: typedef struct {
+[s S1 `E36 1 `us 1 `us 1 ]
+[n S1 . src evt param ]
+"61 sources/dispatcher.c
+[; ;sources/dispatcher.c: 61:                     Global_Dispatch(EVT_GLOBAL_SYSTEM_READY);
+[c E55 0 1 2 3 4 5 6 7 .. ]
+[n E55 . EVT_GLOBAL_INIT_DONE EVT_GLOBAL_SYSTEM_READY EVT_GLOBAL_CREDIT_AVAILABLE EVT_GLOBAL_CREDIT_EMPTY EVT_GLOBAL_SELECTION EVT_GLOBAL_VEND_DONE EVT_GLOBAL_ERROR EVT_GLOBAL_SERVICE_RESET  ]
+"18 Include/global.h
+[; ;Include/global.h: 18: void Global_Dispatch(Global_Event_t evt);
+[v _Global_Dispatch `(v ~T0 @X0 0 ef1`E55 ]
+"66 sources/dispatcher.c
+[; ;sources/dispatcher.c: 66:                     Credit_Dispatch(EVT_CREDIT_RESET, 0);
+[c E90 0 1 2 3 4 5 6 7 8 .. ]
+[n E90 . EVT_CREDIT_NONE EVT_CREDIT_AVAILABLE EVT_CREDIT_UPDATED EVT_CREDIT_ACCEPTED EVT_CREDIT_CONSUME_PRICE_P1 EVT_CREDIT_CONSUME_PRICE_P2 EVT_CREDIT_REFUND_REQUEST EVT_CREDIT_TIMEOUT EVT_CREDIT_RESET  ]
+"6 Include/credit.h
+[; ;Include/credit.h: 6: void Credit_Dispatch(Credit_Event_t evt, uint16_t value);
+[v _Credit_Dispatch `(v ~T0 @X0 0 ef2`E90`us ]
+"71 sources/dispatcher.c
+[; ;sources/dispatcher.c: 71:                     Vend_Dispatch(EVT_VEND_COIN_INSERTED);
+[c E110 0 1 2 3 4 5 .. ]
+[n E110 . EVT_VEND_CREDIT_EMPTY EVT_VEND_COIN_INSERTED EVT_VEND_SELECT_PRODUCT EVT_VEND_START_DISPENSE EVT_VEND_DONE EVT_VEND_REFUND_REQUEST  ]
+"9 Include/vend.h
+[; ;Include/vend.h: 9: void Vend_Dispatch(Vend_Event_t evt);
+[v _Vend_Dispatch `(v ~T0 @X0 0 ef1`E110 ]
+"75 sources/dispatcher.c
+[; ;sources/dispatcher.c: 75:                     MDB_Link_Dispatch(EVT_MDB_ESCROW_REQUEST, e->param);
+[c E80 0 1 11 12 13 14 15 16 .. ]
+[n E80 . EVT_MDB_ACK EVT_MDB_ESCROW_REQUEST EVT_MDB_CHANGER_RESET EVT_MDB_CHANGER_READY EVT_MDB_COIN_VALID EVT_MDB_COIN_INVALID EVT_MDB_STATUS_CODE EVT_MDB_NONE  ]
+"46 Include/fsm_mdb_link.h
+[; ;Include/fsm_mdb_link.h: 46:     void MDB_Link_Dispatch(MDB_Event_t evt, uint16_t param0);
+[v _MDB_Link_Dispatch `(v ~T0 @X0 0 ef2`E80`us ]
+"91 sources/dispatcher.c
+[; ;sources/dispatcher.c: 91:                     UI_Dispatch(EVT_UI_CREDIT_UPDATE);
+[c E118 0 1 2 3 4 .. ]
+[n E118 . EVT_UI_IDLE EVT_UI_HAS_CREDIT EVT_UI_CREDIT_UPDATE EVT_UI_VENDING EVT_UI_OUT_OF_SERVICE  ]
+"10 Include/ui.h
+[; ;Include/ui.h: 10: void UI_Dispatch(UI_Event_t evt);
+[v _UI_Dispatch `(v ~T0 @X0 0 ef1`E118 ]
+"15 sources/dispatcher.c
+[; ;sources/dispatcher.c: 15: static DispatcherEvent_t queue[16];
+[v _queue `S1 ~T0 @X0 -> 16 `i s ]
+"16
+[; ;sources/dispatcher.c: 16: static volatile uint8_t q_head = 0;
+[v _q_head `Vuc ~T0 @X0 1 s ]
+[i _q_head
+-> -> 0 `i `uc
+]
+"17
+[; ;sources/dispatcher.c: 17: static volatile uint8_t q_tail = 0;
+[v _q_tail `Vuc ~T0 @X0 1 s ]
+[i _q_tail
+-> -> 0 `i `uc
+]
+[v F252 `(uc ~T0 @X0 1 tf1`uc ]
+"21
+[; ;sources/dispatcher.c: 21: static __attribute__((inline)) uint8_t NextIndex(uint8_t idx) {
+[v _NextIndex `TF252 ~T0 @X0 1 s ]
+{
+[e :U _NextIndex ]
+[v _idx `uc ~T0 @X0 1 r1 ]
+[f ]
+"22
+[; ;sources/dispatcher.c: 22:     return (idx + 1) % 16;
+[e ) -> % + -> _idx `i -> 1 `i -> 16 `i `uc ]
+[e $UE 7  ]
+"23
+[; ;sources/dispatcher.c: 23: }
+[e :UE 7 ]
+}
+"25
+[; ;sources/dispatcher.c: 25: static _Bool Queue_IsEmpty(void) {
+[v _Queue_IsEmpty `(a ~T0 @X0 1 sf ]
+{
+[e :U _Queue_IsEmpty ]
+[f ]
+"26
+[; ;sources/dispatcher.c: 26:     return q_head == q_tail;
+[e ) -> -> == -> _q_head `i -> _q_tail `i `i `a ]
+[e $UE 8  ]
+"27
+[; ;sources/dispatcher.c: 27: }
+[e :UE 8 ]
+}
+"29
+[; ;sources/dispatcher.c: 29: static _Bool Queue_IsFull(void) {
+[v _Queue_IsFull `(a ~T0 @X0 1 sf ]
+{
+[e :U _Queue_IsFull ]
+[f ]
+"30
+[; ;sources/dispatcher.c: 30:     return NextIndex(q_tail) == q_head;
+[e ) -> -> == -> ( _NextIndex (1 _q_tail `i -> _q_head `i `i `a ]
+[e $UE 9  ]
+"31
+[; ;sources/dispatcher.c: 31: }
+[e :UE 9 ]
+}
+"35
+[; ;sources/dispatcher.c: 35: void Dispatcher_Init(void) {
+[v _Dispatcher_Init `(v ~T0 @X0 1 ef ]
+{
+[e :U _Dispatcher_Init ]
+[f ]
+"36
+[; ;sources/dispatcher.c: 36:     q_head = q_tail = 0;
+[e = _q_head = _q_tail -> -> 0 `i `uc ]
+"37
+[; ;sources/dispatcher.c: 37: }
+[e :UE 10 ]
+}
+"39
+[; ;sources/dispatcher.c: 39: _Bool Dispatcher_Post(EventSource_t src, uint16_t evt, uint16_t param) {
+[v _Dispatcher_Post `(a ~T0 @X0 1 ef3`E36`us`us ]
+{
+[e :U _Dispatcher_Post ]
+[v _src `E36 ~T0 @X0 1 r1 ]
+[v _evt `us ~T0 @X0 1 r2 ]
+[v _param `us ~T0 @X0 1 r3 ]
+[f ]
+"40
+[; ;sources/dispatcher.c: 40:     if (Queue_IsFull())
+[e $ ! != -> ( _Queue_IsFull ..  `i -> 0 `i 12  ]
+"41
+[; ;sources/dispatcher.c: 41:         return 0;
+[e ) -> -> 0 `i `a ]
+[e $UE 11  ]
+[e :U 12 ]
+"43
+[; ;sources/dispatcher.c: 43:     queue[q_tail].src = src;
+[e = . *U + &U _queue * -> _q_tail `ux -> -> # *U &U _queue `ui `ux 0 _src ]
+"44
+[; ;sources/dispatcher.c: 44:     queue[q_tail].evt = evt;
+[e = . *U + &U _queue * -> _q_tail `ux -> -> # *U &U _queue `ui `ux 1 _evt ]
+"45
+[; ;sources/dispatcher.c: 45:     queue[q_tail].param = param;
+[e = . *U + &U _queue * -> _q_tail `ux -> -> # *U &U _queue `ui `ux 2 _param ]
+"47
+[; ;sources/dispatcher.c: 47:     q_tail = NextIndex(q_tail);
+[e = _q_tail ( _NextIndex (1 _q_tail ]
+"48
+[; ;sources/dispatcher.c: 48:     return 1;
+[e ) -> -> 1 `i `a ]
+[e $UE 11  ]
+"49
+[; ;sources/dispatcher.c: 49: }
+[e :UE 11 ]
+}
+"53
+[; ;sources/dispatcher.c: 53: static void Dispatcher_Handle(const DispatcherEvent_t *e) {
+[v _Dispatcher_Handle `(v ~T0 @X0 1 sf1`*CS1 ]
+{
+[e :U _Dispatcher_Handle ]
+[v _e `*CS1 ~T0 @X0 1 r1 ]
+[f ]
+"55
+[; ;sources/dispatcher.c: 55:     switch (e->src) {
+[e $U 15  ]
+{
+"58
+[; ;sources/dispatcher.c: 58:         case SRC_MDB:
+[e :U 16 ]
+"59
+[; ;sources/dispatcher.c: 59:             switch (e->evt) {
+[e $U 18  ]
+{
+"60
+[; ;sources/dispatcher.c: 60:                 case EVT_MDB_CHANGER_READY:
+[e :U 19 ]
+"61
+[; ;sources/dispatcher.c: 61:                     Global_Dispatch(EVT_GLOBAL_SYSTEM_READY);
+[e ( _Global_Dispatch (1 . `E55 1 ]
+"62
+[; ;sources/dispatcher.c: 62:                     break;
+[e $U 17  ]
+"64
+[; ;sources/dispatcher.c: 64:                 case EVT_MDB_CHANGER_RESET:
+[e :U 20 ]
+"65
+[; ;sources/dispatcher.c: 65:                     Global_Dispatch(EVT_GLOBAL_ERROR);
+[e ( _Global_Dispatch (1 . `E55 6 ]
+"66
+[; ;sources/dispatcher.c: 66:                     Credit_Dispatch(EVT_CREDIT_RESET, 0);
+[e ( _Credit_Dispatch (2 , . `E90 8 -> -> 0 `i `us ]
+"67
+[; ;sources/dispatcher.c: 67:                     break;
+[e $U 17  ]
+"69
+[; ;sources/dispatcher.c: 69:                 case EVT_MDB_COIN_VALID:
+[e :U 21 ]
+"70
+[; ;sources/dispatcher.c: 70:                     Credit_Dispatch(EVT_CREDIT_ACCEPTED, e->param);
+[e ( _Credit_Dispatch (2 , . `E90 3 . *U _e 2 ]
+"71
+[; ;sources/dispatcher.c: 71:                     Vend_Dispatch(EVT_VEND_COIN_INSERTED);
+[e ( _Vend_Dispatch (1 . `E110 1 ]
+"72
+[; ;sources/dispatcher.c: 72:                     break;
+[e $U 17  ]
+"74
+[; ;sources/dispatcher.c: 74:                 case EVT_MDB_ESCROW_REQUEST:
+[e :U 22 ]
+"75
+[; ;sources/dispatcher.c: 75:                     MDB_Link_Dispatch(EVT_MDB_ESCROW_REQUEST, e->param);
+[e ( _MDB_Link_Dispatch (2 , . `E80 1 . *U _e 2 ]
+"76
+[; ;sources/dispatcher.c: 76:                     break;
+[e $U 17  ]
+"78
+[; ;sources/dispatcher.c: 78:                 default:
+[e :U 23 ]
+"79
+[; ;sources/dispatcher.c: 79:                     break;
+[e $U 17  ]
+"80
+[; ;sources/dispatcher.c: 80:             }
+}
+[e $U 17  ]
+[e :U 18 ]
+[e [\ -> . *U _e 1 `ui , $ -> . `E80 3 `ui 19
+ , $ -> . `E80 2 `ui 20
+ , $ -> . `E80 4 `ui 21
+ , $ -> . `E80 1 `ui 22
+ 23 ]
+[e :U 17 ]
+"81
+[; ;sources/dispatcher.c: 81:             break;
+[e $U 14  ]
+"84
+[; ;sources/dispatcher.c: 84:         case SRC_CREDIT:
+[e :U 24 ]
+"85
+[; ;sources/dispatcher.c: 85:             switch (e->evt) {
+[e $U 26  ]
+{
+"86
+[; ;sources/dispatcher.c: 86:                 case EVT_CREDIT_AVAILABLE:
+[e :U 27 ]
+"87
+[; ;sources/dispatcher.c: 87:                     Global_Dispatch(EVT_GLOBAL_CREDIT_AVAILABLE);
+[e ( _Global_Dispatch (1 . `E55 2 ]
+"88
+[; ;sources/dispatcher.c: 88:                     break;
+[e $U 25  ]
+"90
+[; ;sources/dispatcher.c: 90:                 case EVT_CREDIT_UPDATED:
+[e :U 28 ]
+"91
+[; ;sources/dispatcher.c: 91:                     UI_Dispatch(EVT_UI_CREDIT_UPDATE);
+[e ( _UI_Dispatch (1 . `E118 2 ]
+"92
+[; ;sources/dispatcher.c: 92:                     break;
+[e $U 25  ]
+"94
+[; ;sources/dispatcher.c: 94:                 case EVT_CREDIT_NONE:
+[e :U 29 ]
+"95
+[; ;sources/dispatcher.c: 95:                     Global_Dispatch(EVT_GLOBAL_CREDIT_EMPTY);
+[e ( _Global_Dispatch (1 . `E55 3 ]
+"96
+[; ;sources/dispatcher.c: 96:                     Vend_Dispatch(EVT_VEND_CREDIT_EMPTY);
+[e ( _Vend_Dispatch (1 . `E110 0 ]
+"97
+[; ;sources/dispatcher.c: 97:                     break;
+[e $U 25  ]
+"99
+[; ;sources/dispatcher.c: 99:                 default:
+[e :U 30 ]
+"100
+[; ;sources/dispatcher.c: 100:                     break;
+[e $U 25  ]
+"101
+[; ;sources/dispatcher.c: 101:             }
+}
+[e $U 25  ]
+[e :U 26 ]
+[e [\ -> . *U _e 1 `ui , $ -> . `E90 1 `ui 27
+ , $ -> . `E90 2 `ui 28
+ , $ -> . `E90 0 `ui 29
+ 30 ]
+[e :U 25 ]
+"102
+[; ;sources/dispatcher.c: 102:             break;
+[e $U 14  ]
+"105
+[; ;sources/dispatcher.c: 105:         case SRC_VEND:
+[e :U 31 ]
+"106
+[; ;sources/dispatcher.c: 106:             switch (e->evt) {
+[e $U 33  ]
+{
+"107
+[; ;sources/dispatcher.c: 107:                 case EVT_VEND_DONE:
+[e :U 34 ]
+"108
+[; ;sources/dispatcher.c: 108:                     Global_Dispatch(EVT_GLOBAL_VEND_DONE);
+[e ( _Global_Dispatch (1 . `E55 5 ]
+"109
+[; ;sources/dispatcher.c: 109:                     break;
+[e $U 32  ]
+"111
+[; ;sources/dispatcher.c: 111:                 case EVT_VEND_REFUND_REQUEST:
+[e :U 35 ]
+"112
+[; ;sources/dispatcher.c: 112:                     Credit_Dispatch(EVT_CREDIT_RESET, 0);
+[e ( _Credit_Dispatch (2 , . `E90 8 -> -> 0 `i `us ]
+"113
+[; ;sources/dispatcher.c: 113:                     break;
+[e $U 32  ]
+"115
+[; ;sources/dispatcher.c: 115:                 default:
+[e :U 36 ]
+"116
+[; ;sources/dispatcher.c: 116:                     break;
+[e $U 32  ]
+"117
+[; ;sources/dispatcher.c: 117:             }
+}
+[e $U 32  ]
+[e :U 33 ]
+[e [\ -> . *U _e 1 `ui , $ -> . `E110 4 `ui 34
+ , $ -> . `E110 5 `ui 35
+ 36 ]
+[e :U 32 ]
+"118
+[; ;sources/dispatcher.c: 118:             break;
+[e $U 14  ]
+"121
+[; ;sources/dispatcher.c: 121:         case SRC_UI:
+[e :U 37 ]
+"122
+[; ;sources/dispatcher.c: 122:         case SRC_APP:
+[e :U 38 ]
+"124
+[; ;sources/dispatcher.c: 124:             break;
+[e $U 14  ]
+"126
+[; ;sources/dispatcher.c: 126:         default:
+[e :U 39 ]
+"127
+[; ;sources/dispatcher.c: 127:             break;
+[e $U 14  ]
+"128
+[; ;sources/dispatcher.c: 128:     }
+}
+[e $U 14  ]
+[e :U 15 ]
+[e [\ -> . *U _e 0 `ui , $ -> . `E36 1 `ui 16
+ , $ -> . `E36 2 `ui 24
+ , $ -> . `E36 3 `ui 31
+ , $ -> . `E36 4 `ui 37
+ , $ -> . `E36 5 `ui 38
+ 39 ]
+[e :U 14 ]
+"129
+[; ;sources/dispatcher.c: 129: }
+[e :UE 13 ]
+}
+"131
+[; ;sources/dispatcher.c: 131: void Dispatcher_Task(void) {
+[v _Dispatcher_Task `(v ~T0 @X0 1 ef ]
+{
+[e :U _Dispatcher_Task ]
+[f ]
+"132
+[; ;sources/dispatcher.c: 132:     DispatcherEvent_t evt;
+[v _evt `S1 ~T0 @X0 1 a ]
+"134
+[; ;sources/dispatcher.c: 134:     if (Queue_IsEmpty())
+[e $ ! != -> ( _Queue_IsEmpty ..  `i -> 0 `i 41  ]
+"135
+[; ;sources/dispatcher.c: 135:         return;
+[e $UE 40  ]
+[e :U 41 ]
+"137
+[; ;sources/dispatcher.c: 137:     evt = queue[q_head];
+[e = _evt *U + &U _queue * -> _q_head `ux -> -> # *U &U _queue `ui `ux ]
+"138
+[; ;sources/dispatcher.c: 138:     q_head = NextIndex(q_head);
+[e = _q_head ( _NextIndex (1 _q_head ]
+"140
+[; ;sources/dispatcher.c: 140:     Dispatcher_Handle(&evt);
+[e ( _Dispatcher_Handle (1 -> &U _evt `*CS1 ]
+"141
+[; ;sources/dispatcher.c: 141: }
+[e :UE 40 ]
+}

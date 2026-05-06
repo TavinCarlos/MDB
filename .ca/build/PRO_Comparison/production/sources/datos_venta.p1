@@ -1,0 +1,268 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"12 Include/datos_venta.h
+[s S1 `us 1 `us 1 `us 1 `us 1 `us 1 `us 1 ]
+[n S1 . Precio1 Precio2 Tiempo1 Tiempo2 Contador1 Contador2 ]
+"13 Include/eeprom_hw.h
+[v _EEPROM_Read `(uc ~T0 @X0 0 ef1`us ]
+"16
+[v _EEPROM_Write `(v ~T0 @X0 0 ef3`us`uc`uc ]
+"19 sources/datos_venta.c
+[v _g_datos `S1 ~T0 @X0 1 s ]
+"20
+[v _g_magic `us ~T0 @X0 1 s ]
+"23
+[v _DatosVenta_Valid `(a ~T0 @X0 1 sf1`*CS1 ]
+{
+[e :U _DatosVenta_Valid ]
+[v _d `*CS1 ~T0 @X0 1 r1 ]
+[f ]
+"24
+[e $ ! || == -> . *U _d 0 `ui -> -> 0 `i `ui == -> . *U _d 1 `ui -> -> 0 `i `ui 3  ]
+"25
+[e ) -> -> 0 `i `a ]
+[e $UE 2  ]
+[e :U 3 ]
+"26
+[e $ ! || == -> . *U _d 2 `ui -> -> 0 `i `ui == -> . *U _d 3 `ui -> -> 0 `i `ui 4  ]
+"27
+[e ) -> -> 0 `i `a ]
+[e $UE 2  ]
+[e :U 4 ]
+"28
+[e ) -> -> 1 `i `a ]
+[e $UE 2  ]
+"29
+[e :UE 2 ]
+}
+"32
+[v _DatosVenta_LoadDefaults `(v ~T0 @X0 1 sf ]
+{
+[e :U _DatosVenta_LoadDefaults ]
+[f ]
+"33
+[e = . _g_datos 0 -> -> 800 `i `us ]
+"34
+[e = . _g_datos 1 -> -> 1800 `i `us ]
+"35
+[e = . _g_datos 2 -> -> 20 `i `us ]
+"36
+[e = . _g_datos 3 -> -> 60 `i `us ]
+"37
+[e = . _g_datos 4 -> -> 0 `i `us ]
+"38
+[e = . _g_datos 5 -> -> 0 `i `us ]
+"39
+[e :UE 5 ]
+}
+"41
+[v _EEPROM_ReadBlock `(v ~T0 @X0 1 sf3`us`*v`us ]
+{
+[e :U _EEPROM_ReadBlock ]
+[v _addr `us ~T0 @X0 1 r1 ]
+[v _dst `*v ~T0 @X0 1 r2 ]
+[v _len `us ~T0 @X0 1 r3 ]
+[f ]
+"42
+[v _p `*uc ~T0 @X0 1 a ]
+[e = _p -> _dst `*uc ]
+"43
+[e $U 7  ]
+[e :U 8 ]
+{
+"44
+[e = *U ++ _p * -> -> 1 `i `x -> -> # *U _p `i `x ( _EEPROM_Read (1 ++ _addr -> -> 1 `i `us ]
+"45
+}
+[e :U 7 ]
+"43
+[e $ != -> -- _len -> -> 1 `i `us `ui -> -> 0 `i `ui 8  ]
+[e :U 9 ]
+"46
+[e :UE 6 ]
+}
+"48
+[v _EEPROM_WriteBlock `(v ~T0 @X0 1 sf3`us`*Cv`us ]
+{
+[e :U _EEPROM_WriteBlock ]
+[v _addr `us ~T0 @X0 1 r1 ]
+[v _src `*Cv ~T0 @X0 1 r2 ]
+[v _len `us ~T0 @X0 1 r3 ]
+[f ]
+"49
+[v _p `*Cuc ~T0 @X0 1 a ]
+[e = _p -> _src `*Cuc ]
+"50
+[e $U 11  ]
+[e :U 12 ]
+{
+"51
+[e ( _EEPROM_Write (3 , , ++ _addr -> -> 1 `i `us *U ++ _p * -> -> 1 `i `x -> -> # *U _p `i `x -> -> 1 `i `uc ]
+"52
+}
+[e :U 11 ]
+"50
+[e $ != -> -- _len -> -> 1 `i `us `ui -> -> 0 `i `ui 12  ]
+[e :U 13 ]
+"53
+[e :UE 10 ]
+}
+"57
+[v _DatosVenta_Init `(v ~T0 @X0 1 ef ]
+{
+[e :U _DatosVenta_Init ]
+[f ]
+"58
+[v _magic `us ~T0 @X0 1 a ]
+"60
+[e ( _EEPROM_ReadBlock (3 , , -> -> 0 `i `us -> &U _magic `*v -> -> # _magic `ui `us ]
+"62
+[e $ ! != -> _magic `ui -> 42330 `ui 15  ]
+{
+"63
+[e ( _DatosVenta_LoadDefaults ..  ]
+"64
+[e = _magic -> -> 42330 `ui `us ]
+"65
+[e ( _EEPROM_WriteBlock (3 , , -> -> 2 `i `us -> &U _g_datos `*Cv -> -> # _g_datos `ui `us ]
+"66
+[e ( _EEPROM_WriteBlock (3 , , -> -> 0 `i `us -> &U _magic `*Cv -> -> # _magic `ui `us ]
+"67
+}
+[e $U 16  ]
+"68
+[e :U 15 ]
+{
+"69
+[e ( _EEPROM_ReadBlock (3 , , -> -> 2 `i `us -> &U _g_datos `*v -> -> # _g_datos `ui `us ]
+"70
+}
+[e :U 16 ]
+"71
+[e :UE 14 ]
+}
+"73
+[v _DatosVenta_Get `(*CS1 ~T0 @X0 1 ef ]
+{
+[e :U _DatosVenta_Get ]
+[f ]
+"74
+[e ) -> &U _g_datos `*CS1 ]
+[e $UE 17  ]
+"75
+[e :UE 17 ]
+}
+"79
+[v _DatosVenta_SetPrecio1 `(a ~T0 @X0 1 ef1`us ]
+{
+[e :U _DatosVenta_SetPrecio1 ]
+[v _v `us ~T0 @X0 1 r1 ]
+[f ]
+"80
+[e $ ! == -> _v `ui -> -> 0 `i `ui 19  ]
+[e ) -> -> 0 `i `a ]
+[e $UE 18  ]
+[e :U 19 ]
+"81
+[e = . _g_datos 0 _v ]
+"82
+[e ) -> -> 1 `i `a ]
+[e $UE 18  ]
+"83
+[e :UE 18 ]
+}
+"85
+[v _DatosVenta_SetPrecio2 `(a ~T0 @X0 1 ef1`us ]
+{
+[e :U _DatosVenta_SetPrecio2 ]
+[v _v `us ~T0 @X0 1 r1 ]
+[f ]
+"86
+[e $ ! == -> _v `ui -> -> 0 `i `ui 21  ]
+[e ) -> -> 0 `i `a ]
+[e $UE 20  ]
+[e :U 21 ]
+"87
+[e = . _g_datos 1 _v ]
+"88
+[e ) -> -> 1 `i `a ]
+[e $UE 20  ]
+"89
+[e :UE 20 ]
+}
+"91
+[v _DatosVenta_SetTiempo1 `(a ~T0 @X0 1 ef1`us ]
+{
+[e :U _DatosVenta_SetTiempo1 ]
+[v _v `us ~T0 @X0 1 r1 ]
+[f ]
+"92
+[e $ ! == -> _v `ui -> -> 0 `i `ui 23  ]
+[e ) -> -> 0 `i `a ]
+[e $UE 22  ]
+[e :U 23 ]
+"93
+[e = . _g_datos 2 _v ]
+"94
+[e ) -> -> 1 `i `a ]
+[e $UE 22  ]
+"95
+[e :UE 22 ]
+}
+"97
+[v _DatosVenta_SetTiempo2 `(a ~T0 @X0 1 ef1`us ]
+{
+[e :U _DatosVenta_SetTiempo2 ]
+[v _v `us ~T0 @X0 1 r1 ]
+[f ]
+"98
+[e $ ! == -> _v `ui -> -> 0 `i `ui 25  ]
+[e ) -> -> 0 `i `a ]
+[e $UE 24  ]
+[e :U 25 ]
+"99
+[e = . _g_datos 3 _v ]
+"100
+[e ) -> -> 1 `i `a ]
+[e $UE 24  ]
+"101
+[e :UE 24 ]
+}
+"105
+[v _DatosVenta_IncContador1 `(v ~T0 @X0 1 ef ]
+{
+[e :U _DatosVenta_IncContador1 ]
+[f ]
+"106
+[e $ ! < -> . _g_datos 4 `ui -> 65535 `ui 27  ]
+"107
+[e ++ . _g_datos 4 -> -> 1 `i `us ]
+[e :U 27 ]
+"108
+[e :UE 26 ]
+}
+"110
+[v _DatosVenta_IncContador2 `(v ~T0 @X0 1 ef ]
+{
+[e :U _DatosVenta_IncContador2 ]
+[f ]
+"111
+[e $ ! < -> . _g_datos 5 `ui -> 65535 `ui 29  ]
+"112
+[e ++ . _g_datos 5 -> -> 1 `i `us ]
+[e :U 29 ]
+"113
+[e :UE 28 ]
+}
+"117
+[v _DatosVenta_Save `(v ~T0 @X0 1 ef ]
+{
+[e :U _DatosVenta_Save ]
+[f ]
+"118
+[e $ ! != -> ( _DatosVenta_Valid (1 -> &U _g_datos `*CS1 `i -> 0 `i 31  ]
+"119
+[e ( _EEPROM_WriteBlock (3 , , -> -> 2 `i `us -> &U _g_datos `*Cv -> -> # _g_datos `ui `us ]
+[e :U 31 ]
+"120
+[e :UE 30 ]
+}

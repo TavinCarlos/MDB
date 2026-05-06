@@ -1,0 +1,25 @@
+.ca/build/Config_1/production/sources/Program.p1:  \
+sources/Program.c  \
+Include/Program.h  \
+Include/timers.h  \
+Include/app.h  \
+Include/mdb.h  \
+Include/events.h  \
+Include/botones.h  \
+Include/hal_uart.h  \
+Include/eeprom.h  \
+Include/mdb_core.h  \
+Include/global.h  \
+Include/credit.h  \
+Include/vend.h  \
+Include/lcd_render.h  \
+Include/uart.h  \
+Include/lcd_hal.h  \
+Include/ui.h  \
+Include/ui_menu.h  \
+Include/utils.h  \
+Include/settings.h  \
+Include/fsm_mdb_link.h  \
+Include/dispatcher.h  \
+Include/datos_venta.h  \
+Include/saldo.h 

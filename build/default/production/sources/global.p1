@@ -1,0 +1,362 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"10 sources/global.c
+[; ;sources/global.c: 10: static Global_State_t g_state = ST_GLOBAL_OUT_OF_SERVICE;
+[c E123 0 1 2 3 4 .. ]
+[n E123 . ST_GLOBAL_INIT ST_GLOBAL_READY ST_GLOBAL_CREDIT ST_GLOBAL_VENDING ST_GLOBAL_OUT_OF_SERVICE  ]
+"24
+[; ;sources/global.c: 24:             UI_Dispatch(EVT_UI_IDLE);
+[c E100 0 1 2 3 4 .. ]
+[n E100 . EVT_UI_IDLE EVT_UI_HAS_CREDIT EVT_UI_CREDIT_UPDATE EVT_UI_VENDING EVT_UI_OUT_OF_SERVICE  ]
+"8 Include/ui.h
+[; ;Include/ui.h: 8: void UI_Dispatch(UI_Event_t evt);
+[v _UI_Dispatch `(v ~T0 @X0 0 ef1`E100 ]
+"65 sources/global.c
+[; ;sources/global.c: 65: void Global_Dispatch(Global_Event_t evt) {
+[c E36 0 1 2 3 4 5 6 7 .. ]
+[n E36 . EVT_GLOBAL_INIT_DONE EVT_GLOBAL_SYSTEM_READY EVT_GLOBAL_CREDIT_AVAILABLE EVT_GLOBAL_CREDIT_EMPTY EVT_GLOBAL_SELECTION EVT_GLOBAL_VEND_DONE EVT_GLOBAL_ERROR EVT_GLOBAL_SERVICE_RESET  ]
+"10 sources/global.c
+[; ;sources/global.c: 10: static Global_State_t g_state = ST_GLOBAL_OUT_OF_SERVICE;
+[v _g_state `E123 ~T0 @X0 1 s ]
+[i _g_state
+. `E123 4
+]
+"14
+[; ;sources/global.c: 14: static void TransitionTo(Global_State_t next) {
+[v _TransitionTo `(v ~T0 @X0 1 sf1`E123 ]
+{
+[e :U _TransitionTo ]
+[v _next `E123 ~T0 @X0 1 r1 ]
+[f ]
+"15
+[; ;sources/global.c: 15:     if (g_state == next)
+[e $ ! == -> _g_state `ui -> _next `ui 7  ]
+"16
+[; ;sources/global.c: 16:         return;
+[e $UE 6  ]
+[e :U 7 ]
+"18
+[; ;sources/global.c: 18:     g_state = next;
+[e = _g_state _next ]
+"21
+[; ;sources/global.c: 21:     switch (g_state) {
+[e $U 9  ]
+{
+"23
+[; ;sources/global.c: 23:         case ST_GLOBAL_READY:
+[e :U 10 ]
+"24
+[; ;sources/global.c: 24:             UI_Dispatch(EVT_UI_IDLE);
+[e ( _UI_Dispatch (1 . `E100 0 ]
+"25
+[; ;sources/global.c: 25:             break;
+[e $U 8  ]
+"27
+[; ;sources/global.c: 27:         case ST_GLOBAL_CREDIT:
+[e :U 11 ]
+"28
+[; ;sources/global.c: 28:             UI_Dispatch(EVT_UI_HAS_CREDIT);
+[e ( _UI_Dispatch (1 . `E100 1 ]
+"29
+[; ;sources/global.c: 29:             break;
+[e $U 8  ]
+"31
+[; ;sources/global.c: 31:         case ST_GLOBAL_VENDING:
+[e :U 12 ]
+"32
+[; ;sources/global.c: 32:             UI_Dispatch(EVT_UI_VENDING);
+[e ( _UI_Dispatch (1 . `E100 3 ]
+"33
+[; ;sources/global.c: 33:             break;
+[e $U 8  ]
+"35
+[; ;sources/global.c: 35:         case ST_GLOBAL_OUT_OF_SERVICE:
+[e :U 13 ]
+"36
+[; ;sources/global.c: 36:             UI_Dispatch(EVT_UI_OUT_OF_SERVICE);
+[e ( _UI_Dispatch (1 . `E100 4 ]
+"37
+[; ;sources/global.c: 37:             break;
+[e $U 8  ]
+"39
+[; ;sources/global.c: 39:         default:
+[e :U 14 ]
+"40
+[; ;sources/global.c: 40:             break;
+[e $U 8  ]
+"41
+[; ;sources/global.c: 41:     }
+}
+[e $U 8  ]
+[e :U 9 ]
+[e [\ -> _g_state `ui , $ -> . `E123 1 `ui 10
+ , $ -> . `E123 2 `ui 11
+ , $ -> . `E123 3 `ui 12
+ , $ -> . `E123 4 `ui 13
+ 14 ]
+[e :U 8 ]
+"42
+[; ;sources/global.c: 42: }
+[e :UE 6 ]
+}
+"46
+[; ;sources/global.c: 46: void Global_Init(void) {
+[v _Global_Init `(v ~T0 @X0 1 ef ]
+{
+[e :U _Global_Init ]
+[f ]
+"47
+[; ;sources/global.c: 47:     g_state = ST_GLOBAL_OUT_OF_SERVICE;
+[e = _g_state . `E123 4 ]
+"48
+[; ;sources/global.c: 48:     UI_Dispatch(EVT_UI_OUT_OF_SERVICE);
+[e ( _UI_Dispatch (1 . `E100 4 ]
+"49
+[; ;sources/global.c: 49: }
+[e :UE 15 ]
+}
+"55
+[; ;sources/global.c: 55: const char* Global_GetState(void) {
+[v _Global_GetState `(*Cuc ~T0 @X0 1 ef ]
+{
+[e :U _Global_GetState ]
+[f ]
+"56
+[; ;sources/global.c: 56:     switch (g_state) {
+[e $U 18  ]
+{
+"57
+[; ;sources/global.c: 57:         case ST_GLOBAL_READY: return "R";
+[e :U 19 ]
+[e ) :s 1C ]
+[e $UE 16  ]
+"58
+[; ;sources/global.c: 58:         case ST_GLOBAL_CREDIT: return "C";
+[e :U 20 ]
+[e ) :s 2C ]
+[e $UE 16  ]
+"59
+[; ;sources/global.c: 59:         case ST_GLOBAL_VENDING: return "V";
+[e :U 21 ]
+[e ) :s 3C ]
+[e $UE 16  ]
+"60
+[; ;sources/global.c: 60:         case ST_GLOBAL_OUT_OF_SERVICE: return "O";
+[e :U 22 ]
+[e ) :s 4C ]
+[e $UE 16  ]
+"61
+[; ;sources/global.c: 61:         default: return "?";
+[e :U 23 ]
+[e ) :s 5C ]
+[e $UE 16  ]
+"62
+[; ;sources/global.c: 62:     }
+}
+[e $U 17  ]
+[e :U 18 ]
+[e [\ -> _g_state `ui , $ -> . `E123 1 `ui 19
+ , $ -> . `E123 2 `ui 20
+ , $ -> . `E123 3 `ui 21
+ , $ -> . `E123 4 `ui 22
+ 23 ]
+[e :U 17 ]
+"63
+[; ;sources/global.c: 63: }
+[e :UE 16 ]
+}
+"65
+[; ;sources/global.c: 65: void Global_Dispatch(Global_Event_t evt) {
+[v _Global_Dispatch `(v ~T0 @X0 1 ef1`E36 ]
+{
+[e :U _Global_Dispatch ]
+[v _evt `E36 ~T0 @X0 1 r1 ]
+[f ]
+"67
+[; ;sources/global.c: 67:     switch (g_state) {
+[e $U 26  ]
+{
+"70
+[; ;sources/global.c: 70:         case ST_GLOBAL_OUT_OF_SERVICE:
+[e :U 27 ]
+"71
+[; ;sources/global.c: 71:             if (evt == EVT_GLOBAL_SYSTEM_READY) {
+[e $ ! == -> _evt `ui -> . `E36 1 `ui 28  ]
+{
+"72
+[; ;sources/global.c: 72:                 TransitionTo(ST_GLOBAL_READY);
+[e ( _TransitionTo (1 . `E123 1 ]
+"73
+[; ;sources/global.c: 73:             }
+}
+[e :U 28 ]
+"74
+[; ;sources/global.c: 74:             break;
+[e $U 25  ]
+"77
+[; ;sources/global.c: 77:         case ST_GLOBAL_READY:
+[e :U 29 ]
+"78
+[; ;sources/global.c: 78:             switch (evt) {
+[e $U 31  ]
+{
+"79
+[; ;sources/global.c: 79:                 case EVT_GLOBAL_CREDIT_AVAILABLE:
+[e :U 32 ]
+"80
+[; ;sources/global.c: 80:                     TransitionTo(ST_GLOBAL_CREDIT);
+[e ( _TransitionTo (1 . `E123 2 ]
+"81
+[; ;sources/global.c: 81:                     break;
+[e $U 30  ]
+"83
+[; ;sources/global.c: 83:                 case EVT_GLOBAL_ERROR:
+[e :U 33 ]
+"84
+[; ;sources/global.c: 84:                     TransitionTo(ST_GLOBAL_OUT_OF_SERVICE);
+[e ( _TransitionTo (1 . `E123 4 ]
+"85
+[; ;sources/global.c: 85:                     break;
+[e $U 30  ]
+"87
+[; ;sources/global.c: 87:                 default:
+[e :U 34 ]
+"88
+[; ;sources/global.c: 88:                     break;
+[e $U 30  ]
+"89
+[; ;sources/global.c: 89:             }
+}
+[e $U 30  ]
+[e :U 31 ]
+[e [\ -> _evt `ui , $ -> . `E36 2 `ui 32
+ , $ -> . `E36 6 `ui 33
+ 34 ]
+[e :U 30 ]
+"90
+[; ;sources/global.c: 90:             break;
+[e $U 25  ]
+"93
+[; ;sources/global.c: 93:         case ST_GLOBAL_CREDIT:
+[e :U 35 ]
+"94
+[; ;sources/global.c: 94:             switch (evt) {
+[e $U 37  ]
+{
+"95
+[; ;sources/global.c: 95:                 case EVT_GLOBAL_SELECTION:
+[e :U 38 ]
+"96
+[; ;sources/global.c: 96:                     TransitionTo(ST_GLOBAL_VENDING);
+[e ( _TransitionTo (1 . `E123 3 ]
+"97
+[; ;sources/global.c: 97:                     break;
+[e $U 36  ]
+"99
+[; ;sources/global.c: 99:                 case EVT_GLOBAL_CREDIT_EMPTY:
+[e :U 39 ]
+"100
+[; ;sources/global.c: 100:                     TransitionTo(ST_GLOBAL_READY);
+[e ( _TransitionTo (1 . `E123 1 ]
+"101
+[; ;sources/global.c: 101:                     break;
+[e $U 36  ]
+"103
+[; ;sources/global.c: 103:                 case EVT_GLOBAL_ERROR:
+[e :U 40 ]
+"104
+[; ;sources/global.c: 104:                     TransitionTo(ST_GLOBAL_OUT_OF_SERVICE);
+[e ( _TransitionTo (1 . `E123 4 ]
+"105
+[; ;sources/global.c: 105:                     break;
+[e $U 36  ]
+"107
+[; ;sources/global.c: 107:                 default:
+[e :U 41 ]
+"108
+[; ;sources/global.c: 108:                     break;
+[e $U 36  ]
+"109
+[; ;sources/global.c: 109:             }
+}
+[e $U 36  ]
+[e :U 37 ]
+[e [\ -> _evt `ui , $ -> . `E36 4 `ui 38
+ , $ -> . `E36 3 `ui 39
+ , $ -> . `E36 6 `ui 40
+ 41 ]
+[e :U 36 ]
+"110
+[; ;sources/global.c: 110:             break;
+[e $U 25  ]
+"113
+[; ;sources/global.c: 113:         case ST_GLOBAL_VENDING:
+[e :U 42 ]
+"114
+[; ;sources/global.c: 114:             switch (evt) {
+[e $U 44  ]
+{
+"115
+[; ;sources/global.c: 115:                 case EVT_GLOBAL_VEND_DONE:
+[e :U 45 ]
+"116
+[; ;sources/global.c: 116:                     TransitionTo(ST_GLOBAL_READY);
+[e ( _TransitionTo (1 . `E123 1 ]
+"117
+[; ;sources/global.c: 117:                     break;
+[e $U 43  ]
+"119
+[; ;sources/global.c: 119:                 case EVT_GLOBAL_ERROR:
+[e :U 46 ]
+"120
+[; ;sources/global.c: 120:                     TransitionTo(ST_GLOBAL_OUT_OF_SERVICE);
+[e ( _TransitionTo (1 . `E123 4 ]
+"121
+[; ;sources/global.c: 121:                     break;
+[e $U 43  ]
+"123
+[; ;sources/global.c: 123:                 default:
+[e :U 47 ]
+"124
+[; ;sources/global.c: 124:                     break;
+[e $U 43  ]
+"125
+[; ;sources/global.c: 125:             }
+}
+[e $U 43  ]
+[e :U 44 ]
+[e [\ -> _evt `ui , $ -> . `E36 5 `ui 45
+ , $ -> . `E36 6 `ui 46
+ 47 ]
+[e :U 43 ]
+"126
+[; ;sources/global.c: 126:             break;
+[e $U 25  ]
+"128
+[; ;sources/global.c: 128:         default:
+[e :U 48 ]
+"129
+[; ;sources/global.c: 129:             TransitionTo(ST_GLOBAL_OUT_OF_SERVICE);
+[e ( _TransitionTo (1 . `E123 4 ]
+"130
+[; ;sources/global.c: 130:             break;
+[e $U 25  ]
+"131
+[; ;sources/global.c: 131:     }
+}
+[e $U 25  ]
+[e :U 26 ]
+[e [\ -> _g_state `ui , $ -> . `E123 4 `ui 27
+ , $ -> . `E123 1 `ui 29
+ , $ -> . `E123 2 `ui 35
+ , $ -> . `E123 3 `ui 42
+ 48 ]
+[e :U 25 ]
+"132
+[; ;sources/global.c: 132: }
+[e :UE 24 ]
+}
+[a 3C 86 0 ]
+[a 1C 82 0 ]
+[a 4C 79 0 ]
+[a 2C 67 0 ]
+[a 5C 63 0 ]

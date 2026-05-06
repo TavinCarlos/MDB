@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <executable name=".ca/dist/Config_2/production\main.production.hex">
+    <memory name="program">
+      <units>bytes</units>
+      <length>32768</length>
+      <used>14998</used>
+      <free>17770</free>
+    </memory>
+    <memory name="data">
+      <units>bytes</units>
+      <length>2048</length>
+      <used>837</used>
+      <free>1211</free>
+    </memory>
+  </executable>
+</project>

@@ -1,0 +1,21 @@
+build/MVC/production/Program.p1:  \
+Program.c  \
+Include/Program.h  \
+Include/timers.h  \
+Include/app.h  \
+Include/mdb.h  \
+Include/fsm_mdb_link.h  \
+Include/mdb_core.h  \
+Include/botones.h  \
+Include/hal_uart.h  \
+Include/eeprom.h  \
+Include/events.h  \
+Include/fsm_global.h  \
+Include/fsm_coin_logic.h  \
+Include/fsm_diag.h  \
+Include/venta_fsm.h  \
+Include/ui_fsm.h  \
+Include/uart_compat.h  \
+Include/lcd_fsm.h  \
+Include/mdb_uart.h  \
+Include/lcd_hal.h 

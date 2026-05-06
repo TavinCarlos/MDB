@@ -1,0 +1,272 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"10 sources/Global.c
+[c E122 0 1 2 3 4 .. ]
+[n E122 . ST_GLOBAL_INIT ST_GLOBAL_READY ST_GLOBAL_CREDIT ST_GLOBAL_VENDING ST_GLOBAL_OUT_OF_SERVICE  ]
+"24
+[c E99 0 1 2 3 4 .. ]
+[n E99 . EVT_UI_IDLE EVT_UI_HAS_CREDIT EVT_UI_CREDIT_UPDATE EVT_UI_VENDING EVT_UI_OUT_OF_SERVICE  ]
+"10 Include/ui.h
+[v _UI_Dispatch `(v ~T0 @X0 0 ef1`E99 ]
+"65 sources/Global.c
+[c E36 0 1 2 3 4 5 6 7 .. ]
+[n E36 . EVT_GLOBAL_INIT_DONE EVT_GLOBAL_SYSTEM_READY EVT_GLOBAL_CREDIT_AVAILABLE EVT_GLOBAL_CREDIT_EMPTY EVT_GLOBAL_SELECTION EVT_GLOBAL_VEND_DONE EVT_GLOBAL_ERROR EVT_GLOBAL_SERVICE_RESET  ]
+"10 sources/Global.c
+[v _g_state `E122 ~T0 @X0 1 s ]
+[i _g_state
+. `E122 4
+]
+"14
+[v _TransitionTo `(v ~T0 @X0 1 sf1`E122 ]
+{
+[e :U _TransitionTo ]
+[v _next `E122 ~T0 @X0 1 r1 ]
+[f ]
+"15
+[e $ ! == -> _g_state `ui -> _next `ui 7  ]
+"16
+[e $UE 6  ]
+[e :U 7 ]
+"18
+[e = _g_state _next ]
+"21
+[e $U 9  ]
+{
+"23
+[e :U 10 ]
+"24
+[e ( _UI_Dispatch (1 . `E99 0 ]
+"25
+[e $U 8  ]
+"27
+[e :U 11 ]
+"28
+[e ( _UI_Dispatch (1 . `E99 1 ]
+"29
+[e $U 8  ]
+"31
+[e :U 12 ]
+"32
+[e ( _UI_Dispatch (1 . `E99 3 ]
+"33
+[e $U 8  ]
+"35
+[e :U 13 ]
+"36
+[e ( _UI_Dispatch (1 . `E99 4 ]
+"37
+[e $U 8  ]
+"39
+[e :U 14 ]
+"40
+[e $U 8  ]
+"41
+}
+[e $U 8  ]
+[e :U 9 ]
+[e [\ -> _g_state `ui , $ -> . `E122 1 `ui 10
+ , $ -> . `E122 2 `ui 11
+ , $ -> . `E122 3 `ui 12
+ , $ -> . `E122 4 `ui 13
+ 14 ]
+[e :U 8 ]
+"42
+[e :UE 6 ]
+}
+"46
+[v _Global_Init `(v ~T0 @X0 1 ef ]
+{
+[e :U _Global_Init ]
+[f ]
+"47
+[e = _g_state . `E122 4 ]
+"48
+[e ( _UI_Dispatch (1 . `E99 4 ]
+"49
+[e :UE 15 ]
+}
+"55
+[v _Global_GetState `(*Cuc ~T0 @X0 1 ef ]
+{
+[e :U _Global_GetState ]
+[f ]
+"56
+[e $U 18  ]
+{
+"57
+[e :U 19 ]
+[e ) :s 1C ]
+[e $UE 16  ]
+"58
+[e :U 20 ]
+[e ) :s 2C ]
+[e $UE 16  ]
+"59
+[e :U 21 ]
+[e ) :s 3C ]
+[e $UE 16  ]
+"60
+[e :U 22 ]
+[e ) :s 4C ]
+[e $UE 16  ]
+"61
+[e :U 23 ]
+[e ) :s 5C ]
+[e $UE 16  ]
+"62
+}
+[e $U 17  ]
+[e :U 18 ]
+[e [\ -> _g_state `ui , $ -> . `E122 1 `ui 19
+ , $ -> . `E122 2 `ui 20
+ , $ -> . `E122 3 `ui 21
+ , $ -> . `E122 4 `ui 22
+ 23 ]
+[e :U 17 ]
+"63
+[e :UE 16 ]
+}
+"65
+[v _Global_Dispatch `(v ~T0 @X0 1 ef1`E36 ]
+{
+[e :U _Global_Dispatch ]
+[v _evt `E36 ~T0 @X0 1 r1 ]
+[f ]
+"67
+[e $U 26  ]
+{
+"70
+[e :U 27 ]
+"71
+[e $ ! == -> _evt `ui -> . `E36 1 `ui 28  ]
+{
+"72
+[e ( _TransitionTo (1 . `E122 1 ]
+"73
+}
+[e :U 28 ]
+"74
+[e $U 25  ]
+"77
+[e :U 29 ]
+"78
+[e $U 31  ]
+{
+"79
+[e :U 32 ]
+"80
+[e ( _TransitionTo (1 . `E122 2 ]
+"81
+[e $U 30  ]
+"83
+[e :U 33 ]
+"84
+[e ( _TransitionTo (1 . `E122 4 ]
+"85
+[e $U 30  ]
+"87
+[e :U 34 ]
+"88
+[e $U 30  ]
+"89
+}
+[e $U 30  ]
+[e :U 31 ]
+[e [\ -> _evt `ui , $ -> . `E36 2 `ui 32
+ , $ -> . `E36 6 `ui 33
+ 34 ]
+[e :U 30 ]
+"90
+[e $U 25  ]
+"93
+[e :U 35 ]
+"94
+[e $U 37  ]
+{
+"95
+[e :U 38 ]
+"96
+[e ( _TransitionTo (1 . `E122 3 ]
+"97
+[e $U 36  ]
+"99
+[e :U 39 ]
+"100
+[e ( _TransitionTo (1 . `E122 1 ]
+"101
+[e $U 36  ]
+"103
+[e :U 40 ]
+"104
+[e ( _TransitionTo (1 . `E122 4 ]
+"105
+[e $U 36  ]
+"107
+[e :U 41 ]
+"108
+[e $U 36  ]
+"109
+}
+[e $U 36  ]
+[e :U 37 ]
+[e [\ -> _evt `ui , $ -> . `E36 4 `ui 38
+ , $ -> . `E36 3 `ui 39
+ , $ -> . `E36 6 `ui 40
+ 41 ]
+[e :U 36 ]
+"110
+[e $U 25  ]
+"113
+[e :U 42 ]
+"114
+[e $U 44  ]
+{
+"115
+[e :U 45 ]
+"116
+[e ( _TransitionTo (1 . `E122 1 ]
+"117
+[e $U 43  ]
+"119
+[e :U 46 ]
+"120
+[e ( _TransitionTo (1 . `E122 4 ]
+"121
+[e $U 43  ]
+"123
+[e :U 47 ]
+"124
+[e $U 43  ]
+"125
+}
+[e $U 43  ]
+[e :U 44 ]
+[e [\ -> _evt `ui , $ -> . `E36 5 `ui 45
+ , $ -> . `E36 6 `ui 46
+ 47 ]
+[e :U 43 ]
+"126
+[e $U 25  ]
+"128
+[e :U 48 ]
+"129
+[e ( _TransitionTo (1 . `E122 4 ]
+"130
+[e $U 25  ]
+"131
+}
+[e $U 25  ]
+[e :U 26 ]
+[e [\ -> _g_state `ui , $ -> . `E122 4 `ui 27
+ , $ -> . `E122 1 `ui 29
+ , $ -> . `E122 2 `ui 35
+ , $ -> . `E122 3 `ui 42
+ 48 ]
+[e :U 25 ]
+"132
+[e :UE 24 ]
+}
+[a 3C 86 0 ]
+[a 1C 82 0 ]
+[a 4C 79 0 ]
+[a 2C 67 0 ]
+[a 5C 63 0 ]

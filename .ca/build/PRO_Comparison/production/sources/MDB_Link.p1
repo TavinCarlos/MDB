@@ -1,0 +1,1900 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"28 sources/MDB_Link.c
+[s S400 `us 1 `uc 1 ]
+[n S400 . value HasValue ]
+"5 Include/timers.h
+[s S395 `ul 1 `ul 1 `uc 1 ]
+[n S395 . start delay active ]
+"37 Include/fsm_mdb_link.h
+[s S398 `uc -> 7 `i `uc 1 `uc -> 46 `i `uc 1 `uc 1 ]
+[n S398 . Tx Tx_len Rx Rx_len Valid ]
+"128 Include/mdb.h
+[s S392 `uc 1 `us 1 `uc 1 `uc 1 `uc -> 16 `i `uc -> 16 `i `uc 1 ]
+[n S392 . CoinChangerFeatureLevel CountryOrCurrencyCode CoinScalingFactor DecimalPlaces CoinsRouteable CoinTypeCredit NumCoinTypes ]
+"140
+[s S393 `us 1 `uc -> 16 `i `uc 1 ]
+[n S393 . Full_Status Status Total_Tubes ]
+"63 sources/MDB_Link.c
+[c E3676 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 .. ]
+[n E3676 . ST_MDB_RESET ST_MDB_RESET_WAIT ST_MDB_JUST_RESET ST_MDB_JUST_RESET_WAIT ST_MDB_SETUP ST_MDB_SETUP_WAIT ST_MDB_EXP_ID ST_MDB_EXP_ID_WAIT ST_MDB_EXP_FEATURE ST_MDB_EXP_FEATURE_WAIT ST_MDB_TUBE_STATUS ST_MDB_TUBE_STATUS_WAIT ST_MDB_ENABLE_COINS ST_MDB_ENABLE_COINS_WAIT ST_MDB_DISBLE_COINS ST_MDB_DISABLE_COINS_WAIT ST_MDB_POLL ST_MDB_POLL_WAIT ST_MDB_REFUND ST_MDB_ERROR ST_MDB_WAIT  ]
+"29 C:\Program Files\Microchip\xc8\v3.10\pic\include\c99/string.h
+[v _memset `(*v ~T0 @X0 0 ef3`*v`i`ui ]
+"15 Include/ui.h
+[v _UI_Show_MDB_Rx_Line4 `(v ~T0 @X0 0 ef3`*Cuc`*Cuc`uc ]
+"18 Include/hal_uart.h
+[v _hal_UART_SendACK `(v ~T0 @X0 0 ef ]
+"8 Include/checksum.h
+[v _CalculateChecksum `(uc ~T0 @X0 0 ef2`*Cuc`uc ]
+"20 Include/hal_uart.h
+[v _hal_UART_Write_Cmd `(v ~T0 @X0 0 ef2`*Cuc`uc ]
+"112 sources/MDB_Link.c
+[c E3559 0 1 11 12 13 14 15 16 .. ]
+[n E3559 . EVT_MDB_ACK EVT_MDB_ESCROW_REQUEST EVT_MDB_CHANGER_RESET EVT_MDB_CHANGER_READY EVT_MDB_COIN_VALID EVT_MDB_COIN_INVALID EVT_MDB_STATUS_CODE EVT_MDB_NONE  ]
+"34
+[v _MDBLinkSendCommand `(v ~T0 @X0 0 sf2`uc`uc ]
+"33
+[v _TransitionTo `(v ~T0 @X0 0 sf2`E3676`us ]
+"39 Include/mdb_status.h
+[v _UI_MDB_MapStatus `(v ~T0 @X0 0 ef1`uc ]
+"11 Include/timers.h
+[v _TimerNB_Start `(v ~T0 @X0 0 ef2`*S395`ul ]
+"12 Include/mdb_core.h
+[s S396 `uc -> 46 `i `uc 1 `a 1 ]
+[n S396 . rxdata len checksum_ok ]
+"264 sources/MDB_Link.c
+[c E3728 0 1 2 3 4 5 .. ]
+[n E3728 . SRC_NONE SRC_MDB SRC_CREDIT SRC_VEND SRC_UI SRC_APP  ]
+"30 Include/dispatcher.h
+[v _Dispatcher_Post `(a ~T0 @X0 0 ef3`E3728`us`us ]
+"33 Include/mdb_core.h
+[v _MDB_Core_FrameAvailable `(a ~T0 @X0 0 ef ]
+"34
+[v _MDB_Core_GetFrame `(*S396 ~T0 @X0 0 ef ]
+"35
+[v _MDB_Core_ReleaseFrame `(v ~T0 @X0 0 ef ]
+"12 Include/timers.h
+[v _TimerNB_Expired `(uc ~T0 @X0 0 ef1`*S395 ]
+"40 Include/mdb_status.h
+[v _MDB_Status_Clear `(v ~T0 @X0 0 ef ]
+"10 Include/checksum.h
+[v _ValidateChecksum `(uc ~T0 @X0 0 ef2`*Cuc`uc ]
+"44 Include/app.h
+[v _received_data `Vuc ~T0 @X0 0 e ]
+"17 Include/mdb_status.h
+[s S397 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
+[n S397 . escrow_req pay_busy no_credit busy reset tube_sensor_err double_coin tube_jam routing_error coin_jam acceptor_removed rom_error fraud ]
+"42
+[v _mdb_status `S397 ~T0 @X0 0 e ]
+"17 Include/saldo.h
+[v _Saldo_Get `(us ~T0 @X0 0 ef ]
+"52 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h
+[; <" SPPDATA equ 0F62h ;# ">
+"72
+[; <" SPPCFG equ 0F63h ;# ">
+"149
+[; <" SPPEPS equ 0F64h ;# ">
+"223
+[; <" SPPCON equ 0F65h ;# ">
+"249
+[; <" UFRM equ 0F66h ;# ">
+"256
+[; <" UFRML equ 0F66h ;# ">
+"334
+[; <" UFRMH equ 0F67h ;# ">
+"374
+[; <" UIR equ 0F68h ;# ">
+"430
+[; <" UIE equ 0F69h ;# ">
+"486
+[; <" UEIR equ 0F6Ah ;# ">
+"537
+[; <" UEIE equ 0F6Bh ;# ">
+"588
+[; <" USTAT equ 0F6Ch ;# ">
+"648
+[; <" UCON equ 0F6Dh ;# ">
+"699
+[; <" UADDR equ 0F6Eh ;# ">
+"763
+[; <" UCFG equ 0F6Fh ;# ">
+"842
+[; <" UEP0 equ 0F70h ;# ">
+"950
+[; <" UEP1 equ 0F71h ;# ">
+"1058
+[; <" UEP2 equ 0F72h ;# ">
+"1166
+[; <" UEP3 equ 0F73h ;# ">
+"1274
+[; <" UEP4 equ 0F74h ;# ">
+"1382
+[; <" UEP5 equ 0F75h ;# ">
+"1490
+[; <" UEP6 equ 0F76h ;# ">
+"1598
+[; <" UEP7 equ 0F77h ;# ">
+"1706
+[; <" UEP8 equ 0F78h ;# ">
+"1782
+[; <" UEP9 equ 0F79h ;# ">
+"1858
+[; <" UEP10 equ 0F7Ah ;# ">
+"1934
+[; <" UEP11 equ 0F7Bh ;# ">
+"2010
+[; <" UEP12 equ 0F7Ch ;# ">
+"2086
+[; <" UEP13 equ 0F7Dh ;# ">
+"2162
+[; <" UEP14 equ 0F7Eh ;# ">
+"2238
+[; <" UEP15 equ 0F7Fh ;# ">
+"2314
+[; <" PORTA equ 0F80h ;# ">
+"2453
+[; <" PORTB equ 0F81h ;# ">
+"2563
+[; <" PORTC equ 0F82h ;# ">
+"2705
+[; <" PORTD equ 0F83h ;# ">
+"2826
+[; <" PORTE equ 0F84h ;# ">
+"2973
+[; <" LATA equ 0F89h ;# ">
+"3073
+[; <" LATB equ 0F8Ah ;# ">
+"3185
+[; <" LATC equ 0F8Bh ;# ">
+"3263
+[; <" LATD equ 0F8Ch ;# ">
+"3375
+[; <" LATE equ 0F8Dh ;# ">
+"3427
+[; <" TRISA equ 0F92h ;# ">
+"3432
+[; <" DDRA equ 0F92h ;# ">
+"3625
+[; <" TRISB equ 0F93h ;# ">
+"3630
+[; <" DDRB equ 0F93h ;# ">
+"3847
+[; <" TRISC equ 0F94h ;# ">
+"3852
+[; <" DDRC equ 0F94h ;# ">
+"4001
+[; <" TRISD equ 0F95h ;# ">
+"4006
+[; <" DDRD equ 0F95h ;# ">
+"4223
+[; <" TRISE equ 0F96h ;# ">
+"4228
+[; <" DDRE equ 0F96h ;# ">
+"4325
+[; <" OSCTUNE equ 0F9Bh ;# ">
+"4384
+[; <" PIE1 equ 0F9Dh ;# ">
+"4468
+[; <" PIR1 equ 0F9Eh ;# ">
+"4552
+[; <" IPR1 equ 0F9Fh ;# ">
+"4636
+[; <" PIE2 equ 0FA0h ;# ">
+"4707
+[; <" PIR2 equ 0FA1h ;# ">
+"4778
+[; <" IPR2 equ 0FA2h ;# ">
+"4849
+[; <" EECON1 equ 0FA6h ;# ">
+"4915
+[; <" EECON2 equ 0FA7h ;# ">
+"4922
+[; <" EEDATA equ 0FA8h ;# ">
+"4929
+[; <" EEADR equ 0FA9h ;# ">
+"4936
+[; <" RCSTA equ 0FABh ;# ">
+"4941
+[; <" RCSTA1 equ 0FABh ;# ">
+"5146
+[; <" TXSTA equ 0FACh ;# ">
+"5151
+[; <" TXSTA1 equ 0FACh ;# ">
+"5402
+[; <" TXREG equ 0FADh ;# ">
+"5407
+[; <" TXREG1 equ 0FADh ;# ">
+"5414
+[; <" RCREG equ 0FAEh ;# ">
+"5419
+[; <" RCREG1 equ 0FAEh ;# ">
+"5426
+[; <" SPBRG equ 0FAFh ;# ">
+"5431
+[; <" SPBRG1 equ 0FAFh ;# ">
+"5438
+[; <" SPBRGH equ 0FB0h ;# ">
+"5445
+[; <" T3CON equ 0FB1h ;# ">
+"5566
+[; <" TMR3 equ 0FB2h ;# ">
+"5573
+[; <" TMR3L equ 0FB2h ;# ">
+"5580
+[; <" TMR3H equ 0FB3h ;# ">
+"5587
+[; <" CMCON equ 0FB4h ;# ">
+"5677
+[; <" CVRCON equ 0FB5h ;# ">
+"5762
+[; <" ECCP1AS equ 0FB6h ;# ">
+"5767
+[; <" CCP1AS equ 0FB6h ;# ">
+"5924
+[; <" ECCP1DEL equ 0FB7h ;# ">
+"5929
+[; <" CCP1DEL equ 0FB7h ;# ">
+"6062
+[; <" BAUDCON equ 0FB8h ;# ">
+"6067
+[; <" BAUDCTL equ 0FB8h ;# ">
+"6242
+[; <" CCP2CON equ 0FBAh ;# ">
+"6306
+[; <" CCPR2 equ 0FBBh ;# ">
+"6313
+[; <" CCPR2L equ 0FBBh ;# ">
+"6320
+[; <" CCPR2H equ 0FBCh ;# ">
+"6327
+[; <" CCP1CON equ 0FBDh ;# ">
+"6332
+[; <" ECCP1CON equ 0FBDh ;# ">
+"6489
+[; <" CCPR1 equ 0FBEh ;# ">
+"6496
+[; <" CCPR1L equ 0FBEh ;# ">
+"6503
+[; <" CCPR1H equ 0FBFh ;# ">
+"6510
+[; <" ADCON2 equ 0FC0h ;# ">
+"6581
+[; <" ADCON1 equ 0FC1h ;# ">
+"6666
+[; <" ADCON0 equ 0FC2h ;# ">
+"6785
+[; <" ADRES equ 0FC3h ;# ">
+"6792
+[; <" ADRESL equ 0FC3h ;# ">
+"6799
+[; <" ADRESH equ 0FC4h ;# ">
+"6806
+[; <" SSPCON2 equ 0FC5h ;# ">
+"6868
+[; <" SSPCON1 equ 0FC6h ;# ">
+"6938
+[; <" SSPSTAT equ 0FC7h ;# ">
+"7186
+[; <" SSPADD equ 0FC8h ;# ">
+"7193
+[; <" SSPBUF equ 0FC9h ;# ">
+"7200
+[; <" T2CON equ 0FCAh ;# ">
+"7298
+[; <" PR2 equ 0FCBh ;# ">
+"7303
+[; <" MEMCON equ 0FCBh ;# ">
+"7408
+[; <" TMR2 equ 0FCCh ;# ">
+"7415
+[; <" T1CON equ 0FCDh ;# ">
+"7518
+[; <" TMR1 equ 0FCEh ;# ">
+"7525
+[; <" TMR1L equ 0FCEh ;# ">
+"7532
+[; <" TMR1H equ 0FCFh ;# ">
+"7539
+[; <" RCON equ 0FD0h ;# ">
+"7688
+[; <" WDTCON equ 0FD1h ;# ">
+"7716
+[; <" HLVDCON equ 0FD2h ;# ">
+"7721
+[; <" LVDCON equ 0FD2h ;# ">
+"7986
+[; <" OSCCON equ 0FD3h ;# ">
+"8069
+[; <" T0CON equ 0FD5h ;# ">
+"8139
+[; <" TMR0 equ 0FD6h ;# ">
+"8146
+[; <" TMR0L equ 0FD6h ;# ">
+"8153
+[; <" TMR0H equ 0FD7h ;# ">
+"8160
+[; <" STATUS equ 0FD8h ;# ">
+"8231
+[; <" FSR2 equ 0FD9h ;# ">
+"8238
+[; <" FSR2L equ 0FD9h ;# ">
+"8245
+[; <" FSR2H equ 0FDAh ;# ">
+"8252
+[; <" PLUSW2 equ 0FDBh ;# ">
+"8259
+[; <" PREINC2 equ 0FDCh ;# ">
+"8266
+[; <" POSTDEC2 equ 0FDDh ;# ">
+"8273
+[; <" POSTINC2 equ 0FDEh ;# ">
+"8280
+[; <" INDF2 equ 0FDFh ;# ">
+"8287
+[; <" BSR equ 0FE0h ;# ">
+"8294
+[; <" FSR1 equ 0FE1h ;# ">
+"8301
+[; <" FSR1L equ 0FE1h ;# ">
+"8308
+[; <" FSR1H equ 0FE2h ;# ">
+"8315
+[; <" PLUSW1 equ 0FE3h ;# ">
+"8322
+[; <" PREINC1 equ 0FE4h ;# ">
+"8329
+[; <" POSTDEC1 equ 0FE5h ;# ">
+"8336
+[; <" POSTINC1 equ 0FE6h ;# ">
+"8343
+[; <" INDF1 equ 0FE7h ;# ">
+"8350
+[; <" WREG equ 0FE8h ;# ">
+"8357
+[; <" FSR0 equ 0FE9h ;# ">
+"8364
+[; <" FSR0L equ 0FE9h ;# ">
+"8371
+[; <" FSR0H equ 0FEAh ;# ">
+"8378
+[; <" PLUSW0 equ 0FEBh ;# ">
+"8385
+[; <" PREINC0 equ 0FECh ;# ">
+"8392
+[; <" POSTDEC0 equ 0FEDh ;# ">
+"8399
+[; <" POSTINC0 equ 0FEEh ;# ">
+"8406
+[; <" INDF0 equ 0FEFh ;# ">
+"8413
+[; <" INTCON3 equ 0FF0h ;# ">
+"8505
+[; <" INTCON2 equ 0FF1h ;# ">
+"8582
+[; <" INTCON equ 0FF2h ;# ">
+"8699
+[; <" PROD equ 0FF3h ;# ">
+"8706
+[; <" PRODL equ 0FF3h ;# ">
+"8713
+[; <" PRODH equ 0FF4h ;# ">
+"8720
+[; <" TABLAT equ 0FF5h ;# ">
+"8729
+[; <" TBLPTR equ 0FF6h ;# ">
+"8736
+[; <" TBLPTRL equ 0FF6h ;# ">
+"8743
+[; <" TBLPTRH equ 0FF7h ;# ">
+"8750
+[; <" TBLPTRU equ 0FF8h ;# ">
+"8759
+[; <" PCLAT equ 0FF9h ;# ">
+"8766
+[; <" PC equ 0FF9h ;# ">
+"8773
+[; <" PCL equ 0FF9h ;# ">
+"8780
+[; <" PCLATH equ 0FFAh ;# ">
+"8787
+[; <" PCLATU equ 0FFBh ;# ">
+"8794
+[; <" STKPTR equ 0FFCh ;# ">
+"8870
+[; <" TOS equ 0FFDh ;# ">
+"8877
+[; <" TOSL equ 0FFDh ;# ">
+"8884
+[; <" TOSH equ 0FFEh ;# ">
+"8891
+[; <" TOSU equ 0FFFh ;# ">
+"11 Include/Program.h
+[p x PLLDIV  =  5        ]
+"12
+[p x CPUDIV  =  OSC1_PLL2 ]
+"13
+[p x USBDIV  =  2        ]
+"16
+[p x FOSC  =  HSPLL_HS   ]
+"17
+[p x FCMEN  =  OFF       ]
+"18
+[p x IESO  =  OFF        ]
+"21
+[p x PWRT  =  OFF        ]
+"22
+[p x BOR  =  ON           ]
+"23
+[p x BORV  =  3          ]
+"24
+[p x VREGEN  =  OFF      ]
+"27
+[p x WDT  =  OFF         ]
+"28
+[p x WDTPS  =  32768     ]
+"31
+[p x CCP2MX  =  ON      ]
+"32
+[p x PBADEN  =  OFF      ]
+"33
+[p x LPT1OSC  =  OFF     ]
+"34
+[p x MCLRE  =  ON        ]
+"37
+[p x STVREN  =  ON       ]
+"38
+[p x LVP  =  OFF          ]
+"39
+[p x ICPRT  =  OFF       ]
+"40
+[p x XINST  =  OFF       ]
+"43
+[p x CP0  =  OFF         ]
+"44
+[p x CP1  =  OFF         ]
+"45
+[p x CP2  =  OFF         ]
+"46
+[p x CP3  =  OFF         ]
+"49
+[p x CPB  =  OFF         ]
+"50
+[p x CPD  =  OFF         ]
+"53
+[p x WRT0  =  OFF        ]
+"54
+[p x WRT1  =  OFF        ]
+"55
+[p x WRT2  =  OFF        ]
+"56
+[p x WRT3  =  OFF        ]
+"59
+[p x WRTC  =  OFF        ]
+"60
+[p x WRTB  =  OFF        ]
+"61
+[p x WRTD  =  OFF        ]
+"64
+[p x EBTR0  =  OFF       ]
+"65
+[p x EBTR1  =  OFF       ]
+"66
+[p x EBTR2  =  OFF       ]
+"67
+[p x EBTR3  =  OFF       ]
+"70
+[p x EBTRB  =  OFF       ]
+"36 sources/MDB_Link.c
+[v _RefundValue `S400 ~T0 @X0 1 s ]
+[i _RefundValue
+:U ..
+:U ..
+-> -> 0 `i `us
+-> -> 0 `i `uc
+..
+..
+]
+"39
+[v _NB_ResetTimeOut `S395 ~T0 @X0 1 e ]
+"40
+[v _NB_JustResetTimeout `S395 ~T0 @X0 1 e ]
+"41
+[v _NB_SetupTimeOut `S395 ~T0 @X0 1 e ]
+"42
+[v _NB_EXPIDTimeOut `S395 ~T0 @X0 1 e ]
+"43
+[v _NB_EXPFEATURETimeOut `S395 ~T0 @X0 1 e ]
+"44
+[v _NB_EXP_DIAG_TimeOut `S395 ~T0 @X0 1 e ]
+"45
+[v _NB_TubeStatusTimeOut `S395 ~T0 @X0 1 e ]
+"46
+[v _NB_EnableCoinsTimeOut `S395 ~T0 @X0 1 e ]
+"47
+[v _NB_PollTimeOut `S395 ~T0 @X0 1 e ]
+"48
+[v _mdbWaitTimer `S395 ~T0 @X0 1 e ]
+"51
+[v _is_coinco `uc ~T0 @X0 1 s ]
+"52
+[v _mdb_log `S398 ~T0 @X0 1 s ]
+"54
+[v _polls_buenos `uc ~T0 @X0 1 s ]
+"56
+[v _coin_changer_info `S392 ~T0 @X0 1 s ]
+[i _coin_changer_info
+:U ..
+:U ..
+-> -> 0 `i `uc
+-> -> 0 `i `us
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+:U ..
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+-> -> 0 `i `uc
+..
+..
+]
+"60
+[v _tube_status `S393 ~T0 @X0 1 s ]
+[i _tube_status
+:U ..
+:U ..
+-> -> 0 `i `us
+:U ..
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+..
+..
+]
+"63
+[v _current_state `E3676 ~T0 @X0 1 s ]
+[i _current_state
+. `E3676 0
+]
+"64
+[v _next_state `E3676 ~T0 @X0 1 s ]
+"67
+[v _MDB_Link_GetState `(E3676 ~T0 @X0 1 ef ]
+{
+[e :U _MDB_Link_GetState ]
+[f ]
+"68
+[e ) _next_state ]
+[e $UE 401  ]
+"69
+[e :UE 401 ]
+}
+"72
+[v _MDB_Link_Log_TX `(v ~T0 @X0 1 sf3`uc`uc`uc ]
+{
+[e :U _MDB_Link_Log_TX ]
+[v _cmd `uc ~T0 @X0 1 r1 ]
+[v _sub `uc ~T0 @X0 1 r2 ]
+[v _len `uc ~T0 @X0 1 r3 ]
+[f ]
+"73
+[e ( _memset (3 , , -> &U _mdb_log `*v -> 0 `i -> # _mdb_log `ui ]
+"74
+[e $ ! > -> _len `i -> 2 `i 403  ]
+"75
+[e = _len -> -> 2 `i `uc ]
+[e :U 403 ]
+"76
+[e = *U + &U . _mdb_log 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _mdb_log 0 `ui `ux _cmd ]
+"77
+[e = *U + &U . _mdb_log 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _mdb_log 0 `ui `ux _sub ]
+"78
+[e = . _mdb_log 1 _len ]
+"79
+[e :UE 402 ]
+}
+"82
+[v _MDB_Link_To_PC `(v ~T0 @X0 1 sf2`*Cuc`uc ]
+{
+[e :U _MDB_Link_To_PC ]
+[v _dta `*Cuc ~T0 @X0 1 r1 ]
+[v _len `uc ~T0 @X0 1 r2 ]
+[f ]
+"83
+[e $ ! > -> _len `i + -> 36 `i -> 10 `i 405  ]
+"84
+[e = _len -> + -> 36 `i -> 10 `i `uc ]
+[e :U 405 ]
+"85
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $U 409  ]
+[e :U 406 ]
+"86
+[e = *U + &U . _mdb_log 2 * -> _i `ux -> -> # *U &U . _mdb_log 2 `ui `ux *U + _dta * -> _i `ux -> -> # *U _dta `ui `ux ]
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 409 ]
+[e $ < -> _i `i -> _len `i 406  ]
+[e :U 407 ]
+}
+"87
+[e = . _mdb_log 3 _len ]
+"88
+[e = . _mdb_log 4 -> -> 1 `i `uc ]
+"90
+[e ( _UI_Show_MDB_Rx_Line4 (3 , , -> &U . _mdb_log 0 `*Cuc -> &U . _mdb_log 2 `*Cuc _len ]
+"91
+[e :UE 404 ]
+}
+"94
+[v _MDBSendACK `(v ~T0 @X0 1 sf ]
+{
+[e :U _MDBSendACK ]
+[f ]
+"95
+[e ( _hal_UART_SendACK ..  ]
+"96
+[e :UE 410 ]
+}
+"99
+[v _MDB_SendCommand_Refund `(v ~T0 @X0 1 sf1`us ]
+{
+[e :U _MDB_SendCommand_Refund ]
+[v _value `us ~T0 @X0 1 r1 ]
+[f ]
+"100
+[e $ ! >= -> _value `ui -> -> 1 `i `ui 412  ]
+{
+"101
+[v _monedas `uc ~T0 @X0 1 a ]
+[e = _monedas -> / -> _value `ui -> . _coin_changer_info 2 `ui `uc ]
+"102
+[v _cmd `uc ~T0 @X0 -> 4 `i a ]
+"103
+[e = *U + &U _cmd * -> -> -> 0 `i `ui `ux -> -> # *U &U _cmd `ui `ux -> -> 15 `i `uc ]
+"104
+[e = *U + &U _cmd * -> -> -> 1 `i `ui `ux -> -> # *U &U _cmd `ui `ux -> -> 2 `i `uc ]
+"105
+[e = *U + &U _cmd * -> -> -> 2 `i `ui `ux -> -> # *U &U _cmd `ui `ux _monedas ]
+"106
+[e = *U + &U _cmd * -> -> -> 3 `i `ui `ux -> -> # *U &U _cmd `ui `ux ( _CalculateChecksum (2 , -> &U _cmd `*Cuc -> -> 4 `i `uc ]
+"107
+[e ( _hal_UART_Write_Cmd (2 , -> &U _cmd `*Cuc -> -> 4 `i `uc ]
+"108
+}
+[e :U 412 ]
+"109
+[e :UE 411 ]
+}
+"112
+[v _MDB_Link_Dispatch `(v ~T0 @X0 1 ef2`E3559`us ]
+{
+[e :U _MDB_Link_Dispatch ]
+[v _evt `E3559 ~T0 @X0 1 r1 ]
+[v _value `us ~T0 @X0 1 r2 ]
+[f ]
+"114
+[e $U 415  ]
+{
+"115
+[e :U 416 ]
+"116
+[e :U 417 ]
+"117
+[e :U 418 ]
+"118
+[e $ ! == -> _evt `ui -> . `E3559 1 `ui 419  ]
+{
+"119
+[e $ ! > -> _value `ui -> -> 1 `i `ui 420  ]
+{
+"120
+[e = . _RefundValue 0 _value ]
+"121
+[e = . _RefundValue 1 -> -> 1 `i `uc ]
+"122
+}
+[e :U 420 ]
+"123
+}
+[e :U 419 ]
+"124
+[e $U 414  ]
+"125
+[e :U 421 ]
+"126
+[e $U 414  ]
+"127
+}
+[e $U 414  ]
+[e :U 415 ]
+[e [\ -> _current_state `ui , $ -> . `E3676 16 `ui 416
+ , $ -> . `E3676 17 `ui 417
+ , $ -> . `E3676 20 `ui 418
+ 421 ]
+[e :U 414 ]
+"128
+[e :UE 413 ]
+}
+"131
+[v _MDB_Link_Init `(v ~T0 @X0 1 ef ]
+{
+[e :U _MDB_Link_Init ]
+[f ]
+"132
+[e ( _MDBLinkSendCommand (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
+"133
+[e ( _TransitionTo (2 , . `E3676 0 -> -> 1000 `i `us ]
+"134
+[e :UE 422 ]
+}
+"137
+[v _ParsePoll `(E3559 ~T0 @X0 1 sf2`*Cuc`uc ]
+{
+[e :U _ParsePoll ]
+[v _buf `*Cuc ~T0 @X0 1 r1 ]
+[v _len `uc ~T0 @X0 1 r2 ]
+[f ]
+"139
+[e $ ! && == -> _len `i -> 1 `i == -> *U + _buf * -> -> 0 `i `x -> -> # *U _buf `i `x `i -> 0 `i 424  ]
+"140
+[e ) . `E3559 0 ]
+[e $UE 423  ]
+[e :U 424 ]
+"143
+[e $ ! && == -> _len `i -> 3 `i == & -> *U + _buf * -> -> 0 `i `x -> -> # *U _buf `i `x `ui -> 192 `ui -> 64 `ui 425  ]
+{
+"144
+[e $ ! == & + -> *U + _buf * -> -> 0 `i `x -> -> # *U _buf `i `x `i -> *U + _buf * -> -> 1 `i `x -> -> # *U _buf `i `x `i -> 255 `i -> *U + _buf * -> -> 2 `i `x -> -> # *U _buf `i `x `i 426  ]
+"145
+[e ) . `E3559 4 ]
+[e $UE 423  ]
+[e $U 427  ]
+"146
+[e :U 426 ]
+"147
+[e ) . `E3559 5 ]
+[e $UE 423  ]
+[e :U 427 ]
+"148
+}
+[e :U 425 ]
+"151
+[e $ ! && == & -> _len `i -> 1 `i -> 0 `i ! == & -> *U + _buf * -> -> 0 `i `x -> -> # *U _buf `i `x `ui -> 192 `ui -> 64 `ui 428  ]
+{
+"152
+[v _i `uc ~T0 @X0 1 a ]
+"155
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 432  ]
+[e :U 429 ]
+{
+"156
+[e $ ! != -> *U + _buf * -> _i `ux -> -> # *U _buf `ui `ux `i -> *U + _buf * -> + -> _i `i -> 1 `i `x -> -> # *U _buf `i `x `i 433  ]
+"157
+[e ) . `E3559 7 ]
+[e $UE 423  ]
+[e :U 433 ]
+"158
+}
+[e =+ _i -> -> 2 `i `uc ]
+[e :U 432 ]
+[e $ < -> _i `i -> _len `i 429  ]
+[e :U 430 ]
+}
+"161
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 437  ]
+[e :U 434 ]
+{
+"162
+[e ( _UI_MDB_MapStatus (1 *U + _buf * -> _i `ux -> -> # *U _buf `ui `ux ]
+"163
+}
+[e =+ _i -> -> 2 `i `uc ]
+[e :U 437 ]
+[e $ < -> _i `i -> _len `i 434  ]
+[e :U 435 ]
+}
+"165
+[e ) . `E3559 6 ]
+[e $UE 423  ]
+"166
+}
+[e :U 428 ]
+"168
+[e ) . `E3559 7 ]
+[e $UE 423  ]
+"169
+[e :UE 423 ]
+}
+"172
+[v _MDBLinkSendCommand `(v ~T0 @X0 1 sf2`uc`uc ]
+{
+[e :U _MDBLinkSendCommand ]
+[v _command `uc ~T0 @X0 1 r1 ]
+[v _subCommand `uc ~T0 @X0 1 r2 ]
+[f ]
+"173
+[e $U 440  ]
+{
+"174
+[e :U 441 ]
+"175
+{
+[v F3817 `Cuc ~T0 @X0 -> 2 `i s ]
+[i F3817
+:U ..
+"176
+-> -> 8 `i `uc
+-> -> 8 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 2 `i a ]
+[e = _cmd F3817 ]
+"177
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 2 `i `uc ]
+"178
+}
+"179
+[e $U 439  ]
+"180
+[e :U 442 ]
+"181
+{
+[v F3819 `Cuc ~T0 @X0 -> 2 `i s ]
+[i F3819
+:U ..
+"182
+-> -> 9 `i `uc
+-> -> 9 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 2 `i a ]
+[e = _cmd F3819 ]
+"183
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 2 `i `uc ]
+"184
+}
+"185
+[e $U 439  ]
+"186
+[e :U 443 ]
+"187
+{
+[v F3821 `Cuc ~T0 @X0 -> 2 `i s ]
+[i F3821
+:U ..
+"188
+-> -> 10 `i `uc
+-> -> 10 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 2 `i a ]
+[e = _cmd F3821 ]
+"189
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 2 `i `uc ]
+"190
+}
+"191
+[e $U 439  ]
+"192
+[e :U 444 ]
+"193
+{
+[v F3823 `Cuc ~T0 @X0 -> 2 `i s ]
+[i F3823
+:U ..
+"194
+-> -> 11 `i `uc
+-> -> 11 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 2 `i a ]
+[e = _cmd F3823 ]
+"195
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 2 `i `uc ]
+"196
+}
+"197
+[e $U 439  ]
+"198
+[e :U 445 ]
+"199
+{
+"200
+[e $ ! == -> _subCommand `i -> 0 `i 446  ]
+{
+[v F3825 `Cuc ~T0 @X0 -> 6 `i s ]
+[i F3825
+:U ..
+"201
+-> -> 12 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 12 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 6 `i a ]
+[e = _cmd F3825 ]
+"202
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 6 `i `uc ]
+"203
+}
+[e $U 447  ]
+"204
+[e :U 446 ]
+{
+[v F3827 `Cuc ~T0 @X0 -> 6 `i s ]
+[i F3827
+:U ..
+"205
+-> -> 12 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 8 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 6 `i a ]
+[e = _cmd F3827 ]
+"206
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 6 `i `uc ]
+"207
+}
+[e :U 447 ]
+"208
+}
+"209
+[e $U 439  ]
+"210
+[e :U 448 ]
+"211
+{
+"212
+[e $U 450  ]
+{
+"213
+[e :U 451 ]
+"214
+{
+[v F3829 `Cuc ~T0 @X0 -> 3 `i s ]
+[i F3829
+:U ..
+"215
+-> -> 15 `i `uc
+-> -> 0 `i `uc
+-> -> 15 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 3 `i a ]
+[e = _cmd F3829 ]
+"216
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 3 `i `uc ]
+"217
+}
+"218
+[e $U 449  ]
+"219
+[e :U 452 ]
+"220
+{
+[v F3831 `Cuc ~T0 @X0 -> 7 `i s ]
+[i F3831
+:U ..
+"221
+-> -> 15 `i `uc
+-> -> 1 `i `uc
+-> -> 12 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 28 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 7 `i a ]
+[e = _cmd F3831 ]
+"222
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 7 `i `uc ]
+"223
+}
+"224
+[e $U 449  ]
+"225
+[e :U 453 ]
+"226
+{
+[v F3833 `Cuc ~T0 @X0 -> 3 `i s ]
+[i F3833
+:U ..
+"227
+-> -> 15 `i `uc
+-> -> 5 `i `uc
+-> -> 20 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 3 `i a ]
+[e = _cmd F3833 ]
+"228
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 3 `i `uc ]
+"229
+}
+"230
+[e $U 449  ]
+"231
+}
+[e $U 449  ]
+[e :U 450 ]
+[e [\ _subCommand , $ -> 0 `i 451
+ , $ -> 1 `i 452
+ , $ -> 5 `i 453
+ 449 ]
+[e :U 449 ]
+"232
+}
+"233
+[e $U 439  ]
+"234
+}
+[e $U 439  ]
+[e :U 440 ]
+[e [\ _command , $ -> 8 `i 441
+ , $ -> 9 `i 442
+ , $ -> 10 `i 443
+ , $ -> 11 `i 444
+ , $ -> 12 `i 445
+ , $ -> 15 `i 448
+ 439 ]
+[e :U 439 ]
+"236
+[v _lenLog `uc ~T0 @X0 1 a ]
+[e = _lenLog -> ? || == -> _command `i -> 12 `i == -> _command `i -> 15 `i : -> 2 `i -> 1 `i `uc ]
+"237
+[e ( _MDB_Link_Log_TX (3 , , _command _subCommand _lenLog ]
+"238
+[e :UE 438 ]
+}
+"241
+[v _TransitionTo `(v ~T0 @X0 1 sf2`E3676`us ]
+{
+[e :U _TransitionTo ]
+[v _next `E3676 ~T0 @X0 1 r1 ]
+[v _delay_ms `us ~T0 @X0 1 r2 ]
+[f ]
+"242
+[e = _current_state . `E3676 20 ]
+"243
+[e = _next_state _next ]
+"244
+[e ( _TimerNB_Start (2 , &U _mdbWaitTimer -> _delay_ms `ul ]
+"246
+[e :UE 454 ]
+}
+"249
+[v _MDB_Link_Task `(v ~T0 @X0 1 ef ]
+"250
+{
+[e :U _MDB_Link_Task ]
+[f ]
+"251
+[v _f `*S396 ~T0 @X0 1 a ]
+"255
+[e $U 457  ]
+{
+"259
+[e :U 458 ]
+"260
+[e = _polls_buenos -> -> 0 `i `uc ]
+"261
+[e ( _MDBLinkSendCommand (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
+"262
+[e ( _TransitionTo (2 , . `E3676 1 -> -> 5 `i `us ]
+"263
+[e ( _TimerNB_Start (2 , &U _NB_ResetTimeOut -> -> -> 5 `i `l `ul ]
+"264
+[e ( _Dispatcher_Post (3 , , . `E3728 1 -> . `E3559 2 `us -> -> 0 `i `us ]
+"265
+[e $U 456  ]
+"269
+[e :U 459 ]
+"270
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 460  ]
+{
+"271
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"272
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"273
+[e $ ! && == -> . *U _f 1 `i -> 1 `i == -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> 0 `i 461  ]
+{
+"274
+[e ( _MDBSendACK ..  ]
+"275
+[e ( _TransitionTo (2 , . `E3676 2 -> -> 200 `i `us ]
+"276
+}
+[e :U 461 ]
+"277
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"278
+}
+[e $U 462  ]
+"279
+[e :U 460 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_ResetTimeOut `i -> 0 `i 463  ]
+{
+"280
+[e ( _TransitionTo (2 , . `E3676 0 -> -> 200 `i `us ]
+"281
+}
+[e :U 463 ]
+[e :U 462 ]
+"282
+[e $U 456  ]
+"285
+[e :U 464 ]
+"286
+[e ( _MDBLinkSendCommand (2 , -> -> 11 `i `uc -> -> 0 `i `uc ]
+"287
+[e ( _TimerNB_Start (2 , &U _NB_JustResetTimeout -> -> -> 5 `i `l `ul ]
+"288
+[e ( _TransitionTo (2 , . `E3676 3 -> -> 5 `i `us ]
+"289
+[e $U 456  ]
+"291
+[e :U 465 ]
+"292
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 466  ]
+{
+"293
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"294
+[e ( _MDB_Status_Clear ..  ]
+"295
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"296
+[e $ ! && == -> . *U _f 1 `i -> 1 `i == -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> 0 `i 467  ]
+{
+"297
+[e ( _MDBSendACK ..  ]
+"298
+[e ( _TransitionTo (2 , . `E3676 4 -> -> 200 `i `us ]
+"299
+}
+[e $U 468  ]
+"300
+[e :U 467 ]
+[e $ ! == & -> . *U _f 1 `i -> 1 `i -> 0 `i 469  ]
+{
+"301
+[e ( _MDBSendACK ..  ]
+"302
+[e ( _TransitionTo (2 , . `E3676 4 -> -> 200 `i `us ]
+"303
+[e ( _TransitionTo (2 , . `E3676 2 -> -> 200 `i `us ]
+"304
+}
+[e :U 469 ]
+[e :U 468 ]
+"305
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"306
+}
+[e $U 470  ]
+"307
+[e :U 466 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_JustResetTimeout `i -> 0 `i 471  ]
+{
+"308
+[e ( _TransitionTo (2 , . `E3676 2 -> -> 200 `i `us ]
+"309
+}
+[e :U 471 ]
+[e :U 470 ]
+"310
+[e $U 456  ]
+"312
+[e :U 472 ]
+"314
+[e ( _MDBLinkSendCommand (2 , -> -> 9 `i `uc -> -> 0 `i `uc ]
+"315
+[e ( _TransitionTo (2 , . `E3676 5 -> -> 60 `i `us ]
+"316
+[e ( _TimerNB_Start (2 , &U _NB_SetupTimeOut -> -> -> 40 `i `l `ul ]
+"326
+[e $U 456  ]
+"329
+[e :U 473 ]
+"330
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 474  ]
+{
+"331
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"332
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"333
+[e $ ! && == -> . *U _f 1 `i -> 24 `i != -> ( _ValidateChecksum (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 `i -> 0 `i 475  ]
+{
+"334
+[v _temp `us ~T0 @X0 1 a ]
+"335
+[v _k `uc ~T0 @X0 1 a ]
+"336
+[e ( _MDBSendACK ..  ]
+"339
+[e = . _coin_changer_info 0 *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux ]
+"341
+[e = . _coin_changer_info 1 -> | << -> -> *U + &U . *U _f 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `us `ui -> 8 `i -> *U + &U . *U _f 0 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `ui `us ]
+"346
+[e = . _coin_changer_info 2 *U + &U . *U _f 0 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux ]
+"350
+[e = . _coin_changer_info 3 *U + &U . *U _f 0 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux ]
+"354
+[e = _temp -> | << -> -> *U + &U . *U _f 0 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `us `ui -> 8 `i -> *U + &U . *U _f 0 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `ui `us ]
+"355
+{
+[e = _k -> -> 0 `i `uc ]
+[e $ < -> _k `i -> 16 `i 476  ]
+[e $U 477  ]
+[e :U 476 ]
+"356
+[e = *U + &U . _coin_changer_info 4 * -> _k `ux -> -> # *U &U . _coin_changer_info 4 `ui `ux -> & >> -> _temp `ui -> _k `i -> -> 1 `i `ui `uc ]
+[e ++ _k -> -> 1 `i `uc ]
+[e $ < -> _k `i -> 16 `i 476  ]
+[e :U 477 ]
+}
+"361
+[e = . _coin_changer_info 6 -> - -> _received_data `i -> 8 `i `uc ]
+"362
+[e $ ! > -> . _coin_changer_info 6 `i -> 16 `i 479  ]
+"363
+[e = . _coin_changer_info 6 -> -> 16 `i `uc ]
+[e :U 479 ]
+"365
+{
+[e = _k -> -> 0 `i `uc ]
+[e $U 483  ]
+[e :U 480 ]
+"366
+[e = *U + &U . _coin_changer_info 5 * -> _k `ux -> -> # *U &U . _coin_changer_info 5 `ui `ux *U + &U . *U _f 0 * -> -> + -> 7 `i -> _k `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux ]
+[e ++ _k -> -> 1 `i `uc ]
+[e :U 483 ]
+[e $ < -> _k `i -> . _coin_changer_info 6 `i 480  ]
+[e :U 481 ]
+}
+"369
+{
+[e = _k . _coin_changer_info 6 ]
+[e $ < -> _k `i -> 16 `i 484  ]
+[e $U 485  ]
+[e :U 484 ]
+"370
+[e = *U + &U . _coin_changer_info 5 * -> _k `ux -> -> # *U &U . _coin_changer_info 5 `ui `ux -> -> 0 `i `uc ]
+[e ++ _k -> -> 1 `i `uc ]
+[e $ < -> _k `i -> 16 `i 484  ]
+[e :U 485 ]
+}
+"372
+[e ( _TransitionTo (2 , . `E3676 6 -> -> 200 `i `us ]
+"373
+}
+[e $U 487  ]
+"374
+[e :U 475 ]
+{
+"375
+[e ( _TransitionTo (2 , . `E3676 4 -> -> 200 `i `us ]
+"376
+}
+[e :U 487 ]
+"377
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"378
+}
+[e $U 488  ]
+"379
+[e :U 474 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_SetupTimeOut `i -> 0 `i 489  ]
+{
+"380
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"381
+[e ( _TransitionTo (2 , . `E3676 4 -> -> 200 `i `us ]
+"382
+}
+[e :U 489 ]
+[e :U 488 ]
+"383
+[e $U 456  ]
+"387
+[e :U 490 ]
+"388
+[e $ ! >= -> . _coin_changer_info 0 `i -> 3 `i 491  ]
+{
+"389
+[e ( _TransitionTo (2 , . `E3676 7 -> -> 100 `i `us ]
+"390
+[e ( _MDBLinkSendCommand (2 , -> -> 15 `i `uc -> -> 0 `i `uc ]
+"391
+[e ( _TimerNB_Start (2 , &U _NB_EXPIDTimeOut -> -> -> 70 `i `l `ul ]
+"393
+}
+[e $U 492  ]
+"394
+[e :U 491 ]
+{
+"395
+[e ( _TransitionTo (2 , . `E3676 10 -> -> 200 `i `us ]
+"396
+}
+[e :U 492 ]
+"397
+[e $U 456  ]
+"399
+[e :U 493 ]
+"400
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 494  ]
+{
+"401
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"402
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"403
+[e $ ! == -> . *U _f 1 `i -> 34 `i 495  ]
+{
+"404
+[e = _is_coinco -> -> && && == -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `ui -> 67 `ui == -> *U + &U . *U _f 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `ui -> 65 `ui == -> *U + &U . *U _f 0 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `ui -> 73 `ui `i `uc ]
+"405
+[e ( _MDBSendACK ..  ]
+"406
+[e ( _TransitionTo (2 , . `E3676 8 -> -> 200 `i `us ]
+"407
+}
+[e :U 495 ]
+"408
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"409
+}
+[e $U 496  ]
+"410
+[e :U 494 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_EXPIDTimeOut `i -> 0 `i 497  ]
+{
+"411
+[e ( _TransitionTo (2 , . `E3676 6 -> -> 200 `i `us ]
+"412
+}
+[e :U 497 ]
+[e :U 496 ]
+"413
+[e $U 456  ]
+"417
+[e :U 498 ]
+"418
+[e $ ! == -> . _coin_changer_info 0 `i -> 3 `i 499  ]
+{
+"419
+[e ( _TransitionTo (2 , . `E3676 9 -> -> 5 `i `us ]
+"420
+[e ( _MDBLinkSendCommand (2 , -> -> 15 `i `uc -> -> 1 `i `uc ]
+"421
+[e ( _TimerNB_Start (2 , &U _NB_EXPFEATURETimeOut -> -> -> 5 `i `l `ul ]
+"422
+}
+[e $U 500  ]
+"423
+[e :U 499 ]
+{
+"424
+[e ( _TransitionTo (2 , . `E3676 10 -> -> 200 `i `us ]
+"425
+}
+[e :U 500 ]
+"426
+[e $U 456  ]
+"428
+[e :U 501 ]
+"429
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 502  ]
+{
+"430
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"431
+[e $ ! && == -> . *U _f 1 `i -> 1 `i == -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> 0 `i 503  ]
+{
+"432
+[e ( _TransitionTo (2 , . `E3676 10 -> -> 200 `i `us ]
+"433
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"434
+}
+[e :U 503 ]
+"435
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"436
+}
+[e $U 504  ]
+"437
+[e :U 502 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_EXPFEATURETimeOut `i -> 0 `i 505  ]
+{
+"438
+[e ( _TransitionTo (2 , . `E3676 8 -> -> 200 `i `us ]
+"439
+}
+[e :U 505 ]
+[e :U 504 ]
+"440
+[e $U 456  ]
+"445
+[e :U 506 ]
+"446
+[e ( _MDBLinkSendCommand (2 , -> -> 10 `i `uc -> -> 0 `i `uc ]
+"447
+[e ( _TransitionTo (2 , . `E3676 11 -> -> 50 `i `us ]
+"448
+[e ( _TimerNB_Start (2 , &U _NB_TubeStatusTimeOut -> -> -> 70 `i `l `ul ]
+"449
+[e $U 456  ]
+"454
+[e :U 507 ]
+"455
+{
+"461
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"462
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 508  ]
+{
+"463
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"464
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"466
+[e $ ! != -> ( _ValidateChecksum (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 `i -> 0 `i 509  ]
+{
+"467
+[e ( _MDBSendACK ..  ]
+"472
+[e = . _tube_status 0 -> + << -> -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `us `ui -> 8 `i -> *U + &U . *U _f 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `ui `us ]
+"477
+[e = . _tube_status 2 -> - - -> . *U _f 1 `i -> 2 `i -> 1 `i `uc ]
+"479
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $U 513  ]
+[e :U 510 ]
+{
+"480
+[e = *U + &U . _tube_status 1 * -> _i `ux -> -> # *U &U . _tube_status 1 `ui `ux *U + &U . *U _f 0 * -> -> + -> _i `i -> 2 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux ]
+"482
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 513 ]
+[e $ < -> _i `i -> . _coin_changer_info 6 `i 510  ]
+[e :U 511 ]
+}
+"485
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i . _coin_changer_info 6 ]
+[e $ < -> _i `i -> 16 `i 514  ]
+[e $U 515  ]
+[e :U 514 ]
+{
+"486
+[e = *U + &U . _tube_status 1 * -> _i `ux -> -> # *U &U . _tube_status 1 `ui `ux -> -> 0 `i `uc ]
+"487
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 16 `i 514  ]
+[e :U 515 ]
+}
+"489
+[e ( _TransitionTo (2 , . `E3676 12 -> -> 200 `i `us ]
+"490
+}
+[e $U 517  ]
+"491
+[e :U 509 ]
+{
+"493
+[e ( _TransitionTo (2 , . `E3676 10 -> -> 200 `i `us ]
+"494
+}
+[e :U 517 ]
+"496
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"497
+}
+[e $U 518  ]
+"498
+[e :U 508 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_TubeStatusTimeOut `i -> 0 `i 519  ]
+{
+"499
+[e ( _TransitionTo (2 , . `E3676 10 -> -> 200 `i `us ]
+"500
+}
+[e :U 519 ]
+[e :U 518 ]
+"501
+}
+"502
+[e $U 456  ]
+"507
+[e :U 520 ]
+"508
+[e ( _TransitionTo (2 , . `E3676 13 -> -> 15 `i `us ]
+"509
+[e ( _MDBLinkSendCommand (2 , -> -> 12 `i `uc -> -> 1 `i `uc ]
+"510
+[e ( _TimerNB_Start (2 , &U _NB_EnableCoinsTimeOut -> -> -> 15 `i `l `ul ]
+"511
+[e $U 456  ]
+"513
+[e :U 521 ]
+"514
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 522  ]
+{
+"515
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"516
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"517
+[e $ ! && == -> . *U _f 1 `i -> 1 `i == -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> 0 `i 523  ]
+{
+"518
+[e ( _MDBSendACK ..  ]
+"519
+[e = _polls_buenos -> -> 0 `i `uc ]
+"520
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"521
+[e ( _Dispatcher_Post (3 , , . `E3728 1 -> . `E3559 3 `us -> -> 0 `i `us ]
+"522
+}
+[e :U 523 ]
+"523
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"524
+}
+[e $U 524  ]
+"525
+[e :U 522 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_EnableCoinsTimeOut `i -> 0 `i 525  ]
+{
+"526
+[e ( _TransitionTo (2 , . `E3676 12 -> -> 200 `i `us ]
+"527
+}
+[e :U 525 ]
+[e :U 524 ]
+"528
+[e $U 456  ]
+"530
+[e :U 526 ]
+"531
+[e ( _TransitionTo (2 , . `E3676 15 -> -> 5 `i `us ]
+"532
+[e ( _MDBLinkSendCommand (2 , -> -> 12 `i `uc -> -> 0 `i `uc ]
+"533
+[e ( _TimerNB_Start (2 , &U _NB_EnableCoinsTimeOut -> -> -> 5 `i `l `ul ]
+"534
+[e $U 456  ]
+"536
+[e :U 527 ]
+"537
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 528  ]
+{
+"538
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"539
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"540
+[e $ ! && == -> . *U _f 1 `i -> 1 `i == -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> 0 `i 529  ]
+{
+"541
+[e ( _MDBSendACK ..  ]
+"542
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"543
+}
+[e :U 529 ]
+"544
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"545
+}
+[e $U 530  ]
+"546
+[e :U 528 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_EnableCoinsTimeOut `i -> 0 `i 531  ]
+{
+"547
+[e ( _TransitionTo (2 , . `E3676 12 -> -> 200 `i `us ]
+"548
+}
+[e :U 531 ]
+[e :U 530 ]
+"549
+[e $U 456  ]
+"561
+[e :U 532 ]
+"562
+[e ( _MDBLinkSendCommand (2 , -> -> 11 `i `uc -> -> 0 `i `uc ]
+"563
+[e ( _TransitionTo (2 , . `E3676 17 -> -> 10 `i `us ]
+"564
+[e ( _TimerNB_Start (2 , &U _NB_PollTimeOut -> -> -> 10 `i `l `ul ]
+"565
+[e $U 456  ]
+"567
+[e :U 533 ]
+"568
+{
+"569
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 534  ]
+{
+"570
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"571
+[e ( _MDB_Status_Clear ..  ]
+"572
+[v _evt `E3559 ~T0 @X0 1 a ]
+[e = _evt ( _ParsePoll (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"574
+[e $U 536  ]
+{
+"575
+[e :U 537 ]
+"578
+[e $ ! && != -> . _RefundValue 1 `i -> 0 `i != -> . _RefundValue 0 `ui -> -> 0 `i `ui 538  ]
+{
+"579
+[e ( _MDB_SendCommand_Refund (1 . _RefundValue 0 ]
+"580
+[e = . _RefundValue 1 -> = . _RefundValue 0 -> -> 0 `i `us `uc ]
+"581
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 500 `i `us ]
+"582
+}
+[e $U 539  ]
+"583
+[e :U 538 ]
+{
+"584
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"585
+}
+[e :U 539 ]
+"595
+[e $U 535  ]
+"597
+[e :U 540 ]
+"602
+[e $ ! == & + -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> *U + &U . *U _f 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> 255 `i -> *U + &U . *U _f 0 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i 541  ]
+{
+"603
+[e ( _MDBSendACK ..  ]
+"607
+[v _CoinTypeDeposited `uc ~T0 @X0 1 a ]
+[e = _CoinTypeDeposited -> & -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> 15 `i `uc ]
+"610
+[v _CoinValue `us ~T0 @X0 1 a ]
+[e = _CoinValue -> * -> *U + &U . _coin_changer_info 5 * -> _CoinTypeDeposited `ux -> -> # *U &U . _coin_changer_info 5 `ui `ux `i -> . _coin_changer_info 2 `i `us ]
+"614
+[e ( _Dispatcher_Post (3 , , . `E3728 1 -> . `E3559 4 `us _CoinValue ]
+"616
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"617
+}
+[e $U 542  ]
+"618
+[e :U 541 ]
+{
+"619
+[e ( _MDBSendACK ..  ]
+"620
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"621
+}
+[e :U 542 ]
+"622
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"623
+[e $U 535  ]
+"625
+[e :U 543 ]
+"626
+[e ( _MDBSendACK ..  ]
+"628
+[e $ ! != -> . _mdb_status 0 `i -> 0 `i 544  ]
+{
+"629
+[v _credit `us ~T0 @X0 1 a ]
+[e = _credit ( _Saldo_Get ..  ]
+"630
+[e ( _MDB_Link_Dispatch (2 , . `E3559 1 _credit ]
+"631
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"632
+}
+[e :U 544 ]
+"633
+[e $ ! != -> . _mdb_status 3 `i -> 0 `i 545  ]
+{
+"635
+}
+[e :U 545 ]
+"636
+[e $ ! != -> . _mdb_status 2 `i -> 0 `i 546  ]
+"637
+{
+"638
+}
+[e :U 546 ]
+"641
+[e $ ! != -> . _mdb_status 4 `i -> 0 `i 547  ]
+{
+"642
+[e ( _MDBSendACK ..  ]
+"643
+[e ( _TransitionTo (2 , . `E3676 0 -> -> 200 `i `us ]
+"644
+}
+[e :U 547 ]
+"660
+[e ( _MDB_Status_Clear ..  ]
+"661
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"662
+[e $U 535  ]
+"666
+[e :U 548 ]
+"667
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"668
+[e $U 535  ]
+"669
+}
+[e $U 535  ]
+[e :U 536 ]
+[e [\ -> _evt `ui , $ -> . `E3559 0 `ui 537
+ , $ -> . `E3559 4 `ui 540
+ , $ -> . `E3559 6 `ui 543
+ 548 ]
+[e :U 535 ]
+"683
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"684
+}
+[e $U 549  ]
+"685
+[e :U 534 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_PollTimeOut `i -> 0 `i 550  ]
+{
+"686
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"687
+}
+[e :U 550 ]
+[e :U 549 ]
+"688
+}
+"689
+[e $U 456  ]
+"691
+[e :U 551 ]
+"692
+[e $ ! && != -> . _RefundValue 1 `i -> 0 `i > -> . _RefundValue 0 `ui -> -> 1 `i `ui 552  ]
+{
+"693
+[e = . _RefundValue 1 -> -> 0 `i `uc ]
+"694
+[e ( _MDB_SendCommand_Refund (1 . _RefundValue 0 ]
+"695
+}
+[e :U 552 ]
+"696
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 500 `i `us ]
+"697
+[e $U 456  ]
+"700
+[e :U 553 ]
+"701
+{
+"702
+[e $ ! != -> ( _TimerNB_Expired (1 &U _mdbWaitTimer `i -> 0 `i 554  ]
+{
+"703
+[e = _current_state _next_state ]
+"704
+}
+[e :U 554 ]
+"705
+}
+"706
+[e $U 456  ]
+"707
+[e :U 555 ]
+"708
+[e $U 456  ]
+"709
+}
+[e $U 456  ]
+[e :U 457 ]
+[e [\ -> _current_state `ui , $ -> . `E3676 0 `ui 458
+ , $ -> . `E3676 1 `ui 459
+ , $ -> . `E3676 2 `ui 464
+ , $ -> . `E3676 3 `ui 465
+ , $ -> . `E3676 4 `ui 472
+ , $ -> . `E3676 5 `ui 473
+ , $ -> . `E3676 6 `ui 490
+ , $ -> . `E3676 7 `ui 493
+ , $ -> . `E3676 8 `ui 498
+ , $ -> . `E3676 9 `ui 501
+ , $ -> . `E3676 10 `ui 506
+ , $ -> . `E3676 11 `ui 507
+ , $ -> . `E3676 12 `ui 520
+ , $ -> . `E3676 13 `ui 521
+ , $ -> . `E3676 14 `ui 526
+ , $ -> . `E3676 15 `ui 527
+ , $ -> . `E3676 16 `ui 532
+ , $ -> . `E3676 17 `ui 533
+ , $ -> . `E3676 18 `ui 551
+ , $ -> . `E3676 20 `ui 553
+ , $ -> . `E3676 19 `ui 555
+ 456 ]
+[e :U 456 ]
+"710
+[e :UE 455 ]
+}

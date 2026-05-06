@@ -1,0 +1,2558 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"28 sources/MDB_Link.c
+[; ;sources/MDB_Link.c: 28: {
+[s S400 `us 1 `uc 1 ]
+[n S400 . value HasValue ]
+"5 Include/timers.h
+[; ;Include/timers.h: 5: {
+[s S395 `ul 1 `ul 1 `uc 1 ]
+[n S395 . start delay active ]
+"37 Include/fsm_mdb_link.h
+[; ;Include/fsm_mdb_link.h: 37:     typedef struct {
+[s S398 `uc -> 7 `i `uc 1 `uc -> 46 `i `uc 1 `uc 1 ]
+[n S398 . Tx Tx_len Rx Rx_len Valid ]
+"128 Include/mdb.h
+[; ;Include/mdb.h: 128: {
+[s S392 `uc 1 `us 1 `uc 1 `uc 1 `uc -> 16 `i `uc -> 16 `i `uc 1 ]
+[n S392 . CoinChangerFeatureLevel CountryOrCurrencyCode CoinScalingFactor DecimalPlaces CoinsRouteable CoinTypeCredit NumCoinTypes ]
+"140
+[; ;Include/mdb.h: 140: {
+[s S393 `us 1 `uc -> 16 `i `uc 1 ]
+[n S393 . Full_Status Status Total_Tubes ]
+"63 sources/MDB_Link.c
+[; ;sources/MDB_Link.c: 63: static MDB_Link_State_t current_state = ST_MDB_RESET;
+[c E3676 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 .. ]
+[n E3676 . ST_MDB_RESET ST_MDB_RESET_WAIT ST_MDB_JUST_RESET ST_MDB_JUST_RESET_WAIT ST_MDB_SETUP ST_MDB_SETUP_WAIT ST_MDB_EXP_ID ST_MDB_EXP_ID_WAIT ST_MDB_EXP_FEATURE ST_MDB_EXP_FEATURE_WAIT ST_MDB_TUBE_STATUS ST_MDB_TUBE_STATUS_WAIT ST_MDB_ENABLE_COINS ST_MDB_ENABLE_COINS_WAIT ST_MDB_DISBLE_COINS ST_MDB_DISABLE_COINS_WAIT ST_MDB_POLL ST_MDB_POLL_WAIT ST_MDB_REFUND ST_MDB_ERROR ST_MDB_WAIT  ]
+"29 C:\Program Files\Microchip\xc8\v3.10\pic\include\c99/string.h
+[; ;C:\Program Files\Microchip\xc8\v3.10\pic\include\c99/string.h: 29: void *memset (void *, int, size_t);
+[v _memset `(*v ~T0 @X0 0 ef3`*v`i`ui ]
+"15 Include/ui.h
+[; ;Include/ui.h: 15: void UI_Show_MDB_Rx_Line4(const uint8_t *tx, const uint8_t *rx, uint8_t len);
+[v _UI_Show_MDB_Rx_Line4 `(v ~T0 @X0 0 ef3`*Cuc`*Cuc`uc ]
+"18 Include/hal_uart.h
+[; ;Include/hal_uart.h: 18: void hal_UART_SendACK(void);
+[v _hal_UART_SendACK `(v ~T0 @X0 0 ef ]
+"8 Include/checksum.h
+[; ;Include/checksum.h: 8: uint8_t CalculateChecksum(const uint8_t tdata[], uint8_t n);
+[v _CalculateChecksum `(uc ~T0 @X0 0 ef2`*Cuc`uc ]
+"20 Include/hal_uart.h
+[; ;Include/hal_uart.h: 20: void hal_UART_Write_Cmd(const uint8_t *datos, uint8_t longitudDatos);
+[v _hal_UART_Write_Cmd `(v ~T0 @X0 0 ef2`*Cuc`uc ]
+"112 sources/MDB_Link.c
+[; ;sources/MDB_Link.c: 112: void MDB_Link_Dispatch(MDB_Event_t evt, uint16_t value) {
+[c E3559 0 1 11 12 13 14 15 16 .. ]
+[n E3559 . EVT_MDB_ACK EVT_MDB_ESCROW_REQUEST EVT_MDB_CHANGER_RESET EVT_MDB_CHANGER_READY EVT_MDB_COIN_VALID EVT_MDB_COIN_INVALID EVT_MDB_STATUS_CODE EVT_MDB_NONE  ]
+"34
+[; ;sources/MDB_Link.c: 34: static void MDBLinkSendCommand(uint8_t command, uint8_t subCommand);
+[v _MDBLinkSendCommand `(v ~T0 @X0 0 sf2`uc`uc ]
+"33
+[; ;sources/MDB_Link.c: 33: static void TransitionTo(MDB_Link_State_t next, uint16_t delay_ms);
+[v _TransitionTo `(v ~T0 @X0 0 sf2`E3676`us ]
+"39 Include/mdb_status.h
+[; ;Include/mdb_status.h: 39:     void UI_MDB_MapStatus(uint8_t status_code);
+[v _UI_MDB_MapStatus `(v ~T0 @X0 0 ef1`uc ]
+"11 Include/timers.h
+[; ;Include/timers.h: 11: void TimerNB_Start(TimerNB_t *t, uint32_t ms);
+[v _TimerNB_Start `(v ~T0 @X0 0 ef2`*S395`ul ]
+"12 Include/mdb_core.h
+[; ;Include/mdb_core.h: 12: typedef struct {
+[s S396 `uc -> 46 `i `uc 1 `a 1 ]
+[n S396 . rxdata len checksum_ok ]
+"264 sources/MDB_Link.c
+[; ;sources/MDB_Link.c: 264:             Dispatcher_Post(SRC_MDB, EVT_MDB_CHANGER_RESET, 0);
+[c E3728 0 1 2 3 4 5 .. ]
+[n E3728 . SRC_NONE SRC_MDB SRC_CREDIT SRC_VEND SRC_UI SRC_APP  ]
+"30 Include/dispatcher.h
+[; ;Include/dispatcher.h: 30: _Bool Dispatcher_Post(EventSource_t src, uint16_t evt, uint16_t param);
+[v _Dispatcher_Post `(a ~T0 @X0 0 ef3`E3728`us`us ]
+"33 Include/mdb_core.h
+[; ;Include/mdb_core.h: 33: _Bool MDB_Core_FrameAvailable(void);
+[v _MDB_Core_FrameAvailable `(a ~T0 @X0 0 ef ]
+"34
+[; ;Include/mdb_core.h: 34: mdb_frame_t* MDB_Core_GetFrame(void);
+[v _MDB_Core_GetFrame `(*S396 ~T0 @X0 0 ef ]
+"35
+[; ;Include/mdb_core.h: 35: void MDB_Core_ReleaseFrame(void);
+[v _MDB_Core_ReleaseFrame `(v ~T0 @X0 0 ef ]
+"12 Include/timers.h
+[; ;Include/timers.h: 12: uint8_t TimerNB_Expired(TimerNB_t *t);
+[v _TimerNB_Expired `(uc ~T0 @X0 0 ef1`*S395 ]
+"40 Include/mdb_status.h
+[; ;Include/mdb_status.h: 40:     void MDB_Status_Clear(void);
+[v _MDB_Status_Clear `(v ~T0 @X0 0 ef ]
+"10 Include/checksum.h
+[; ;Include/checksum.h: 10: uint8_t ValidateChecksum(const uint8_t tdata[], uint8_t n);
+[v _ValidateChecksum `(uc ~T0 @X0 0 ef2`*Cuc`uc ]
+"44 Include/app.h
+[; ;Include/app.h: 44: extern volatile uint8_t received_data;
+[v _received_data `Vuc ~T0 @X0 0 e ]
+"17 Include/mdb_status.h
+[; ;Include/mdb_status.h: 17:     typedef struct {
+[s S397 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
+[n S397 . escrow_req pay_busy no_credit busy reset tube_sensor_err double_coin tube_jam routing_error coin_jam acceptor_removed rom_error fraud ]
+"42
+[; ;Include/mdb_status.h: 42:     extern mdb_status_flags_t mdb_status;
+[v _mdb_status `S397 ~T0 @X0 0 e ]
+"17 Include/saldo.h
+[; ;Include/saldo.h: 17: uint16_t Saldo_Get(void);
+[v _Saldo_Get `(us ~T0 @X0 0 ef ]
+"52 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 52: __asm("SPPDATA equ 0F62h");
+[; <" SPPDATA equ 0F62h ;# ">
+"72
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 72: __asm("SPPCFG equ 0F63h");
+[; <" SPPCFG equ 0F63h ;# ">
+"149
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 149: __asm("SPPEPS equ 0F64h");
+[; <" SPPEPS equ 0F64h ;# ">
+"223
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 223: __asm("SPPCON equ 0F65h");
+[; <" SPPCON equ 0F65h ;# ">
+"249
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 249: __asm("UFRM equ 0F66h");
+[; <" UFRM equ 0F66h ;# ">
+"256
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 256: __asm("UFRML equ 0F66h");
+[; <" UFRML equ 0F66h ;# ">
+"334
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 334: __asm("UFRMH equ 0F67h");
+[; <" UFRMH equ 0F67h ;# ">
+"374
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 374: __asm("UIR equ 0F68h");
+[; <" UIR equ 0F68h ;# ">
+"430
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 430: __asm("UIE equ 0F69h");
+[; <" UIE equ 0F69h ;# ">
+"486
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 486: __asm("UEIR equ 0F6Ah");
+[; <" UEIR equ 0F6Ah ;# ">
+"537
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 537: __asm("UEIE equ 0F6Bh");
+[; <" UEIE equ 0F6Bh ;# ">
+"588
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 588: __asm("USTAT equ 0F6Ch");
+[; <" USTAT equ 0F6Ch ;# ">
+"648
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 648: __asm("UCON equ 0F6Dh");
+[; <" UCON equ 0F6Dh ;# ">
+"699
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 699: __asm("UADDR equ 0F6Eh");
+[; <" UADDR equ 0F6Eh ;# ">
+"763
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 763: __asm("UCFG equ 0F6Fh");
+[; <" UCFG equ 0F6Fh ;# ">
+"842
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 842: __asm("UEP0 equ 0F70h");
+[; <" UEP0 equ 0F70h ;# ">
+"950
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 950: __asm("UEP1 equ 0F71h");
+[; <" UEP1 equ 0F71h ;# ">
+"1058
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 1058: __asm("UEP2 equ 0F72h");
+[; <" UEP2 equ 0F72h ;# ">
+"1166
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 1166: __asm("UEP3 equ 0F73h");
+[; <" UEP3 equ 0F73h ;# ">
+"1274
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 1274: __asm("UEP4 equ 0F74h");
+[; <" UEP4 equ 0F74h ;# ">
+"1382
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 1382: __asm("UEP5 equ 0F75h");
+[; <" UEP5 equ 0F75h ;# ">
+"1490
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 1490: __asm("UEP6 equ 0F76h");
+[; <" UEP6 equ 0F76h ;# ">
+"1598
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 1598: __asm("UEP7 equ 0F77h");
+[; <" UEP7 equ 0F77h ;# ">
+"1706
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 1706: __asm("UEP8 equ 0F78h");
+[; <" UEP8 equ 0F78h ;# ">
+"1782
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 1782: __asm("UEP9 equ 0F79h");
+[; <" UEP9 equ 0F79h ;# ">
+"1858
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 1858: __asm("UEP10 equ 0F7Ah");
+[; <" UEP10 equ 0F7Ah ;# ">
+"1934
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 1934: __asm("UEP11 equ 0F7Bh");
+[; <" UEP11 equ 0F7Bh ;# ">
+"2010
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 2010: __asm("UEP12 equ 0F7Ch");
+[; <" UEP12 equ 0F7Ch ;# ">
+"2086
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 2086: __asm("UEP13 equ 0F7Dh");
+[; <" UEP13 equ 0F7Dh ;# ">
+"2162
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 2162: __asm("UEP14 equ 0F7Eh");
+[; <" UEP14 equ 0F7Eh ;# ">
+"2238
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 2238: __asm("UEP15 equ 0F7Fh");
+[; <" UEP15 equ 0F7Fh ;# ">
+"2314
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 2314: __asm("PORTA equ 0F80h");
+[; <" PORTA equ 0F80h ;# ">
+"2453
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 2453: __asm("PORTB equ 0F81h");
+[; <" PORTB equ 0F81h ;# ">
+"2563
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 2563: __asm("PORTC equ 0F82h");
+[; <" PORTC equ 0F82h ;# ">
+"2705
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 2705: __asm("PORTD equ 0F83h");
+[; <" PORTD equ 0F83h ;# ">
+"2826
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 2826: __asm("PORTE equ 0F84h");
+[; <" PORTE equ 0F84h ;# ">
+"2973
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 2973: __asm("LATA equ 0F89h");
+[; <" LATA equ 0F89h ;# ">
+"3073
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 3073: __asm("LATB equ 0F8Ah");
+[; <" LATB equ 0F8Ah ;# ">
+"3185
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 3185: __asm("LATC equ 0F8Bh");
+[; <" LATC equ 0F8Bh ;# ">
+"3263
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 3263: __asm("LATD equ 0F8Ch");
+[; <" LATD equ 0F8Ch ;# ">
+"3375
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 3375: __asm("LATE equ 0F8Dh");
+[; <" LATE equ 0F8Dh ;# ">
+"3427
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 3427: __asm("TRISA equ 0F92h");
+[; <" TRISA equ 0F92h ;# ">
+"3432
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 3432: __asm("DDRA equ 0F92h");
+[; <" DDRA equ 0F92h ;# ">
+"3625
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 3625: __asm("TRISB equ 0F93h");
+[; <" TRISB equ 0F93h ;# ">
+"3630
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 3630: __asm("DDRB equ 0F93h");
+[; <" DDRB equ 0F93h ;# ">
+"3847
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 3847: __asm("TRISC equ 0F94h");
+[; <" TRISC equ 0F94h ;# ">
+"3852
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 3852: __asm("DDRC equ 0F94h");
+[; <" DDRC equ 0F94h ;# ">
+"4001
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4001: __asm("TRISD equ 0F95h");
+[; <" TRISD equ 0F95h ;# ">
+"4006
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4006: __asm("DDRD equ 0F95h");
+[; <" DDRD equ 0F95h ;# ">
+"4223
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4223: __asm("TRISE equ 0F96h");
+[; <" TRISE equ 0F96h ;# ">
+"4228
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4228: __asm("DDRE equ 0F96h");
+[; <" DDRE equ 0F96h ;# ">
+"4325
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4325: __asm("OSCTUNE equ 0F9Bh");
+[; <" OSCTUNE equ 0F9Bh ;# ">
+"4384
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4384: __asm("PIE1 equ 0F9Dh");
+[; <" PIE1 equ 0F9Dh ;# ">
+"4468
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4468: __asm("PIR1 equ 0F9Eh");
+[; <" PIR1 equ 0F9Eh ;# ">
+"4552
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4552: __asm("IPR1 equ 0F9Fh");
+[; <" IPR1 equ 0F9Fh ;# ">
+"4636
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4636: __asm("PIE2 equ 0FA0h");
+[; <" PIE2 equ 0FA0h ;# ">
+"4707
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4707: __asm("PIR2 equ 0FA1h");
+[; <" PIR2 equ 0FA1h ;# ">
+"4778
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4778: __asm("IPR2 equ 0FA2h");
+[; <" IPR2 equ 0FA2h ;# ">
+"4849
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4849: __asm("EECON1 equ 0FA6h");
+[; <" EECON1 equ 0FA6h ;# ">
+"4915
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4915: __asm("EECON2 equ 0FA7h");
+[; <" EECON2 equ 0FA7h ;# ">
+"4922
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4922: __asm("EEDATA equ 0FA8h");
+[; <" EEDATA equ 0FA8h ;# ">
+"4929
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4929: __asm("EEADR equ 0FA9h");
+[; <" EEADR equ 0FA9h ;# ">
+"4936
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4936: __asm("RCSTA equ 0FABh");
+[; <" RCSTA equ 0FABh ;# ">
+"4941
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 4941: __asm("RCSTA1 equ 0FABh");
+[; <" RCSTA1 equ 0FABh ;# ">
+"5146
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5146: __asm("TXSTA equ 0FACh");
+[; <" TXSTA equ 0FACh ;# ">
+"5151
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5151: __asm("TXSTA1 equ 0FACh");
+[; <" TXSTA1 equ 0FACh ;# ">
+"5402
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5402: __asm("TXREG equ 0FADh");
+[; <" TXREG equ 0FADh ;# ">
+"5407
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5407: __asm("TXREG1 equ 0FADh");
+[; <" TXREG1 equ 0FADh ;# ">
+"5414
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5414: __asm("RCREG equ 0FAEh");
+[; <" RCREG equ 0FAEh ;# ">
+"5419
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5419: __asm("RCREG1 equ 0FAEh");
+[; <" RCREG1 equ 0FAEh ;# ">
+"5426
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5426: __asm("SPBRG equ 0FAFh");
+[; <" SPBRG equ 0FAFh ;# ">
+"5431
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5431: __asm("SPBRG1 equ 0FAFh");
+[; <" SPBRG1 equ 0FAFh ;# ">
+"5438
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5438: __asm("SPBRGH equ 0FB0h");
+[; <" SPBRGH equ 0FB0h ;# ">
+"5445
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5445: __asm("T3CON equ 0FB1h");
+[; <" T3CON equ 0FB1h ;# ">
+"5566
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5566: __asm("TMR3 equ 0FB2h");
+[; <" TMR3 equ 0FB2h ;# ">
+"5573
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5573: __asm("TMR3L equ 0FB2h");
+[; <" TMR3L equ 0FB2h ;# ">
+"5580
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5580: __asm("TMR3H equ 0FB3h");
+[; <" TMR3H equ 0FB3h ;# ">
+"5587
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5587: __asm("CMCON equ 0FB4h");
+[; <" CMCON equ 0FB4h ;# ">
+"5677
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5677: __asm("CVRCON equ 0FB5h");
+[; <" CVRCON equ 0FB5h ;# ">
+"5762
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5762: __asm("ECCP1AS equ 0FB6h");
+[; <" ECCP1AS equ 0FB6h ;# ">
+"5767
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5767: __asm("CCP1AS equ 0FB6h");
+[; <" CCP1AS equ 0FB6h ;# ">
+"5924
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5924: __asm("ECCP1DEL equ 0FB7h");
+[; <" ECCP1DEL equ 0FB7h ;# ">
+"5929
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 5929: __asm("CCP1DEL equ 0FB7h");
+[; <" CCP1DEL equ 0FB7h ;# ">
+"6062
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6062: __asm("BAUDCON equ 0FB8h");
+[; <" BAUDCON equ 0FB8h ;# ">
+"6067
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6067: __asm("BAUDCTL equ 0FB8h");
+[; <" BAUDCTL equ 0FB8h ;# ">
+"6242
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6242: __asm("CCP2CON equ 0FBAh");
+[; <" CCP2CON equ 0FBAh ;# ">
+"6306
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6306: __asm("CCPR2 equ 0FBBh");
+[; <" CCPR2 equ 0FBBh ;# ">
+"6313
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6313: __asm("CCPR2L equ 0FBBh");
+[; <" CCPR2L equ 0FBBh ;# ">
+"6320
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6320: __asm("CCPR2H equ 0FBCh");
+[; <" CCPR2H equ 0FBCh ;# ">
+"6327
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6327: __asm("CCP1CON equ 0FBDh");
+[; <" CCP1CON equ 0FBDh ;# ">
+"6332
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6332: __asm("ECCP1CON equ 0FBDh");
+[; <" ECCP1CON equ 0FBDh ;# ">
+"6489
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6489: __asm("CCPR1 equ 0FBEh");
+[; <" CCPR1 equ 0FBEh ;# ">
+"6496
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6496: __asm("CCPR1L equ 0FBEh");
+[; <" CCPR1L equ 0FBEh ;# ">
+"6503
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6503: __asm("CCPR1H equ 0FBFh");
+[; <" CCPR1H equ 0FBFh ;# ">
+"6510
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6510: __asm("ADCON2 equ 0FC0h");
+[; <" ADCON2 equ 0FC0h ;# ">
+"6581
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6581: __asm("ADCON1 equ 0FC1h");
+[; <" ADCON1 equ 0FC1h ;# ">
+"6666
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6666: __asm("ADCON0 equ 0FC2h");
+[; <" ADCON0 equ 0FC2h ;# ">
+"6785
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6785: __asm("ADRES equ 0FC3h");
+[; <" ADRES equ 0FC3h ;# ">
+"6792
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6792: __asm("ADRESL equ 0FC3h");
+[; <" ADRESL equ 0FC3h ;# ">
+"6799
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6799: __asm("ADRESH equ 0FC4h");
+[; <" ADRESH equ 0FC4h ;# ">
+"6806
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6806: __asm("SSPCON2 equ 0FC5h");
+[; <" SSPCON2 equ 0FC5h ;# ">
+"6868
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6868: __asm("SSPCON1 equ 0FC6h");
+[; <" SSPCON1 equ 0FC6h ;# ">
+"6938
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 6938: __asm("SSPSTAT equ 0FC7h");
+[; <" SSPSTAT equ 0FC7h ;# ">
+"7186
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 7186: __asm("SSPADD equ 0FC8h");
+[; <" SSPADD equ 0FC8h ;# ">
+"7193
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 7193: __asm("SSPBUF equ 0FC9h");
+[; <" SSPBUF equ 0FC9h ;# ">
+"7200
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 7200: __asm("T2CON equ 0FCAh");
+[; <" T2CON equ 0FCAh ;# ">
+"7298
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 7298: __asm("PR2 equ 0FCBh");
+[; <" PR2 equ 0FCBh ;# ">
+"7303
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 7303: __asm("MEMCON equ 0FCBh");
+[; <" MEMCON equ 0FCBh ;# ">
+"7408
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 7408: __asm("TMR2 equ 0FCCh");
+[; <" TMR2 equ 0FCCh ;# ">
+"7415
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 7415: __asm("T1CON equ 0FCDh");
+[; <" T1CON equ 0FCDh ;# ">
+"7518
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 7518: __asm("TMR1 equ 0FCEh");
+[; <" TMR1 equ 0FCEh ;# ">
+"7525
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 7525: __asm("TMR1L equ 0FCEh");
+[; <" TMR1L equ 0FCEh ;# ">
+"7532
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 7532: __asm("TMR1H equ 0FCFh");
+[; <" TMR1H equ 0FCFh ;# ">
+"7539
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 7539: __asm("RCON equ 0FD0h");
+[; <" RCON equ 0FD0h ;# ">
+"7688
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 7688: __asm("WDTCON equ 0FD1h");
+[; <" WDTCON equ 0FD1h ;# ">
+"7716
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 7716: __asm("HLVDCON equ 0FD2h");
+[; <" HLVDCON equ 0FD2h ;# ">
+"7721
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 7721: __asm("LVDCON equ 0FD2h");
+[; <" LVDCON equ 0FD2h ;# ">
+"7986
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 7986: __asm("OSCCON equ 0FD3h");
+[; <" OSCCON equ 0FD3h ;# ">
+"8069
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8069: __asm("T0CON equ 0FD5h");
+[; <" T0CON equ 0FD5h ;# ">
+"8139
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8139: __asm("TMR0 equ 0FD6h");
+[; <" TMR0 equ 0FD6h ;# ">
+"8146
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8146: __asm("TMR0L equ 0FD6h");
+[; <" TMR0L equ 0FD6h ;# ">
+"8153
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8153: __asm("TMR0H equ 0FD7h");
+[; <" TMR0H equ 0FD7h ;# ">
+"8160
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8160: __asm("STATUS equ 0FD8h");
+[; <" STATUS equ 0FD8h ;# ">
+"8231
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8231: __asm("FSR2 equ 0FD9h");
+[; <" FSR2 equ 0FD9h ;# ">
+"8238
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8238: __asm("FSR2L equ 0FD9h");
+[; <" FSR2L equ 0FD9h ;# ">
+"8245
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8245: __asm("FSR2H equ 0FDAh");
+[; <" FSR2H equ 0FDAh ;# ">
+"8252
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8252: __asm("PLUSW2 equ 0FDBh");
+[; <" PLUSW2 equ 0FDBh ;# ">
+"8259
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8259: __asm("PREINC2 equ 0FDCh");
+[; <" PREINC2 equ 0FDCh ;# ">
+"8266
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8266: __asm("POSTDEC2 equ 0FDDh");
+[; <" POSTDEC2 equ 0FDDh ;# ">
+"8273
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8273: __asm("POSTINC2 equ 0FDEh");
+[; <" POSTINC2 equ 0FDEh ;# ">
+"8280
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8280: __asm("INDF2 equ 0FDFh");
+[; <" INDF2 equ 0FDFh ;# ">
+"8287
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8287: __asm("BSR equ 0FE0h");
+[; <" BSR equ 0FE0h ;# ">
+"8294
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8294: __asm("FSR1 equ 0FE1h");
+[; <" FSR1 equ 0FE1h ;# ">
+"8301
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8301: __asm("FSR1L equ 0FE1h");
+[; <" FSR1L equ 0FE1h ;# ">
+"8308
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8308: __asm("FSR1H equ 0FE2h");
+[; <" FSR1H equ 0FE2h ;# ">
+"8315
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8315: __asm("PLUSW1 equ 0FE3h");
+[; <" PLUSW1 equ 0FE3h ;# ">
+"8322
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8322: __asm("PREINC1 equ 0FE4h");
+[; <" PREINC1 equ 0FE4h ;# ">
+"8329
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8329: __asm("POSTDEC1 equ 0FE5h");
+[; <" POSTDEC1 equ 0FE5h ;# ">
+"8336
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8336: __asm("POSTINC1 equ 0FE6h");
+[; <" POSTINC1 equ 0FE6h ;# ">
+"8343
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8343: __asm("INDF1 equ 0FE7h");
+[; <" INDF1 equ 0FE7h ;# ">
+"8350
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8350: __asm("WREG equ 0FE8h");
+[; <" WREG equ 0FE8h ;# ">
+"8357
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8357: __asm("FSR0 equ 0FE9h");
+[; <" FSR0 equ 0FE9h ;# ">
+"8364
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8364: __asm("FSR0L equ 0FE9h");
+[; <" FSR0L equ 0FE9h ;# ">
+"8371
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8371: __asm("FSR0H equ 0FEAh");
+[; <" FSR0H equ 0FEAh ;# ">
+"8378
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8378: __asm("PLUSW0 equ 0FEBh");
+[; <" PLUSW0 equ 0FEBh ;# ">
+"8385
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8385: __asm("PREINC0 equ 0FECh");
+[; <" PREINC0 equ 0FECh ;# ">
+"8392
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8392: __asm("POSTDEC0 equ 0FEDh");
+[; <" POSTDEC0 equ 0FEDh ;# ">
+"8399
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8399: __asm("POSTINC0 equ 0FEEh");
+[; <" POSTINC0 equ 0FEEh ;# ">
+"8406
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8406: __asm("INDF0 equ 0FEFh");
+[; <" INDF0 equ 0FEFh ;# ">
+"8413
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8413: __asm("INTCON3 equ 0FF0h");
+[; <" INTCON3 equ 0FF0h ;# ">
+"8505
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8505: __asm("INTCON2 equ 0FF1h");
+[; <" INTCON2 equ 0FF1h ;# ">
+"8582
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8582: __asm("INTCON equ 0FF2h");
+[; <" INTCON equ 0FF2h ;# ">
+"8699
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8699: __asm("PROD equ 0FF3h");
+[; <" PROD equ 0FF3h ;# ">
+"8706
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8706: __asm("PRODL equ 0FF3h");
+[; <" PRODL equ 0FF3h ;# ">
+"8713
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8713: __asm("PRODH equ 0FF4h");
+[; <" PRODH equ 0FF4h ;# ">
+"8720
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8720: __asm("TABLAT equ 0FF5h");
+[; <" TABLAT equ 0FF5h ;# ">
+"8729
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8729: __asm("TBLPTR equ 0FF6h");
+[; <" TBLPTR equ 0FF6h ;# ">
+"8736
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8736: __asm("TBLPTRL equ 0FF6h");
+[; <" TBLPTRL equ 0FF6h ;# ">
+"8743
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8743: __asm("TBLPTRH equ 0FF7h");
+[; <" TBLPTRH equ 0FF7h ;# ">
+"8750
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8750: __asm("TBLPTRU equ 0FF8h");
+[; <" TBLPTRU equ 0FF8h ;# ">
+"8759
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8759: __asm("PCLAT equ 0FF9h");
+[; <" PCLAT equ 0FF9h ;# ">
+"8766
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8766: __asm("PC equ 0FF9h");
+[; <" PC equ 0FF9h ;# ">
+"8773
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8773: __asm("PCL equ 0FF9h");
+[; <" PCL equ 0FF9h ;# ">
+"8780
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8780: __asm("PCLATH equ 0FFAh");
+[; <" PCLATH equ 0FFAh ;# ">
+"8787
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8787: __asm("PCLATU equ 0FFBh");
+[; <" PCLATU equ 0FFBh ;# ">
+"8794
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8794: __asm("STKPTR equ 0FFCh");
+[; <" STKPTR equ 0FFCh ;# ">
+"8870
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8870: __asm("TOS equ 0FFDh");
+[; <" TOS equ 0FFDh ;# ">
+"8877
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8877: __asm("TOSL equ 0FFDh");
+[; <" TOSL equ 0FFDh ;# ">
+"8884
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8884: __asm("TOSH equ 0FFEh");
+[; <" TOSH equ 0FFEh ;# ">
+"8891
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8\pic\include\proc/pic18f4550.h: 8891: __asm("TOSU equ 0FFFh");
+[; <" TOSU equ 0FFFh ;# ">
+"11 Include/Program.h
+[p x PLLDIV  =  5        ]
+"12
+[p x CPUDIV  =  OSC1_PLL2 ]
+"13
+[p x USBDIV  =  2        ]
+"16
+[p x FOSC  =  HSPLL_HS   ]
+"17
+[p x FCMEN  =  OFF       ]
+"18
+[p x IESO  =  OFF        ]
+"21
+[p x PWRT  =  OFF        ]
+"22
+[p x BOR  =  ON           ]
+"23
+[p x BORV  =  3          ]
+"24
+[p x VREGEN  =  OFF      ]
+"27
+[p x WDT  =  OFF         ]
+"28
+[p x WDTPS  =  32768     ]
+"31
+[p x CCP2MX  =  ON      ]
+"32
+[p x PBADEN  =  OFF      ]
+"33
+[p x LPT1OSC  =  OFF     ]
+"34
+[p x MCLRE  =  ON        ]
+"37
+[p x STVREN  =  ON       ]
+"38
+[p x LVP  =  OFF          ]
+"39
+[p x ICPRT  =  OFF       ]
+"40
+[p x XINST  =  OFF       ]
+"43
+[p x CP0  =  OFF         ]
+"44
+[p x CP1  =  OFF         ]
+"45
+[p x CP2  =  OFF         ]
+"46
+[p x CP3  =  OFF         ]
+"49
+[p x CPB  =  OFF         ]
+"50
+[p x CPD  =  OFF         ]
+"53
+[p x WRT0  =  OFF        ]
+"54
+[p x WRT1  =  OFF        ]
+"55
+[p x WRT2  =  OFF        ]
+"56
+[p x WRT3  =  OFF        ]
+"59
+[p x WRTC  =  OFF        ]
+"60
+[p x WRTB  =  OFF        ]
+"61
+[p x WRTD  =  OFF        ]
+"64
+[p x EBTR0  =  OFF       ]
+"65
+[p x EBTR1  =  OFF       ]
+"66
+[p x EBTR2  =  OFF       ]
+"67
+[p x EBTR3  =  OFF       ]
+"70
+[p x EBTRB  =  OFF       ]
+"36 sources/MDB_Link.c
+[; ;sources/MDB_Link.c: 36: static RefundValue_t RefundValue = {0, 0};
+[v _RefundValue `S400 ~T0 @X0 1 s ]
+[i _RefundValue
+:U ..
+:U ..
+-> -> 0 `i `us
+-> -> 0 `i `uc
+..
+..
+]
+"39
+[; ;sources/MDB_Link.c: 39: TimerNB_t NB_ResetTimeOut;
+[v _NB_ResetTimeOut `S395 ~T0 @X0 1 e ]
+"40
+[; ;sources/MDB_Link.c: 40: TimerNB_t NB_JustResetTimeout;
+[v _NB_JustResetTimeout `S395 ~T0 @X0 1 e ]
+"41
+[; ;sources/MDB_Link.c: 41: TimerNB_t NB_SetupTimeOut;
+[v _NB_SetupTimeOut `S395 ~T0 @X0 1 e ]
+"42
+[; ;sources/MDB_Link.c: 42: TimerNB_t NB_EXPIDTimeOut;
+[v _NB_EXPIDTimeOut `S395 ~T0 @X0 1 e ]
+"43
+[; ;sources/MDB_Link.c: 43: TimerNB_t NB_EXPFEATURETimeOut;
+[v _NB_EXPFEATURETimeOut `S395 ~T0 @X0 1 e ]
+"44
+[; ;sources/MDB_Link.c: 44: TimerNB_t NB_EXP_DIAG_TimeOut;
+[v _NB_EXP_DIAG_TimeOut `S395 ~T0 @X0 1 e ]
+"45
+[; ;sources/MDB_Link.c: 45: TimerNB_t NB_TubeStatusTimeOut;
+[v _NB_TubeStatusTimeOut `S395 ~T0 @X0 1 e ]
+"46
+[; ;sources/MDB_Link.c: 46: TimerNB_t NB_EnableCoinsTimeOut;
+[v _NB_EnableCoinsTimeOut `S395 ~T0 @X0 1 e ]
+"47
+[; ;sources/MDB_Link.c: 47: TimerNB_t NB_PollTimeOut;
+[v _NB_PollTimeOut `S395 ~T0 @X0 1 e ]
+"48
+[; ;sources/MDB_Link.c: 48: TimerNB_t mdbWaitTimer;
+[v _mdbWaitTimer `S395 ~T0 @X0 1 e ]
+"51
+[; ;sources/MDB_Link.c: 51: static uint8_t is_coinco;
+[v _is_coinco `uc ~T0 @X0 1 s ]
+"52
+[; ;sources/MDB_Link.c: 52: static MDB_Log_t mdb_log;
+[v _mdb_log `S398 ~T0 @X0 1 s ]
+"54
+[; ;sources/MDB_Link.c: 54: static uint8_t polls_buenos;
+[v _polls_buenos `uc ~T0 @X0 1 s ]
+"56
+[; ;sources/MDB_Link.c: 56: static CoinChanger_Info_t coin_changer_info = {0, 0, 0, 0,
+[v _coin_changer_info `S392 ~T0 @X0 1 s ]
+[i _coin_changer_info
+:U ..
+:U ..
+-> -> 0 `i `uc
+-> -> 0 `i `us
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+:U ..
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+-> -> 0 `i `uc
+..
+..
+]
+"60
+[; ;sources/MDB_Link.c: 60: static Tube_Status_t tube_status = {0,
+[v _tube_status `S393 ~T0 @X0 1 s ]
+[i _tube_status
+:U ..
+:U ..
+-> -> 0 `i `us
+:U ..
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+..
+..
+]
+"63
+[; ;sources/MDB_Link.c: 63: static MDB_Link_State_t current_state = ST_MDB_RESET;
+[v _current_state `E3676 ~T0 @X0 1 s ]
+[i _current_state
+. `E3676 0
+]
+"64
+[; ;sources/MDB_Link.c: 64: static MDB_Link_State_t next_state;
+[v _next_state `E3676 ~T0 @X0 1 s ]
+"67
+[; ;sources/MDB_Link.c: 67: MDB_Link_State_t MDB_Link_GetState(void) {
+[v _MDB_Link_GetState `(E3676 ~T0 @X0 1 ef ]
+{
+[e :U _MDB_Link_GetState ]
+[f ]
+"68
+[; ;sources/MDB_Link.c: 68:     return next_state;
+[e ) _next_state ]
+[e $UE 401  ]
+"69
+[; ;sources/MDB_Link.c: 69: }
+[e :UE 401 ]
+}
+"72
+[; ;sources/MDB_Link.c: 72: static void MDB_Link_Log_TX(uint8_t cmd, uint8_t sub, uint8_t len) {
+[v _MDB_Link_Log_TX `(v ~T0 @X0 1 sf3`uc`uc`uc ]
+{
+[e :U _MDB_Link_Log_TX ]
+[v _cmd `uc ~T0 @X0 1 r1 ]
+[v _sub `uc ~T0 @X0 1 r2 ]
+[v _len `uc ~T0 @X0 1 r3 ]
+[f ]
+"73
+[; ;sources/MDB_Link.c: 73:     memset(&mdb_log, 0, sizeof (mdb_log));
+[e ( _memset (3 , , -> &U _mdb_log `*v -> 0 `i -> # _mdb_log `ui ]
+"74
+[; ;sources/MDB_Link.c: 74:     if (len > 2)
+[e $ ! > -> _len `i -> 2 `i 403  ]
+"75
+[; ;sources/MDB_Link.c: 75:         len = 2;
+[e = _len -> -> 2 `i `uc ]
+[e :U 403 ]
+"76
+[; ;sources/MDB_Link.c: 76:     mdb_log.Tx[0] = cmd;
+[e = *U + &U . _mdb_log 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _mdb_log 0 `ui `ux _cmd ]
+"77
+[; ;sources/MDB_Link.c: 77:     mdb_log.Tx[1] = sub;
+[e = *U + &U . _mdb_log 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _mdb_log 0 `ui `ux _sub ]
+"78
+[; ;sources/MDB_Link.c: 78:     mdb_log.Tx_len = len;
+[e = . _mdb_log 1 _len ]
+"79
+[; ;sources/MDB_Link.c: 79: }
+[e :UE 402 ]
+}
+"82
+[; ;sources/MDB_Link.c: 82: static void MDB_Link_To_PC(const uint8_t *dta, uint8_t len) {
+[v _MDB_Link_To_PC `(v ~T0 @X0 1 sf2`*Cuc`uc ]
+{
+[e :U _MDB_Link_To_PC ]
+[v _dta `*Cuc ~T0 @X0 1 r1 ]
+[v _len `uc ~T0 @X0 1 r2 ]
+[f ]
+"83
+[; ;sources/MDB_Link.c: 83:     if (len > 36+10)
+[e $ ! > -> _len `i + -> 36 `i -> 10 `i 405  ]
+"84
+[; ;sources/MDB_Link.c: 84:         len = 36+10;
+[e = _len -> + -> 36 `i -> 10 `i `uc ]
+[e :U 405 ]
+"85
+[; ;sources/MDB_Link.c: 85:     for (uint8_t i = 0; i < len; i++)
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $U 409  ]
+[e :U 406 ]
+"86
+[; ;sources/MDB_Link.c: 86:         mdb_log.Rx[i] = dta[i];
+[e = *U + &U . _mdb_log 2 * -> _i `ux -> -> # *U &U . _mdb_log 2 `ui `ux *U + _dta * -> _i `ux -> -> # *U _dta `ui `ux ]
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 409 ]
+[e $ < -> _i `i -> _len `i 406  ]
+[e :U 407 ]
+}
+"87
+[; ;sources/MDB_Link.c: 87:     mdb_log.Rx_len = len;
+[e = . _mdb_log 3 _len ]
+"88
+[; ;sources/MDB_Link.c: 88:     mdb_log.Valid = 1;
+[e = . _mdb_log 4 -> -> 1 `i `uc ]
+"90
+[; ;sources/MDB_Link.c: 90:     UI_Show_MDB_Rx_Line4(mdb_log.Tx, mdb_log.Rx, len);
+[e ( _UI_Show_MDB_Rx_Line4 (3 , , -> &U . _mdb_log 0 `*Cuc -> &U . _mdb_log 2 `*Cuc _len ]
+"91
+[; ;sources/MDB_Link.c: 91: }
+[e :UE 404 ]
+}
+"94
+[; ;sources/MDB_Link.c: 94: static void MDBSendACK(void) {
+[v _MDBSendACK `(v ~T0 @X0 1 sf ]
+{
+[e :U _MDBSendACK ]
+[f ]
+"95
+[; ;sources/MDB_Link.c: 95:     hal_UART_SendACK();
+[e ( _hal_UART_SendACK ..  ]
+"96
+[; ;sources/MDB_Link.c: 96: }
+[e :UE 410 ]
+}
+"99
+[; ;sources/MDB_Link.c: 99: static void MDB_SendCommand_Refund(uint16_t value) {
+[v _MDB_SendCommand_Refund `(v ~T0 @X0 1 sf1`us ]
+{
+[e :U _MDB_SendCommand_Refund ]
+[v _value `us ~T0 @X0 1 r1 ]
+[f ]
+"100
+[; ;sources/MDB_Link.c: 100:     if (value >= 1) {
+[e $ ! >= -> _value `ui -> -> 1 `i `ui 412  ]
+{
+"101
+[; ;sources/MDB_Link.c: 101:         uint8_t monedas = (uint8_t) (value / coin_changer_info.CoinScalingFactor);
+[v _monedas `uc ~T0 @X0 1 a ]
+[e = _monedas -> / -> _value `ui -> . _coin_changer_info 2 `ui `uc ]
+"102
+[; ;sources/MDB_Link.c: 102:         uint8_t cmd[4];
+[v _cmd `uc ~T0 @X0 -> 4 `i a ]
+"103
+[; ;sources/MDB_Link.c: 103:         cmd[0] = 0x0F;
+[e = *U + &U _cmd * -> -> -> 0 `i `ui `ux -> -> # *U &U _cmd `ui `ux -> -> 15 `i `uc ]
+"104
+[; ;sources/MDB_Link.c: 104:         cmd[1] = 0x02;
+[e = *U + &U _cmd * -> -> -> 1 `i `ui `ux -> -> # *U &U _cmd `ui `ux -> -> 2 `i `uc ]
+"105
+[; ;sources/MDB_Link.c: 105:         cmd[2] = monedas;
+[e = *U + &U _cmd * -> -> -> 2 `i `ui `ux -> -> # *U &U _cmd `ui `ux _monedas ]
+"106
+[; ;sources/MDB_Link.c: 106:         cmd[3] = CalculateChecksum(cmd, 4);
+[e = *U + &U _cmd * -> -> -> 3 `i `ui `ux -> -> # *U &U _cmd `ui `ux ( _CalculateChecksum (2 , -> &U _cmd `*Cuc -> -> 4 `i `uc ]
+"107
+[; ;sources/MDB_Link.c: 107:         hal_UART_Write_Cmd(cmd, 4);
+[e ( _hal_UART_Write_Cmd (2 , -> &U _cmd `*Cuc -> -> 4 `i `uc ]
+"108
+[; ;sources/MDB_Link.c: 108:     }
+}
+[e :U 412 ]
+"109
+[; ;sources/MDB_Link.c: 109: }
+[e :UE 411 ]
+}
+"112
+[; ;sources/MDB_Link.c: 112: void MDB_Link_Dispatch(MDB_Event_t evt, uint16_t value) {
+[v _MDB_Link_Dispatch `(v ~T0 @X0 1 ef2`E3559`us ]
+{
+[e :U _MDB_Link_Dispatch ]
+[v _evt `E3559 ~T0 @X0 1 r1 ]
+[v _value `us ~T0 @X0 1 r2 ]
+[f ]
+"114
+[; ;sources/MDB_Link.c: 114:     switch (current_state) {
+[e $U 415  ]
+{
+"115
+[; ;sources/MDB_Link.c: 115:         case ST_MDB_POLL:
+[e :U 416 ]
+"116
+[; ;sources/MDB_Link.c: 116:         case ST_MDB_POLL_WAIT:
+[e :U 417 ]
+"117
+[; ;sources/MDB_Link.c: 117:         case ST_MDB_WAIT:
+[e :U 418 ]
+"118
+[; ;sources/MDB_Link.c: 118:             if (evt == EVT_MDB_ESCROW_REQUEST) {
+[e $ ! == -> _evt `ui -> . `E3559 1 `ui 419  ]
+{
+"119
+[; ;sources/MDB_Link.c: 119:                 if (value > 1) {
+[e $ ! > -> _value `ui -> -> 1 `i `ui 420  ]
+{
+"120
+[; ;sources/MDB_Link.c: 120:                     RefundValue.value = value;
+[e = . _RefundValue 0 _value ]
+"121
+[; ;sources/MDB_Link.c: 121:                     RefundValue.HasValue = 1;
+[e = . _RefundValue 1 -> -> 1 `i `uc ]
+"122
+[; ;sources/MDB_Link.c: 122:                 }
+}
+[e :U 420 ]
+"123
+[; ;sources/MDB_Link.c: 123:             }
+}
+[e :U 419 ]
+"124
+[; ;sources/MDB_Link.c: 124:             break;
+[e $U 414  ]
+"125
+[; ;sources/MDB_Link.c: 125:         default:
+[e :U 421 ]
+"126
+[; ;sources/MDB_Link.c: 126:             break;
+[e $U 414  ]
+"127
+[; ;sources/MDB_Link.c: 127:     }
+}
+[e $U 414  ]
+[e :U 415 ]
+[e [\ -> _current_state `ui , $ -> . `E3676 16 `ui 416
+ , $ -> . `E3676 17 `ui 417
+ , $ -> . `E3676 20 `ui 418
+ 421 ]
+[e :U 414 ]
+"128
+[; ;sources/MDB_Link.c: 128: }
+[e :UE 413 ]
+}
+"131
+[; ;sources/MDB_Link.c: 131: void MDB_Link_Init(void) {
+[v _MDB_Link_Init `(v ~T0 @X0 1 ef ]
+{
+[e :U _MDB_Link_Init ]
+[f ]
+"132
+[; ;sources/MDB_Link.c: 132:     MDBLinkSendCommand(0x08, 0);
+[e ( _MDBLinkSendCommand (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
+"133
+[; ;sources/MDB_Link.c: 133:     TransitionTo(ST_MDB_RESET, 1000);
+[e ( _TransitionTo (2 , . `E3676 0 -> -> 1000 `i `us ]
+"134
+[; ;sources/MDB_Link.c: 134: }
+[e :UE 422 ]
+}
+"137
+[; ;sources/MDB_Link.c: 137: static MDB_Event_t ParsePoll(const uint8_t *buf, uint8_t len) {
+[v _ParsePoll `(E3559 ~T0 @X0 1 sf2`*Cuc`uc ]
+{
+[e :U _ParsePoll ]
+[v _buf `*Cuc ~T0 @X0 1 r1 ]
+[v _len `uc ~T0 @X0 1 r2 ]
+[f ]
+"139
+[; ;sources/MDB_Link.c: 139:     if (len == 1 && buf[0] == 0x00)
+[e $ ! && == -> _len `i -> 1 `i == -> *U + _buf * -> -> 0 `i `x -> -> # *U _buf `i `x `i -> 0 `i 424  ]
+"140
+[; ;sources/MDB_Link.c: 140:         return EVT_MDB_ACK;
+[e ) . `E3559 0 ]
+[e $UE 423  ]
+[e :U 424 ]
+"143
+[; ;sources/MDB_Link.c: 143:     if (len == 3 && ((((buf[0]) & 0xC0u) == 0x40u))) {
+[e $ ! && == -> _len `i -> 3 `i == & -> *U + _buf * -> -> 0 `i `x -> -> # *U _buf `i `x `ui -> 192 `ui -> 64 `ui 425  ]
+{
+"144
+[; ;sources/MDB_Link.c: 144:         if (((buf[0] + buf[1]) & 0xFF) == buf[2])
+[e $ ! == & + -> *U + _buf * -> -> 0 `i `x -> -> # *U _buf `i `x `i -> *U + _buf * -> -> 1 `i `x -> -> # *U _buf `i `x `i -> 255 `i -> *U + _buf * -> -> 2 `i `x -> -> # *U _buf `i `x `i 426  ]
+"145
+[; ;sources/MDB_Link.c: 145:             return EVT_MDB_COIN_VALID;
+[e ) . `E3559 4 ]
+[e $UE 423  ]
+[e $U 427  ]
+"146
+[; ;sources/MDB_Link.c: 146:         else
+[e :U 426 ]
+"147
+[; ;sources/MDB_Link.c: 147:             return EVT_MDB_COIN_INVALID;
+[e ) . `E3559 5 ]
+[e $UE 423  ]
+[e :U 427 ]
+"148
+[; ;sources/MDB_Link.c: 148:     }
+}
+[e :U 425 ]
+"151
+[; ;sources/MDB_Link.c: 151:     if ((len & 1) == 0 && !((((buf[0]) & 0xC0u) == 0x40u))) {
+[e $ ! && == & -> _len `i -> 1 `i -> 0 `i ! == & -> *U + _buf * -> -> 0 `i `x -> -> # *U _buf `i `x `ui -> 192 `ui -> 64 `ui 428  ]
+{
+"152
+[; ;sources/MDB_Link.c: 152:         uint8_t i;
+[v _i `uc ~T0 @X0 1 a ]
+"155
+[; ;sources/MDB_Link.c: 155:         for (i = 0; i < len; i += 2) {
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 432  ]
+[e :U 429 ]
+{
+"156
+[; ;sources/MDB_Link.c: 156:             if (buf[i] != buf[i + 1])
+[e $ ! != -> *U + _buf * -> _i `ux -> -> # *U _buf `ui `ux `i -> *U + _buf * -> + -> _i `i -> 1 `i `x -> -> # *U _buf `i `x `i 433  ]
+"157
+[; ;sources/MDB_Link.c: 157:                 return EVT_MDB_NONE;
+[e ) . `E3559 7 ]
+[e $UE 423  ]
+[e :U 433 ]
+"158
+[; ;sources/MDB_Link.c: 158:         }
+}
+[e =+ _i -> -> 2 `i `uc ]
+[e :U 432 ]
+[e $ < -> _i `i -> _len `i 429  ]
+[e :U 430 ]
+}
+"161
+[; ;sources/MDB_Link.c: 161:         for (i = 0; i < len; i += 2) {
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 437  ]
+[e :U 434 ]
+{
+"162
+[; ;sources/MDB_Link.c: 162:             UI_MDB_MapStatus(buf[i]);
+[e ( _UI_MDB_MapStatus (1 *U + _buf * -> _i `ux -> -> # *U _buf `ui `ux ]
+"163
+[; ;sources/MDB_Link.c: 163:         }
+}
+[e =+ _i -> -> 2 `i `uc ]
+[e :U 437 ]
+[e $ < -> _i `i -> _len `i 434  ]
+[e :U 435 ]
+}
+"165
+[; ;sources/MDB_Link.c: 165:         return EVT_MDB_STATUS_CODE;
+[e ) . `E3559 6 ]
+[e $UE 423  ]
+"166
+[; ;sources/MDB_Link.c: 166:     }
+}
+[e :U 428 ]
+"168
+[; ;sources/MDB_Link.c: 168:     return EVT_MDB_NONE;
+[e ) . `E3559 7 ]
+[e $UE 423  ]
+"169
+[; ;sources/MDB_Link.c: 169: }
+[e :UE 423 ]
+}
+"172
+[; ;sources/MDB_Link.c: 172: static void MDBLinkSendCommand(uint8_t command, uint8_t subCommand) {
+[v _MDBLinkSendCommand `(v ~T0 @X0 1 sf2`uc`uc ]
+{
+[e :U _MDBLinkSendCommand ]
+[v _command `uc ~T0 @X0 1 r1 ]
+[v _subCommand `uc ~T0 @X0 1 r2 ]
+[f ]
+"173
+[; ;sources/MDB_Link.c: 173:     switch (command) {
+[e $U 440  ]
+{
+"174
+[; ;sources/MDB_Link.c: 174:         case 0x08:
+[e :U 441 ]
+"175
+[; ;sources/MDB_Link.c: 175:         {
+{
+[v F3817 `Cuc ~T0 @X0 -> 2 `i s ]
+[i F3817
+:U ..
+"176
+[; ;sources/MDB_Link.c: 176:             const uint8_t cmd[] = {0x08, 0x08};
+-> -> 8 `i `uc
+-> -> 8 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 2 `i a ]
+[e = _cmd F3817 ]
+"177
+[; ;sources/MDB_Link.c: 177:             hal_UART_Write_Cmd(cmd, 2);
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 2 `i `uc ]
+"178
+[; ;sources/MDB_Link.c: 178:         }
+}
+"179
+[; ;sources/MDB_Link.c: 179:             break;
+[e $U 439  ]
+"180
+[; ;sources/MDB_Link.c: 180:         case 0x09:
+[e :U 442 ]
+"181
+[; ;sources/MDB_Link.c: 181:         {
+{
+[v F3819 `Cuc ~T0 @X0 -> 2 `i s ]
+[i F3819
+:U ..
+"182
+[; ;sources/MDB_Link.c: 182:             const uint8_t cmd[] = {0x09, 0x09};
+-> -> 9 `i `uc
+-> -> 9 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 2 `i a ]
+[e = _cmd F3819 ]
+"183
+[; ;sources/MDB_Link.c: 183:             hal_UART_Write_Cmd(cmd, 2);
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 2 `i `uc ]
+"184
+[; ;sources/MDB_Link.c: 184:         }
+}
+"185
+[; ;sources/MDB_Link.c: 185:             break;
+[e $U 439  ]
+"186
+[; ;sources/MDB_Link.c: 186:         case 0x0A:
+[e :U 443 ]
+"187
+[; ;sources/MDB_Link.c: 187:         {
+{
+[v F3821 `Cuc ~T0 @X0 -> 2 `i s ]
+[i F3821
+:U ..
+"188
+[; ;sources/MDB_Link.c: 188:             const uint8_t cmd[] = {0x0A, 0x0A};
+-> -> 10 `i `uc
+-> -> 10 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 2 `i a ]
+[e = _cmd F3821 ]
+"189
+[; ;sources/MDB_Link.c: 189:             hal_UART_Write_Cmd(cmd, 2);
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 2 `i `uc ]
+"190
+[; ;sources/MDB_Link.c: 190:         }
+}
+"191
+[; ;sources/MDB_Link.c: 191:             break;
+[e $U 439  ]
+"192
+[; ;sources/MDB_Link.c: 192:         case 0x0B:
+[e :U 444 ]
+"193
+[; ;sources/MDB_Link.c: 193:         {
+{
+[v F3823 `Cuc ~T0 @X0 -> 2 `i s ]
+[i F3823
+:U ..
+"194
+[; ;sources/MDB_Link.c: 194:             const uint8_t cmd[] = {0x0B, 0x0B};
+-> -> 11 `i `uc
+-> -> 11 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 2 `i a ]
+[e = _cmd F3823 ]
+"195
+[; ;sources/MDB_Link.c: 195:             hal_UART_Write_Cmd(cmd, 2);
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 2 `i `uc ]
+"196
+[; ;sources/MDB_Link.c: 196:         }
+}
+"197
+[; ;sources/MDB_Link.c: 197:             break;
+[e $U 439  ]
+"198
+[; ;sources/MDB_Link.c: 198:         case 0x0C:
+[e :U 445 ]
+"199
+[; ;sources/MDB_Link.c: 199:         {
+{
+"200
+[; ;sources/MDB_Link.c: 200:             if (subCommand == 0x00) {
+[e $ ! == -> _subCommand `i -> 0 `i 446  ]
+{
+[v F3825 `Cuc ~T0 @X0 -> 6 `i s ]
+[i F3825
+:U ..
+"201
+[; ;sources/MDB_Link.c: 201:                 const uint8_t cmd[] = {0x0C, 0x00, 0x00, 0x00, 0x00, 0x0C};
+-> -> 12 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 12 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 6 `i a ]
+[e = _cmd F3825 ]
+"202
+[; ;sources/MDB_Link.c: 202:                 hal_UART_Write_Cmd(cmd, 6);
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 6 `i `uc ]
+"203
+[; ;sources/MDB_Link.c: 203:             }
+}
+[e $U 447  ]
+"204
+[; ;sources/MDB_Link.c: 204:             else {
+[e :U 446 ]
+{
+[v F3827 `Cuc ~T0 @X0 -> 6 `i s ]
+[i F3827
+:U ..
+"205
+[; ;sources/MDB_Link.c: 205:                 const uint8_t cmd[] = {0x0C, 0xFF, 0xFF, 0xFF, 0xFF, 0x08};
+-> -> 12 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 255 `i `uc
+-> -> 8 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 6 `i a ]
+[e = _cmd F3827 ]
+"206
+[; ;sources/MDB_Link.c: 206:                 hal_UART_Write_Cmd(cmd, 6);
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 6 `i `uc ]
+"207
+[; ;sources/MDB_Link.c: 207:             }
+}
+[e :U 447 ]
+"208
+[; ;sources/MDB_Link.c: 208:         }
+}
+"209
+[; ;sources/MDB_Link.c: 209:             break;
+[e $U 439  ]
+"210
+[; ;sources/MDB_Link.c: 210:         case 0x0F:
+[e :U 448 ]
+"211
+[; ;sources/MDB_Link.c: 211:         {
+{
+"212
+[; ;sources/MDB_Link.c: 212:             switch (subCommand) {
+[e $U 450  ]
+{
+"213
+[; ;sources/MDB_Link.c: 213:                 case 0x00:
+[e :U 451 ]
+"214
+[; ;sources/MDB_Link.c: 214:                 {
+{
+[v F3829 `Cuc ~T0 @X0 -> 3 `i s ]
+[i F3829
+:U ..
+"215
+[; ;sources/MDB_Link.c: 215:                     const uint8_t cmd[] = {0x0F, 0x00, 0x0F};
+-> -> 15 `i `uc
+-> -> 0 `i `uc
+-> -> 15 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 3 `i a ]
+[e = _cmd F3829 ]
+"216
+[; ;sources/MDB_Link.c: 216:                     hal_UART_Write_Cmd(cmd, 3);
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 3 `i `uc ]
+"217
+[; ;sources/MDB_Link.c: 217:                 }
+}
+"218
+[; ;sources/MDB_Link.c: 218:                     break;
+[e $U 449  ]
+"219
+[; ;sources/MDB_Link.c: 219:                 case 0x01:
+[e :U 452 ]
+"220
+[; ;sources/MDB_Link.c: 220:                 {
+{
+[v F3831 `Cuc ~T0 @X0 -> 7 `i s ]
+[i F3831
+:U ..
+"221
+[; ;sources/MDB_Link.c: 221:                     const uint8_t cmd[] = {0x0F, 0x01, 0x0C, 0x00, 0x00, 0x00, 0x1C};
+-> -> 15 `i `uc
+-> -> 1 `i `uc
+-> -> 12 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 28 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 7 `i a ]
+[e = _cmd F3831 ]
+"222
+[; ;sources/MDB_Link.c: 222:                     hal_UART_Write_Cmd(cmd, 7);
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 7 `i `uc ]
+"223
+[; ;sources/MDB_Link.c: 223:                 }
+}
+"224
+[; ;sources/MDB_Link.c: 224:                     break;
+[e $U 449  ]
+"225
+[; ;sources/MDB_Link.c: 225:                 case 0x05:
+[e :U 453 ]
+"226
+[; ;sources/MDB_Link.c: 226:                 {
+{
+[v F3833 `Cuc ~T0 @X0 -> 3 `i s ]
+[i F3833
+:U ..
+"227
+[; ;sources/MDB_Link.c: 227:                     const uint8_t cmd[] = {0x0F, 0x05, 0x14};
+-> -> 15 `i `uc
+-> -> 5 `i `uc
+-> -> 20 `i `uc
+..
+]
+[v _cmd `Cuc ~T0 @X0 -> 3 `i a ]
+[e = _cmd F3833 ]
+"228
+[; ;sources/MDB_Link.c: 228:                     hal_UART_Write_Cmd(cmd, 3);
+[e ( _hal_UART_Write_Cmd (2 , &U _cmd -> -> 3 `i `uc ]
+"229
+[; ;sources/MDB_Link.c: 229:                 }
+}
+"230
+[; ;sources/MDB_Link.c: 230:                     break;
+[e $U 449  ]
+"231
+[; ;sources/MDB_Link.c: 231:             }
+}
+[e $U 449  ]
+[e :U 450 ]
+[e [\ _subCommand , $ -> 0 `i 451
+ , $ -> 1 `i 452
+ , $ -> 5 `i 453
+ 449 ]
+[e :U 449 ]
+"232
+[; ;sources/MDB_Link.c: 232:         }
+}
+"233
+[; ;sources/MDB_Link.c: 233:             break;
+[e $U 439  ]
+"234
+[; ;sources/MDB_Link.c: 234:     }
+}
+[e $U 439  ]
+[e :U 440 ]
+[e [\ _command , $ -> 8 `i 441
+ , $ -> 9 `i 442
+ , $ -> 10 `i 443
+ , $ -> 11 `i 444
+ , $ -> 12 `i 445
+ , $ -> 15 `i 448
+ 439 ]
+[e :U 439 ]
+"236
+[; ;sources/MDB_Link.c: 236:     uint8_t lenLog = (command == 0x0C) || (command == 0x0F) ? 2 : 1;
+[v _lenLog `uc ~T0 @X0 1 a ]
+[e = _lenLog -> ? || == -> _command `i -> 12 `i == -> _command `i -> 15 `i : -> 2 `i -> 1 `i `uc ]
+"237
+[; ;sources/MDB_Link.c: 237:     MDB_Link_Log_TX(command, subCommand, lenLog);
+[e ( _MDB_Link_Log_TX (3 , , _command _subCommand _lenLog ]
+"238
+[; ;sources/MDB_Link.c: 238: }
+[e :UE 438 ]
+}
+"241
+[; ;sources/MDB_Link.c: 241: static void TransitionTo(MDB_Link_State_t next, uint16_t delay_ms) {
+[v _TransitionTo `(v ~T0 @X0 1 sf2`E3676`us ]
+{
+[e :U _TransitionTo ]
+[v _next `E3676 ~T0 @X0 1 r1 ]
+[v _delay_ms `us ~T0 @X0 1 r2 ]
+[f ]
+"242
+[; ;sources/MDB_Link.c: 242:     current_state = ST_MDB_WAIT;
+[e = _current_state . `E3676 20 ]
+"243
+[; ;sources/MDB_Link.c: 243:     next_state = next;
+[e = _next_state _next ]
+"244
+[; ;sources/MDB_Link.c: 244:     TimerNB_Start(&mdbWaitTimer, delay_ms);
+[e ( _TimerNB_Start (2 , &U _mdbWaitTimer -> _delay_ms `ul ]
+"246
+[; ;sources/MDB_Link.c: 246: }
+[e :UE 454 ]
+}
+"249
+[; ;sources/MDB_Link.c: 249: void MDB_Link_Task(void)
+[v _MDB_Link_Task `(v ~T0 @X0 1 ef ]
+"250
+[; ;sources/MDB_Link.c: 250: {
+{
+[e :U _MDB_Link_Task ]
+[f ]
+"251
+[; ;sources/MDB_Link.c: 251:     mdb_frame_t *f;
+[v _f `*S396 ~T0 @X0 1 a ]
+"255
+[; ;sources/MDB_Link.c: 255:     switch (current_state) {
+[e $U 457  ]
+{
+"259
+[; ;sources/MDB_Link.c: 259:         case ST_MDB_RESET:
+[e :U 458 ]
+"260
+[; ;sources/MDB_Link.c: 260:             polls_buenos = 0;
+[e = _polls_buenos -> -> 0 `i `uc ]
+"261
+[; ;sources/MDB_Link.c: 261:             MDBLinkSendCommand(0x08, 0);
+[e ( _MDBLinkSendCommand (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
+"262
+[; ;sources/MDB_Link.c: 262:             TransitionTo(ST_MDB_RESET_WAIT, 5);
+[e ( _TransitionTo (2 , . `E3676 1 -> -> 5 `i `us ]
+"263
+[; ;sources/MDB_Link.c: 263:             TimerNB_Start(&NB_ResetTimeOut, 5);
+[e ( _TimerNB_Start (2 , &U _NB_ResetTimeOut -> -> -> 5 `i `l `ul ]
+"264
+[; ;sources/MDB_Link.c: 264:             Dispatcher_Post(SRC_MDB, EVT_MDB_CHANGER_RESET, 0);
+[e ( _Dispatcher_Post (3 , , . `E3728 1 -> . `E3559 2 `us -> -> 0 `i `us ]
+"265
+[; ;sources/MDB_Link.c: 265:             break;
+[e $U 456  ]
+"269
+[; ;sources/MDB_Link.c: 269:         case ST_MDB_RESET_WAIT:
+[e :U 459 ]
+"270
+[; ;sources/MDB_Link.c: 270:             if (MDB_Core_FrameAvailable()) {
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 460  ]
+{
+"271
+[; ;sources/MDB_Link.c: 271:                 f = MDB_Core_GetFrame();
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"272
+[; ;sources/MDB_Link.c: 272:                 MDB_Link_To_PC(f->rxdata, f->len);
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"273
+[; ;sources/MDB_Link.c: 273:                 if (f->len == 1 && f->rxdata[0] == 0x00) {
+[e $ ! && == -> . *U _f 1 `i -> 1 `i == -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> 0 `i 461  ]
+{
+"274
+[; ;sources/MDB_Link.c: 274:                     MDBSendACK();
+[e ( _MDBSendACK ..  ]
+"275
+[; ;sources/MDB_Link.c: 275:                     TransitionTo(ST_MDB_JUST_RESET, 200);
+[e ( _TransitionTo (2 , . `E3676 2 -> -> 200 `i `us ]
+"276
+[; ;sources/MDB_Link.c: 276:                 }
+}
+[e :U 461 ]
+"277
+[; ;sources/MDB_Link.c: 277:                 MDB_Core_ReleaseFrame();
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"278
+[; ;sources/MDB_Link.c: 278:             }
+}
+[e $U 462  ]
+"279
+[; ;sources/MDB_Link.c: 279:             else if (TimerNB_Expired(&NB_ResetTimeOut)) {
+[e :U 460 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_ResetTimeOut `i -> 0 `i 463  ]
+{
+"280
+[; ;sources/MDB_Link.c: 280:                 TransitionTo(ST_MDB_RESET, 200);
+[e ( _TransitionTo (2 , . `E3676 0 -> -> 200 `i `us ]
+"281
+[; ;sources/MDB_Link.c: 281:             }
+}
+[e :U 463 ]
+[e :U 462 ]
+"282
+[; ;sources/MDB_Link.c: 282:             break;
+[e $U 456  ]
+"285
+[; ;sources/MDB_Link.c: 285:         case ST_MDB_JUST_RESET:
+[e :U 464 ]
+"286
+[; ;sources/MDB_Link.c: 286:             MDBLinkSendCommand(0x0B, 0);
+[e ( _MDBLinkSendCommand (2 , -> -> 11 `i `uc -> -> 0 `i `uc ]
+"287
+[; ;sources/MDB_Link.c: 287:             TimerNB_Start(&NB_JustResetTimeout, 5);
+[e ( _TimerNB_Start (2 , &U _NB_JustResetTimeout -> -> -> 5 `i `l `ul ]
+"288
+[; ;sources/MDB_Link.c: 288:             TransitionTo(ST_MDB_JUST_RESET_WAIT, 5);
+[e ( _TransitionTo (2 , . `E3676 3 -> -> 5 `i `us ]
+"289
+[; ;sources/MDB_Link.c: 289:             break;
+[e $U 456  ]
+"291
+[; ;sources/MDB_Link.c: 291:         case ST_MDB_JUST_RESET_WAIT:
+[e :U 465 ]
+"292
+[; ;sources/MDB_Link.c: 292:             if (MDB_Core_FrameAvailable()) {
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 466  ]
+{
+"293
+[; ;sources/MDB_Link.c: 293:                 f = MDB_Core_GetFrame();
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"294
+[; ;sources/MDB_Link.c: 294:                 MDB_Status_Clear();
+[e ( _MDB_Status_Clear ..  ]
+"295
+[; ;sources/MDB_Link.c: 295:                 MDB_Link_To_PC(f->rxdata, f->len);
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"296
+[; ;sources/MDB_Link.c: 296:                 if (f->len == 1 && f->rxdata[0] == 0x00) {
+[e $ ! && == -> . *U _f 1 `i -> 1 `i == -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> 0 `i 467  ]
+{
+"297
+[; ;sources/MDB_Link.c: 297:                     MDBSendACK();
+[e ( _MDBSendACK ..  ]
+"298
+[; ;sources/MDB_Link.c: 298:                     TransitionTo(ST_MDB_SETUP, 200);
+[e ( _TransitionTo (2 , . `E3676 4 -> -> 200 `i `us ]
+"299
+[; ;sources/MDB_Link.c: 299:                 }
+}
+[e $U 468  ]
+"300
+[; ;sources/MDB_Link.c: 300:                 else if ((f->len & 1) == 0) {
+[e :U 467 ]
+[e $ ! == & -> . *U _f 1 `i -> 1 `i -> 0 `i 469  ]
+{
+"301
+[; ;sources/MDB_Link.c: 301:                     MDBSendACK();
+[e ( _MDBSendACK ..  ]
+"302
+[; ;sources/MDB_Link.c: 302:                     TransitionTo(ST_MDB_SETUP, 200);
+[e ( _TransitionTo (2 , . `E3676 4 -> -> 200 `i `us ]
+"303
+[; ;sources/MDB_Link.c: 303:                     TransitionTo(ST_MDB_JUST_RESET, 200);
+[e ( _TransitionTo (2 , . `E3676 2 -> -> 200 `i `us ]
+"304
+[; ;sources/MDB_Link.c: 304:                 }
+}
+[e :U 469 ]
+[e :U 468 ]
+"305
+[; ;sources/MDB_Link.c: 305:                 MDB_Core_ReleaseFrame();
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"306
+[; ;sources/MDB_Link.c: 306:             }
+}
+[e $U 470  ]
+"307
+[; ;sources/MDB_Link.c: 307:             else if (TimerNB_Expired(&NB_JustResetTimeout)) {
+[e :U 466 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_JustResetTimeout `i -> 0 `i 471  ]
+{
+"308
+[; ;sources/MDB_Link.c: 308:                 TransitionTo(ST_MDB_JUST_RESET, 200);
+[e ( _TransitionTo (2 , . `E3676 2 -> -> 200 `i `us ]
+"309
+[; ;sources/MDB_Link.c: 309:             }
+}
+[e :U 471 ]
+[e :U 470 ]
+"310
+[; ;sources/MDB_Link.c: 310:             break;
+[e $U 456  ]
+"312
+[; ;sources/MDB_Link.c: 312:         case ST_MDB_SETUP:
+[e :U 472 ]
+"314
+[; ;sources/MDB_Link.c: 314:             MDBLinkSendCommand(0x09, 0);
+[e ( _MDBLinkSendCommand (2 , -> -> 9 `i `uc -> -> 0 `i `uc ]
+"315
+[; ;sources/MDB_Link.c: 315:             TransitionTo(ST_MDB_SETUP_WAIT, 60);
+[e ( _TransitionTo (2 , . `E3676 5 -> -> 60 `i `us ]
+"316
+[; ;sources/MDB_Link.c: 316:             TimerNB_Start(&NB_SetupTimeOut, 40);
+[e ( _TimerNB_Start (2 , &U _NB_SetupTimeOut -> -> -> 40 `i `l `ul ]
+"326
+[; ;sources/MDB_Link.c: 326:             break;
+[e $U 456  ]
+"329
+[; ;sources/MDB_Link.c: 329:         case ST_MDB_SETUP_WAIT:
+[e :U 473 ]
+"330
+[; ;sources/MDB_Link.c: 330:             if (MDB_Core_FrameAvailable()) {
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 474  ]
+{
+"331
+[; ;sources/MDB_Link.c: 331:                 f = MDB_Core_GetFrame();
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"332
+[; ;sources/MDB_Link.c: 332:                 MDB_Link_To_PC(f->rxdata, f->len);
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"333
+[; ;sources/MDB_Link.c: 333:                 if (f->len == 24 && ValidateChecksum(f->rxdata, f->len)) {
+[e $ ! && == -> . *U _f 1 `i -> 24 `i != -> ( _ValidateChecksum (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 `i -> 0 `i 475  ]
+{
+"334
+[; ;sources/MDB_Link.c: 334:                     uint16_t temp;
+[v _temp `us ~T0 @X0 1 a ]
+"335
+[; ;sources/MDB_Link.c: 335:                     uint8_t k;
+[v _k `uc ~T0 @X0 1 a ]
+"336
+[; ;sources/MDB_Link.c: 336:                     MDBSendACK();
+[e ( _MDBSendACK ..  ]
+"339
+[; ;sources/MDB_Link.c: 339:                     coin_changer_info.CoinChangerFeatureLevel = f->rxdata[0];
+[e = . _coin_changer_info 0 *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux ]
+"341
+[; ;sources/MDB_Link.c: 341:                     coin_changer_info.CountryOrCurrencyCode =
+[e = . _coin_changer_info 1 -> | << -> -> *U + &U . *U _f 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `us `ui -> 8 `i -> *U + &U . *U _f 0 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `ui `us ]
+"346
+[; ;sources/MDB_Link.c: 346:                     coin_changer_info.CoinScalingFactor = f->rxdata[3];
+[e = . _coin_changer_info 2 *U + &U . *U _f 0 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux ]
+"350
+[; ;sources/MDB_Link.c: 350:                     coin_changer_info.DecimalPlaces = f->rxdata[4];
+[e = . _coin_changer_info 3 *U + &U . *U _f 0 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux ]
+"354
+[; ;sources/MDB_Link.c: 354:                     temp = ((uint16_t) f->rxdata[5] << 8) | f->rxdata[6];
+[e = _temp -> | << -> -> *U + &U . *U _f 0 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `us `ui -> 8 `i -> *U + &U . *U _f 0 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `ui `us ]
+"355
+[; ;sources/MDB_Link.c: 355:                     for (k = 0; k < 16; k++)
+{
+[e = _k -> -> 0 `i `uc ]
+[e $ < -> _k `i -> 16 `i 476  ]
+[e $U 477  ]
+[e :U 476 ]
+"356
+[; ;sources/MDB_Link.c: 356:                         coin_changer_info.CoinsRouteable[k] = (temp >> k) & 0x01;
+[e = *U + &U . _coin_changer_info 4 * -> _k `ux -> -> # *U &U . _coin_changer_info 4 `ui `ux -> & >> -> _temp `ui -> _k `i -> -> 1 `i `ui `uc ]
+[e ++ _k -> -> 1 `i `uc ]
+[e $ < -> _k `i -> 16 `i 476  ]
+[e :U 477 ]
+}
+"361
+[; ;sources/MDB_Link.c: 361:                     coin_changer_info.NumCoinTypes = received_data - 8;
+[e = . _coin_changer_info 6 -> - -> _received_data `i -> 8 `i `uc ]
+"362
+[; ;sources/MDB_Link.c: 362:                     if (coin_changer_info.NumCoinTypes > 16)
+[e $ ! > -> . _coin_changer_info 6 `i -> 16 `i 479  ]
+"363
+[; ;sources/MDB_Link.c: 363:                         coin_changer_info.NumCoinTypes = 16;
+[e = . _coin_changer_info 6 -> -> 16 `i `uc ]
+[e :U 479 ]
+"365
+[; ;sources/MDB_Link.c: 365:                     for (k = 0; k < coin_changer_info.NumCoinTypes; k++)
+{
+[e = _k -> -> 0 `i `uc ]
+[e $U 483  ]
+[e :U 480 ]
+"366
+[; ;sources/MDB_Link.c: 366:                         coin_changer_info.CoinTypeCredit[k] = f->rxdata[7 + k];
+[e = *U + &U . _coin_changer_info 5 * -> _k `ux -> -> # *U &U . _coin_changer_info 5 `ui `ux *U + &U . *U _f 0 * -> -> + -> 7 `i -> _k `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux ]
+[e ++ _k -> -> 1 `i `uc ]
+[e :U 483 ]
+[e $ < -> _k `i -> . _coin_changer_info 6 `i 480  ]
+[e :U 481 ]
+}
+"369
+[; ;sources/MDB_Link.c: 369:                     for (k = coin_changer_info.NumCoinTypes; k < 16; k++)
+{
+[e = _k . _coin_changer_info 6 ]
+[e $ < -> _k `i -> 16 `i 484  ]
+[e $U 485  ]
+[e :U 484 ]
+"370
+[; ;sources/MDB_Link.c: 370:                         coin_changer_info.CoinTypeCredit[k] = 0;
+[e = *U + &U . _coin_changer_info 5 * -> _k `ux -> -> # *U &U . _coin_changer_info 5 `ui `ux -> -> 0 `i `uc ]
+[e ++ _k -> -> 1 `i `uc ]
+[e $ < -> _k `i -> 16 `i 484  ]
+[e :U 485 ]
+}
+"372
+[; ;sources/MDB_Link.c: 372:                     TransitionTo(ST_MDB_EXP_ID, 200);
+[e ( _TransitionTo (2 , . `E3676 6 -> -> 200 `i `us ]
+"373
+[; ;sources/MDB_Link.c: 373:                 }
+}
+[e $U 487  ]
+"374
+[; ;sources/MDB_Link.c: 374:                 else {
+[e :U 475 ]
+{
+"375
+[; ;sources/MDB_Link.c: 375:                     TransitionTo(ST_MDB_SETUP, 200);
+[e ( _TransitionTo (2 , . `E3676 4 -> -> 200 `i `us ]
+"376
+[; ;sources/MDB_Link.c: 376:                 }
+}
+[e :U 487 ]
+"377
+[; ;sources/MDB_Link.c: 377:                 MDB_Core_ReleaseFrame();
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"378
+[; ;sources/MDB_Link.c: 378:             }
+}
+[e $U 488  ]
+"379
+[; ;sources/MDB_Link.c: 379:             else if (TimerNB_Expired(&NB_SetupTimeOut)) {
+[e :U 474 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_SetupTimeOut `i -> 0 `i 489  ]
+{
+"380
+[; ;sources/MDB_Link.c: 380:                 MDB_Link_To_PC(f->rxdata, f->len);
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"381
+[; ;sources/MDB_Link.c: 381:                 TransitionTo(ST_MDB_SETUP, 200);
+[e ( _TransitionTo (2 , . `E3676 4 -> -> 200 `i `us ]
+"382
+[; ;sources/MDB_Link.c: 382:             }
+}
+[e :U 489 ]
+[e :U 488 ]
+"383
+[; ;sources/MDB_Link.c: 383:             break;
+[e $U 456  ]
+"387
+[; ;sources/MDB_Link.c: 387:         case ST_MDB_EXP_ID:
+[e :U 490 ]
+"388
+[; ;sources/MDB_Link.c: 388:             if (coin_changer_info.CoinChangerFeatureLevel >= 3) {
+[e $ ! >= -> . _coin_changer_info 0 `i -> 3 `i 491  ]
+{
+"389
+[; ;sources/MDB_Link.c: 389:                 TransitionTo(ST_MDB_EXP_ID_WAIT, 100);
+[e ( _TransitionTo (2 , . `E3676 7 -> -> 100 `i `us ]
+"390
+[; ;sources/MDB_Link.c: 390:                 MDBLinkSendCommand(0x0F, 0x00);
+[e ( _MDBLinkSendCommand (2 , -> -> 15 `i `uc -> -> 0 `i `uc ]
+"391
+[; ;sources/MDB_Link.c: 391:                 TimerNB_Start(&NB_EXPIDTimeOut, 70);
+[e ( _TimerNB_Start (2 , &U _NB_EXPIDTimeOut -> -> -> 70 `i `l `ul ]
+"393
+[; ;sources/MDB_Link.c: 393:             }
+}
+[e $U 492  ]
+"394
+[; ;sources/MDB_Link.c: 394:             else {
+[e :U 491 ]
+{
+"395
+[; ;sources/MDB_Link.c: 395:                 TransitionTo(ST_MDB_TUBE_STATUS, 200);
+[e ( _TransitionTo (2 , . `E3676 10 -> -> 200 `i `us ]
+"396
+[; ;sources/MDB_Link.c: 396:             }
+}
+[e :U 492 ]
+"397
+[; ;sources/MDB_Link.c: 397:             break;
+[e $U 456  ]
+"399
+[; ;sources/MDB_Link.c: 399:         case ST_MDB_EXP_ID_WAIT:
+[e :U 493 ]
+"400
+[; ;sources/MDB_Link.c: 400:             if (MDB_Core_FrameAvailable()) {
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 494  ]
+{
+"401
+[; ;sources/MDB_Link.c: 401:                 f = MDB_Core_GetFrame();
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"402
+[; ;sources/MDB_Link.c: 402:                 MDB_Link_To_PC(f->rxdata, f->len);
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"403
+[; ;sources/MDB_Link.c: 403:                 if (f->len == 34) {
+[e $ ! == -> . *U _f 1 `i -> 34 `i 495  ]
+{
+"404
+[; ;sources/MDB_Link.c: 404:                     is_coinco = (f->rxdata[0] == 'C' && f->rxdata[1] == 'A' && f->rxdata[2] == 'I');
+[e = _is_coinco -> -> && && == -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `ui -> 67 `ui == -> *U + &U . *U _f 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `ui -> 65 `ui == -> *U + &U . *U _f 0 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `ui -> 73 `ui `i `uc ]
+"405
+[; ;sources/MDB_Link.c: 405:                     MDBSendACK();
+[e ( _MDBSendACK ..  ]
+"406
+[; ;sources/MDB_Link.c: 406:                     TransitionTo(ST_MDB_EXP_FEATURE, 200);
+[e ( _TransitionTo (2 , . `E3676 8 -> -> 200 `i `us ]
+"407
+[; ;sources/MDB_Link.c: 407:                 }
+}
+[e :U 495 ]
+"408
+[; ;sources/MDB_Link.c: 408:                 MDB_Core_ReleaseFrame();
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"409
+[; ;sources/MDB_Link.c: 409:             }
+}
+[e $U 496  ]
+"410
+[; ;sources/MDB_Link.c: 410:             else if (TimerNB_Expired(&NB_EXPIDTimeOut)) {
+[e :U 494 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_EXPIDTimeOut `i -> 0 `i 497  ]
+{
+"411
+[; ;sources/MDB_Link.c: 411:                 TransitionTo(ST_MDB_EXP_ID, 200);
+[e ( _TransitionTo (2 , . `E3676 6 -> -> 200 `i `us ]
+"412
+[; ;sources/MDB_Link.c: 412:             }
+}
+[e :U 497 ]
+[e :U 496 ]
+"413
+[; ;sources/MDB_Link.c: 413:             break;
+[e $U 456  ]
+"417
+[; ;sources/MDB_Link.c: 417:         case ST_MDB_EXP_FEATURE:
+[e :U 498 ]
+"418
+[; ;sources/MDB_Link.c: 418:             if (coin_changer_info.CoinChangerFeatureLevel == 3) {
+[e $ ! == -> . _coin_changer_info 0 `i -> 3 `i 499  ]
+{
+"419
+[; ;sources/MDB_Link.c: 419:                 TransitionTo(ST_MDB_EXP_FEATURE_WAIT, 5);
+[e ( _TransitionTo (2 , . `E3676 9 -> -> 5 `i `us ]
+"420
+[; ;sources/MDB_Link.c: 420:                 MDBLinkSendCommand(0x0F, 0x01);
+[e ( _MDBLinkSendCommand (2 , -> -> 15 `i `uc -> -> 1 `i `uc ]
+"421
+[; ;sources/MDB_Link.c: 421:                 TimerNB_Start(&NB_EXPFEATURETimeOut, 5);
+[e ( _TimerNB_Start (2 , &U _NB_EXPFEATURETimeOut -> -> -> 5 `i `l `ul ]
+"422
+[; ;sources/MDB_Link.c: 422:             }
+}
+[e $U 500  ]
+"423
+[; ;sources/MDB_Link.c: 423:             else {
+[e :U 499 ]
+{
+"424
+[; ;sources/MDB_Link.c: 424:                 TransitionTo(ST_MDB_TUBE_STATUS, 200);
+[e ( _TransitionTo (2 , . `E3676 10 -> -> 200 `i `us ]
+"425
+[; ;sources/MDB_Link.c: 425:             }
+}
+[e :U 500 ]
+"426
+[; ;sources/MDB_Link.c: 426:             break;
+[e $U 456  ]
+"428
+[; ;sources/MDB_Link.c: 428:         case ST_MDB_EXP_FEATURE_WAIT:
+[e :U 501 ]
+"429
+[; ;sources/MDB_Link.c: 429:             if (MDB_Core_FrameAvailable()) {
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 502  ]
+{
+"430
+[; ;sources/MDB_Link.c: 430:                 f = MDB_Core_GetFrame();
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"431
+[; ;sources/MDB_Link.c: 431:                 if ((f->len == 1) && (f->rxdata[0] == 0x00)) {
+[e $ ! && == -> . *U _f 1 `i -> 1 `i == -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> 0 `i 503  ]
+{
+"432
+[; ;sources/MDB_Link.c: 432:                     TransitionTo(ST_MDB_TUBE_STATUS, 200);
+[e ( _TransitionTo (2 , . `E3676 10 -> -> 200 `i `us ]
+"433
+[; ;sources/MDB_Link.c: 433:                     MDB_Link_To_PC(f->rxdata, f->len);
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"434
+[; ;sources/MDB_Link.c: 434:                 }
+}
+[e :U 503 ]
+"435
+[; ;sources/MDB_Link.c: 435:                 MDB_Core_ReleaseFrame();
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"436
+[; ;sources/MDB_Link.c: 436:             }
+}
+[e $U 504  ]
+"437
+[; ;sources/MDB_Link.c: 437:             else if (TimerNB_Expired(&NB_EXPFEATURETimeOut)) {
+[e :U 502 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_EXPFEATURETimeOut `i -> 0 `i 505  ]
+{
+"438
+[; ;sources/MDB_Link.c: 438:                 TransitionTo(ST_MDB_EXP_FEATURE, 200);
+[e ( _TransitionTo (2 , . `E3676 8 -> -> 200 `i `us ]
+"439
+[; ;sources/MDB_Link.c: 439:             }
+}
+[e :U 505 ]
+[e :U 504 ]
+"440
+[; ;sources/MDB_Link.c: 440:             break;
+[e $U 456  ]
+"445
+[; ;sources/MDB_Link.c: 445:         case ST_MDB_TUBE_STATUS:
+[e :U 506 ]
+"446
+[; ;sources/MDB_Link.c: 446:             MDBLinkSendCommand(0x0A, 0);
+[e ( _MDBLinkSendCommand (2 , -> -> 10 `i `uc -> -> 0 `i `uc ]
+"447
+[; ;sources/MDB_Link.c: 447:             TransitionTo(ST_MDB_TUBE_STATUS_WAIT, 50);
+[e ( _TransitionTo (2 , . `E3676 11 -> -> 50 `i `us ]
+"448
+[; ;sources/MDB_Link.c: 448:             TimerNB_Start(&NB_TubeStatusTimeOut, 70);
+[e ( _TimerNB_Start (2 , &U _NB_TubeStatusTimeOut -> -> -> 70 `i `l `ul ]
+"449
+[; ;sources/MDB_Link.c: 449:             break;
+[e $U 456  ]
+"454
+[; ;sources/MDB_Link.c: 454:         case ST_MDB_TUBE_STATUS_WAIT:
+[e :U 507 ]
+"455
+[; ;sources/MDB_Link.c: 455:         {
+{
+"461
+[; ;sources/MDB_Link.c: 461:             MDB_Link_To_PC(f->rxdata, f->len);
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"462
+[; ;sources/MDB_Link.c: 462:             if (MDB_Core_FrameAvailable()) {
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 508  ]
+{
+"463
+[; ;sources/MDB_Link.c: 463:                 f = MDB_Core_GetFrame();
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"464
+[; ;sources/MDB_Link.c: 464:                 MDB_Link_To_PC(f->rxdata, f->len);
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"466
+[; ;sources/MDB_Link.c: 466:                 if (ValidateChecksum(f->rxdata, f->len)) {
+[e $ ! != -> ( _ValidateChecksum (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 `i -> 0 `i 509  ]
+{
+"467
+[; ;sources/MDB_Link.c: 467:                     MDBSendACK();
+[e ( _MDBSendACK ..  ]
+"472
+[; ;sources/MDB_Link.c: 472:                     tube_status.Full_Status = ((uint16_t) f->rxdata[0] << 8) + f->rxdata[1];
+[e = . _tube_status 0 -> + << -> -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `us `ui -> 8 `i -> *U + &U . *U _f 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `ui `us ]
+"477
+[; ;sources/MDB_Link.c: 477:                     tube_status.Total_Tubes = f->len - 2 - 1;
+[e = . _tube_status 2 -> - - -> . *U _f 1 `i -> 2 `i -> 1 `i `uc ]
+"479
+[; ;sources/MDB_Link.c: 479:                     for (uint8_t i = 0; i < coin_changer_info.NumCoinTypes; i++) {
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $U 513  ]
+[e :U 510 ]
+{
+"480
+[; ;sources/MDB_Link.c: 480:                         tube_status.Status[i] = f->rxdata[i + 2];
+[e = *U + &U . _tube_status 1 * -> _i `ux -> -> # *U &U . _tube_status 1 `ui `ux *U + &U . *U _f 0 * -> -> + -> _i `i -> 2 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux ]
+"482
+[; ;sources/MDB_Link.c: 482:                     }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 513 ]
+[e $ < -> _i `i -> . _coin_changer_info 6 `i 510  ]
+[e :U 511 ]
+}
+"485
+[; ;sources/MDB_Link.c: 485:                     for (uint8_t i = coin_changer_info.NumCoinTypes; i < 16; i++) {
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i . _coin_changer_info 6 ]
+[e $ < -> _i `i -> 16 `i 514  ]
+[e $U 515  ]
+[e :U 514 ]
+{
+"486
+[; ;sources/MDB_Link.c: 486:                         tube_status.Status[i] = 0;
+[e = *U + &U . _tube_status 1 * -> _i `ux -> -> # *U &U . _tube_status 1 `ui `ux -> -> 0 `i `uc ]
+"487
+[; ;sources/MDB_Link.c: 487:                     }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 16 `i 514  ]
+[e :U 515 ]
+}
+"489
+[; ;sources/MDB_Link.c: 489:                     TransitionTo(ST_MDB_ENABLE_COINS, 200);
+[e ( _TransitionTo (2 , . `E3676 12 -> -> 200 `i `us ]
+"490
+[; ;sources/MDB_Link.c: 490:                 }
+}
+[e $U 517  ]
+"491
+[; ;sources/MDB_Link.c: 491:                 else {
+[e :U 509 ]
+{
+"493
+[; ;sources/MDB_Link.c: 493:                     TransitionTo(ST_MDB_TUBE_STATUS, 200);
+[e ( _TransitionTo (2 , . `E3676 10 -> -> 200 `i `us ]
+"494
+[; ;sources/MDB_Link.c: 494:                 }
+}
+[e :U 517 ]
+"496
+[; ;sources/MDB_Link.c: 496:                 MDB_Core_ReleaseFrame();
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"497
+[; ;sources/MDB_Link.c: 497:             }
+}
+[e $U 518  ]
+"498
+[; ;sources/MDB_Link.c: 498:             else if (TimerNB_Expired(&NB_TubeStatusTimeOut)) {
+[e :U 508 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_TubeStatusTimeOut `i -> 0 `i 519  ]
+{
+"499
+[; ;sources/MDB_Link.c: 499:                 TransitionTo(ST_MDB_TUBE_STATUS, 200);
+[e ( _TransitionTo (2 , . `E3676 10 -> -> 200 `i `us ]
+"500
+[; ;sources/MDB_Link.c: 500:             }
+}
+[e :U 519 ]
+[e :U 518 ]
+"501
+[; ;sources/MDB_Link.c: 501:         }
+}
+"502
+[; ;sources/MDB_Link.c: 502:             break;
+[e $U 456  ]
+"507
+[; ;sources/MDB_Link.c: 507:         case ST_MDB_ENABLE_COINS:
+[e :U 520 ]
+"508
+[; ;sources/MDB_Link.c: 508:             TransitionTo(ST_MDB_ENABLE_COINS_WAIT, 15);
+[e ( _TransitionTo (2 , . `E3676 13 -> -> 15 `i `us ]
+"509
+[; ;sources/MDB_Link.c: 509:             MDBLinkSendCommand(0x0C, 0x01);
+[e ( _MDBLinkSendCommand (2 , -> -> 12 `i `uc -> -> 1 `i `uc ]
+"510
+[; ;sources/MDB_Link.c: 510:             TimerNB_Start(&NB_EnableCoinsTimeOut, 15);
+[e ( _TimerNB_Start (2 , &U _NB_EnableCoinsTimeOut -> -> -> 15 `i `l `ul ]
+"511
+[; ;sources/MDB_Link.c: 511:             break;
+[e $U 456  ]
+"513
+[; ;sources/MDB_Link.c: 513:         case ST_MDB_ENABLE_COINS_WAIT:
+[e :U 521 ]
+"514
+[; ;sources/MDB_Link.c: 514:             if (MDB_Core_FrameAvailable()) {
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 522  ]
+{
+"515
+[; ;sources/MDB_Link.c: 515:                 f = MDB_Core_GetFrame();
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"516
+[; ;sources/MDB_Link.c: 516:                 MDB_Link_To_PC(f->rxdata, f->len);
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"517
+[; ;sources/MDB_Link.c: 517:                 if (f->len == 1 && f->rxdata[0] == 0x00) {
+[e $ ! && == -> . *U _f 1 `i -> 1 `i == -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> 0 `i 523  ]
+{
+"518
+[; ;sources/MDB_Link.c: 518:                     MDBSendACK();
+[e ( _MDBSendACK ..  ]
+"519
+[; ;sources/MDB_Link.c: 519:                     polls_buenos = 0;
+[e = _polls_buenos -> -> 0 `i `uc ]
+"520
+[; ;sources/MDB_Link.c: 520:                     TransitionTo(ST_MDB_POLL, 200);
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"521
+[; ;sources/MDB_Link.c: 521:                     Dispatcher_Post(SRC_MDB, EVT_MDB_CHANGER_READY, 0);
+[e ( _Dispatcher_Post (3 , , . `E3728 1 -> . `E3559 3 `us -> -> 0 `i `us ]
+"522
+[; ;sources/MDB_Link.c: 522:                 }
+}
+[e :U 523 ]
+"523
+[; ;sources/MDB_Link.c: 523:                 MDB_Core_ReleaseFrame();
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"524
+[; ;sources/MDB_Link.c: 524:             }
+}
+[e $U 524  ]
+"525
+[; ;sources/MDB_Link.c: 525:             else if (TimerNB_Expired(&NB_EnableCoinsTimeOut)) {
+[e :U 522 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_EnableCoinsTimeOut `i -> 0 `i 525  ]
+{
+"526
+[; ;sources/MDB_Link.c: 526:                 TransitionTo(ST_MDB_ENABLE_COINS, 200);
+[e ( _TransitionTo (2 , . `E3676 12 -> -> 200 `i `us ]
+"527
+[; ;sources/MDB_Link.c: 527:             }
+}
+[e :U 525 ]
+[e :U 524 ]
+"528
+[; ;sources/MDB_Link.c: 528:             break;
+[e $U 456  ]
+"530
+[; ;sources/MDB_Link.c: 530:         case ST_MDB_DISBLE_COINS:
+[e :U 526 ]
+"531
+[; ;sources/MDB_Link.c: 531:             TransitionTo(ST_MDB_DISABLE_COINS_WAIT, 5);
+[e ( _TransitionTo (2 , . `E3676 15 -> -> 5 `i `us ]
+"532
+[; ;sources/MDB_Link.c: 532:             MDBLinkSendCommand(0x0C, 0x00);
+[e ( _MDBLinkSendCommand (2 , -> -> 12 `i `uc -> -> 0 `i `uc ]
+"533
+[; ;sources/MDB_Link.c: 533:             TimerNB_Start(&NB_EnableCoinsTimeOut, 5);
+[e ( _TimerNB_Start (2 , &U _NB_EnableCoinsTimeOut -> -> -> 5 `i `l `ul ]
+"534
+[; ;sources/MDB_Link.c: 534:             break;
+[e $U 456  ]
+"536
+[; ;sources/MDB_Link.c: 536:         case ST_MDB_DISABLE_COINS_WAIT:
+[e :U 527 ]
+"537
+[; ;sources/MDB_Link.c: 537:             if (MDB_Core_FrameAvailable()) {
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 528  ]
+{
+"538
+[; ;sources/MDB_Link.c: 538:                 f = MDB_Core_GetFrame();
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"539
+[; ;sources/MDB_Link.c: 539:                 MDB_Link_To_PC(f->rxdata, f->len);
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"540
+[; ;sources/MDB_Link.c: 540:                 if (f->len == 1 && f->rxdata[0] == 0x00) {
+[e $ ! && == -> . *U _f 1 `i -> 1 `i == -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> 0 `i 529  ]
+{
+"541
+[; ;sources/MDB_Link.c: 541:                     MDBSendACK();
+[e ( _MDBSendACK ..  ]
+"542
+[; ;sources/MDB_Link.c: 542:                     TransitionTo(ST_MDB_POLL, 200);
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"543
+[; ;sources/MDB_Link.c: 543:                 }
+}
+[e :U 529 ]
+"544
+[; ;sources/MDB_Link.c: 544:                 MDB_Core_ReleaseFrame();
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"545
+[; ;sources/MDB_Link.c: 545:             }
+}
+[e $U 530  ]
+"546
+[; ;sources/MDB_Link.c: 546:             else if (TimerNB_Expired(&NB_EnableCoinsTimeOut)) {
+[e :U 528 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_EnableCoinsTimeOut `i -> 0 `i 531  ]
+{
+"547
+[; ;sources/MDB_Link.c: 547:                 TransitionTo(ST_MDB_ENABLE_COINS, 200);
+[e ( _TransitionTo (2 , . `E3676 12 -> -> 200 `i `us ]
+"548
+[; ;sources/MDB_Link.c: 548:             }
+}
+[e :U 531 ]
+[e :U 530 ]
+"549
+[; ;sources/MDB_Link.c: 549:             break;
+[e $U 456  ]
+"561
+[; ;sources/MDB_Link.c: 561:         case ST_MDB_POLL:
+[e :U 532 ]
+"562
+[; ;sources/MDB_Link.c: 562:             MDBLinkSendCommand(0x0B, 0x00);
+[e ( _MDBLinkSendCommand (2 , -> -> 11 `i `uc -> -> 0 `i `uc ]
+"563
+[; ;sources/MDB_Link.c: 563:             TransitionTo(ST_MDB_POLL_WAIT, 10);
+[e ( _TransitionTo (2 , . `E3676 17 -> -> 10 `i `us ]
+"564
+[; ;sources/MDB_Link.c: 564:             TimerNB_Start(&NB_PollTimeOut, 10);
+[e ( _TimerNB_Start (2 , &U _NB_PollTimeOut -> -> -> 10 `i `l `ul ]
+"565
+[; ;sources/MDB_Link.c: 565:             break;
+[e $U 456  ]
+"567
+[; ;sources/MDB_Link.c: 567:         case ST_MDB_POLL_WAIT:
+[e :U 533 ]
+"568
+[; ;sources/MDB_Link.c: 568:         {
+{
+"569
+[; ;sources/MDB_Link.c: 569:             if (MDB_Core_FrameAvailable()) {
+[e $ ! != -> ( _MDB_Core_FrameAvailable ..  `i -> 0 `i 534  ]
+{
+"570
+[; ;sources/MDB_Link.c: 570:                 f = MDB_Core_GetFrame();
+[e = _f ( _MDB_Core_GetFrame ..  ]
+"571
+[; ;sources/MDB_Link.c: 571:                 MDB_Status_Clear();
+[e ( _MDB_Status_Clear ..  ]
+"572
+[; ;sources/MDB_Link.c: 572:                 MDB_Event_t evt = ParsePoll(f->rxdata, f->len);
+[v _evt `E3559 ~T0 @X0 1 a ]
+[e = _evt ( _ParsePoll (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"574
+[; ;sources/MDB_Link.c: 574:                 switch (evt) {
+[e $U 536  ]
+{
+"575
+[; ;sources/MDB_Link.c: 575:                     case EVT_MDB_ACK:
+[e :U 537 ]
+"578
+[; ;sources/MDB_Link.c: 578:                         if (RefundValue.HasValue && RefundValue.value) {
+[e $ ! && != -> . _RefundValue 1 `i -> 0 `i != -> . _RefundValue 0 `ui -> -> 0 `i `ui 538  ]
+{
+"579
+[; ;sources/MDB_Link.c: 579:                             MDB_SendCommand_Refund(RefundValue.value);
+[e ( _MDB_SendCommand_Refund (1 . _RefundValue 0 ]
+"580
+[; ;sources/MDB_Link.c: 580:                             RefundValue.HasValue = RefundValue.value = 0;
+[e = . _RefundValue 1 -> = . _RefundValue 0 -> -> 0 `i `us `uc ]
+"581
+[; ;sources/MDB_Link.c: 581:                             TransitionTo(ST_MDB_POLL, 500);
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 500 `i `us ]
+"582
+[; ;sources/MDB_Link.c: 582:                         }
+}
+[e $U 539  ]
+"583
+[; ;sources/MDB_Link.c: 583:                         else {
+[e :U 538 ]
+{
+"584
+[; ;sources/MDB_Link.c: 584:                             TransitionTo(ST_MDB_POLL, 200);
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"585
+[; ;sources/MDB_Link.c: 585:                         }
+}
+[e :U 539 ]
+"595
+[; ;sources/MDB_Link.c: 595:                         break;
+[e $U 535  ]
+"597
+[; ;sources/MDB_Link.c: 597:                     case EVT_MDB_COIN_VALID:
+[e :U 540 ]
+"602
+[; ;sources/MDB_Link.c: 602:                         if (((f->rxdata[0] + f->rxdata[1]) & 0xFF) == f->rxdata[2]) {
+[e $ ! == & + -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> *U + &U . *U _f 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> 255 `i -> *U + &U . *U _f 0 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i 541  ]
+{
+"603
+[; ;sources/MDB_Link.c: 603:                             MDBSendACK();
+[e ( _MDBSendACK ..  ]
+"607
+[; ;sources/MDB_Link.c: 607:                             uint8_t CoinTypeDeposited = f->rxdata[0] & 0x0F;
+[v _CoinTypeDeposited `uc ~T0 @X0 1 a ]
+[e = _CoinTypeDeposited -> & -> *U + &U . *U _f 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _f 0 `ui `ux `i -> 15 `i `uc ]
+"610
+[; ;sources/MDB_Link.c: 610:                             uint16_t CoinValue =
+[v _CoinValue `us ~T0 @X0 1 a ]
+[e = _CoinValue -> * -> *U + &U . _coin_changer_info 5 * -> _CoinTypeDeposited `ux -> -> # *U &U . _coin_changer_info 5 `ui `ux `i -> . _coin_changer_info 2 `i `us ]
+"614
+[; ;sources/MDB_Link.c: 614:                             Dispatcher_Post(SRC_MDB, EVT_MDB_COIN_VALID, CoinValue);
+[e ( _Dispatcher_Post (3 , , . `E3728 1 -> . `E3559 4 `us _CoinValue ]
+"616
+[; ;sources/MDB_Link.c: 616:                             TransitionTo(ST_MDB_POLL, 200);
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"617
+[; ;sources/MDB_Link.c: 617:                         }
+}
+[e $U 542  ]
+"618
+[; ;sources/MDB_Link.c: 618:                         else {
+[e :U 541 ]
+{
+"619
+[; ;sources/MDB_Link.c: 619:                             MDBSendACK();
+[e ( _MDBSendACK ..  ]
+"620
+[; ;sources/MDB_Link.c: 620:                             TransitionTo(ST_MDB_POLL, 200);
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"621
+[; ;sources/MDB_Link.c: 621:                         }
+}
+[e :U 542 ]
+"622
+[; ;sources/MDB_Link.c: 622:                         MDB_Link_To_PC(f->rxdata, f->len);
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"623
+[; ;sources/MDB_Link.c: 623:                         break;
+[e $U 535  ]
+"625
+[; ;sources/MDB_Link.c: 625:                     case EVT_MDB_STATUS_CODE:
+[e :U 543 ]
+"626
+[; ;sources/MDB_Link.c: 626:                         MDBSendACK();
+[e ( _MDBSendACK ..  ]
+"628
+[; ;sources/MDB_Link.c: 628:                         if (mdb_status.escrow_req) {
+[e $ ! != -> . _mdb_status 0 `i -> 0 `i 544  ]
+{
+"629
+[; ;sources/MDB_Link.c: 629:                             uint16_t credit = Saldo_Get();
+[v _credit `us ~T0 @X0 1 a ]
+[e = _credit ( _Saldo_Get ..  ]
+"630
+[; ;sources/MDB_Link.c: 630:                             MDB_Link_Dispatch(EVT_MDB_ESCROW_REQUEST, credit);
+[e ( _MDB_Link_Dispatch (2 , . `E3559 1 _credit ]
+"631
+[; ;sources/MDB_Link.c: 631:                             TransitionTo(ST_MDB_POLL, 200);
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"632
+[; ;sources/MDB_Link.c: 632:                         }
+}
+[e :U 544 ]
+"633
+[; ;sources/MDB_Link.c: 633:                         if (mdb_status.busy) {
+[e $ ! != -> . _mdb_status 3 `i -> 0 `i 545  ]
+{
+"635
+[; ;sources/MDB_Link.c: 635:                         }
+}
+[e :U 545 ]
+"636
+[; ;sources/MDB_Link.c: 636:                         if (mdb_status.no_credit)
+[e $ ! != -> . _mdb_status 2 `i -> 0 `i 546  ]
+"637
+[; ;sources/MDB_Link.c: 637:                         {
+{
+"638
+[; ;sources/MDB_Link.c: 638:                         }
+}
+[e :U 546 ]
+"641
+[; ;sources/MDB_Link.c: 641:                         if (mdb_status.reset) {
+[e $ ! != -> . _mdb_status 4 `i -> 0 `i 547  ]
+{
+"642
+[; ;sources/MDB_Link.c: 642:                             MDBSendACK();
+[e ( _MDBSendACK ..  ]
+"643
+[; ;sources/MDB_Link.c: 643:                             TransitionTo(ST_MDB_RESET, 200);
+[e ( _TransitionTo (2 , . `E3676 0 -> -> 200 `i `us ]
+"644
+[; ;sources/MDB_Link.c: 644:                         }
+}
+[e :U 547 ]
+"660
+[; ;sources/MDB_Link.c: 660:                         MDB_Status_Clear();
+[e ( _MDB_Status_Clear ..  ]
+"661
+[; ;sources/MDB_Link.c: 661:                         TransitionTo(ST_MDB_POLL, 200);
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"662
+[; ;sources/MDB_Link.c: 662:                         break;
+[e $U 535  ]
+"666
+[; ;sources/MDB_Link.c: 666:                     default:
+[e :U 548 ]
+"667
+[; ;sources/MDB_Link.c: 667:                         MDB_Link_To_PC(f->rxdata, f->len);
+[e ( _MDB_Link_To_PC (2 , -> &U . *U _f 0 `*Cuc . *U _f 1 ]
+"668
+[; ;sources/MDB_Link.c: 668:                         break;
+[e $U 535  ]
+"669
+[; ;sources/MDB_Link.c: 669:                 }
+}
+[e $U 535  ]
+[e :U 536 ]
+[e [\ -> _evt `ui , $ -> . `E3559 0 `ui 537
+ , $ -> . `E3559 4 `ui 540
+ , $ -> . `E3559 6 `ui 543
+ 548 ]
+[e :U 535 ]
+"683
+[; ;sources/MDB_Link.c: 683:                 MDB_Core_ReleaseFrame();
+[e ( _MDB_Core_ReleaseFrame ..  ]
+"684
+[; ;sources/MDB_Link.c: 684:             }
+}
+[e $U 549  ]
+"685
+[; ;sources/MDB_Link.c: 685:             else if (TimerNB_Expired(&NB_PollTimeOut)) {
+[e :U 534 ]
+[e $ ! != -> ( _TimerNB_Expired (1 &U _NB_PollTimeOut `i -> 0 `i 550  ]
+{
+"686
+[; ;sources/MDB_Link.c: 686:                 TransitionTo(ST_MDB_POLL, 200);
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 200 `i `us ]
+"687
+[; ;sources/MDB_Link.c: 687:             }
+}
+[e :U 550 ]
+[e :U 549 ]
+"688
+[; ;sources/MDB_Link.c: 688:         }
+}
+"689
+[; ;sources/MDB_Link.c: 689:             break;
+[e $U 456  ]
+"691
+[; ;sources/MDB_Link.c: 691:         case ST_MDB_REFUND:
+[e :U 551 ]
+"692
+[; ;sources/MDB_Link.c: 692:             if (RefundValue.HasValue && RefundValue.value > 1) {
+[e $ ! && != -> . _RefundValue 1 `i -> 0 `i > -> . _RefundValue 0 `ui -> -> 1 `i `ui 552  ]
+{
+"693
+[; ;sources/MDB_Link.c: 693:                 RefundValue.HasValue = 0;
+[e = . _RefundValue 1 -> -> 0 `i `uc ]
+"694
+[; ;sources/MDB_Link.c: 694:                 MDB_SendCommand_Refund(RefundValue.value);
+[e ( _MDB_SendCommand_Refund (1 . _RefundValue 0 ]
+"695
+[; ;sources/MDB_Link.c: 695:             }
+}
+[e :U 552 ]
+"696
+[; ;sources/MDB_Link.c: 696:             TransitionTo(ST_MDB_POLL, 500);
+[e ( _TransitionTo (2 , . `E3676 16 -> -> 500 `i `us ]
+"697
+[; ;sources/MDB_Link.c: 697:             break;
+[e $U 456  ]
+"700
+[; ;sources/MDB_Link.c: 700:         case ST_MDB_WAIT:
+[e :U 553 ]
+"701
+[; ;sources/MDB_Link.c: 701:         {
+{
+"702
+[; ;sources/MDB_Link.c: 702:             if (TimerNB_Expired(&mdbWaitTimer)) {
+[e $ ! != -> ( _TimerNB_Expired (1 &U _mdbWaitTimer `i -> 0 `i 554  ]
+{
+"703
+[; ;sources/MDB_Link.c: 703:                 current_state = next_state;
+[e = _current_state _next_state ]
+"704
+[; ;sources/MDB_Link.c: 704:             }
+}
+[e :U 554 ]
+"705
+[; ;sources/MDB_Link.c: 705:         }
+}
+"706
+[; ;sources/MDB_Link.c: 706:             break;
+[e $U 456  ]
+"707
+[; ;sources/MDB_Link.c: 707:         case ST_MDB_ERROR:
+[e :U 555 ]
+"708
+[; ;sources/MDB_Link.c: 708:             break;
+[e $U 456  ]
+"709
+[; ;sources/MDB_Link.c: 709:     }
+}
+[e $U 456  ]
+[e :U 457 ]
+[e [\ -> _current_state `ui , $ -> . `E3676 0 `ui 458
+ , $ -> . `E3676 1 `ui 459
+ , $ -> . `E3676 2 `ui 464
+ , $ -> . `E3676 3 `ui 465
+ , $ -> . `E3676 4 `ui 472
+ , $ -> . `E3676 5 `ui 473
+ , $ -> . `E3676 6 `ui 490
+ , $ -> . `E3676 7 `ui 493
+ , $ -> . `E3676 8 `ui 498
+ , $ -> . `E3676 9 `ui 501
+ , $ -> . `E3676 10 `ui 506
+ , $ -> . `E3676 11 `ui 507
+ , $ -> . `E3676 12 `ui 520
+ , $ -> . `E3676 13 `ui 521
+ , $ -> . `E3676 14 `ui 526
+ , $ -> . `E3676 15 `ui 527
+ , $ -> . `E3676 16 `ui 532
+ , $ -> . `E3676 17 `ui 533
+ , $ -> . `E3676 18 `ui 551
+ , $ -> . `E3676 20 `ui 553
+ , $ -> . `E3676 19 `ui 555
+ 456 ]
+[e :U 456 ]
+"710
+[; ;sources/MDB_Link.c: 710: }
+[e :UE 455 ]
+}

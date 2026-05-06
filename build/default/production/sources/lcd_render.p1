@@ -1,0 +1,265 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"13 sources/lcd_render.c
+[; ;sources/lcd_render.c: 13: static lcd_fsm_state_t state;
+[c E51 0 1 2 .. ]
+[n E51 . LCD_FSM_IDLE LCD_FSM_SET_ADDR LCD_FSM_SEND_CHAR  ]
+"7 Include/lcd_hal.h
+[; ;Include/lcd_hal.h: 7: void LCD_HAL_SendCommand(uint8_t cmd);
+[v _LCD_HAL_SendCommand `(v ~T0 @X0 0 ef1`uc ]
+"8
+[; ;Include/lcd_hal.h: 8: void LCD_HAL_SendData(uint8_t data);
+[v _LCD_HAL_SendData `(v ~T0 @X0 0 ef1`uc ]
+[v F49 `uc ~T0 @X0 -> 20 `i t ]
+"4 sources/lcd_render.c
+[; ;sources/lcd_render.c: 4: static char lcd_buffer[4][20];
+[v _lcd_buffer `F49 ~T0 @X0 -> 4 `i s ]
+"5
+[; ;sources/lcd_render.c: 5: static uint8_t lcd_dirty = 1;
+[v _lcd_dirty `uc ~T0 @X0 1 s ]
+[i _lcd_dirty
+-> -> 1 `i `uc
+]
+"13
+[; ;sources/lcd_render.c: 13: static lcd_fsm_state_t state;
+[v _state `E51 ~T0 @X0 1 s ]
+"14
+[; ;sources/lcd_render.c: 14: static uint8_t r, c;
+[v _r `uc ~T0 @X0 1 s ]
+[v _c `uc ~T0 @X0 1 s ]
+"16
+[; ;sources/lcd_render.c: 16: void LCD_Clear_Buffer(void)
+[v _LCD_Clear_Buffer `(v ~T0 @X0 1 ef ]
+"17
+[; ;sources/lcd_render.c: 17: {
+{
+[e :U _LCD_Clear_Buffer ]
+[f ]
+"18
+[; ;sources/lcd_render.c: 18:     for(uint8_t i=0;i<4;i++)
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 4 `i 2  ]
+[e $U 3  ]
+[e :U 2 ]
+"19
+[; ;sources/lcd_render.c: 19:         for(uint8_t j=0;j<20;j++)
+{
+[v _j `uc ~T0 @X0 1 a ]
+[e = _j -> -> 0 `i `uc ]
+[e $ < -> _j `i -> 20 `i 5  ]
+[e $U 6  ]
+[e :U 5 ]
+"20
+[; ;sources/lcd_render.c: 20:             lcd_buffer[i][j] = ' ';
+[e = *U + &U *U + &U _lcd_buffer * -> _i `ux -> * -> # *U &U *U &U _lcd_buffer `ui -> -> 20 `i `ui `ux * -> _j `ux -> -> # *U &U *U + &U _lcd_buffer * -> _i `ux -> * -> # *U &U *U &U _lcd_buffer `ui -> -> 20 `i `ui `ux `ui `ux -> -> 32 `ui `uc ]
+[e ++ _j -> -> 1 `i `uc ]
+[e $ < -> _j `i -> 20 `i 5  ]
+[e :U 6 ]
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 4 `i 2  ]
+[e :U 3 ]
+}
+"22
+[; ;sources/lcd_render.c: 22:     lcd_dirty = 1;
+[e = _lcd_dirty -> -> 1 `i `uc ]
+"23
+[; ;sources/lcd_render.c: 23: }
+[e :UE 1 ]
+}
+"25
+[; ;sources/lcd_render.c: 25: void LCD_Write_Buffer(uint8_t row, uint8_t col, const char *str)
+[v _LCD_Write_Buffer `(v ~T0 @X0 1 ef3`uc`uc`*Cuc ]
+"26
+[; ;sources/lcd_render.c: 26: {
+{
+[e :U _LCD_Write_Buffer ]
+"25
+[; ;sources/lcd_render.c: 25: void LCD_Write_Buffer(uint8_t row, uint8_t col, const char *str)
+[v _row `uc ~T0 @X0 1 r1 ]
+[v _col `uc ~T0 @X0 1 r2 ]
+[v _str `*Cuc ~T0 @X0 1 r3 ]
+"26
+[; ;sources/lcd_render.c: 26: {
+[f ]
+"27
+[; ;sources/lcd_render.c: 27:     if(row < 1 || row > 4) return;
+[e $ ! || < -> _row `i -> 1 `i > -> _row `i -> 4 `i 9  ]
+[e $UE 8  ]
+[e :U 9 ]
+"29
+[; ;sources/lcd_render.c: 29:     uint8_t rr = row - 1;
+[v _rr `uc ~T0 @X0 1 a ]
+[e = _rr -> - -> _row `i -> 1 `i `uc ]
+"30
+[; ;sources/lcd_render.c: 30:     uint8_t cc = col - 1;
+[v _cc `uc ~T0 @X0 1 a ]
+[e = _cc -> - -> _col `i -> 1 `i `uc ]
+"32
+[; ;sources/lcd_render.c: 32:     while(*str && cc < 20)
+[e $U 10  ]
+[e :U 11 ]
+"33
+[; ;sources/lcd_render.c: 33:         lcd_buffer[rr][cc++] = *str++;
+[e = *U + &U *U + &U _lcd_buffer * -> _rr `ux -> * -> # *U &U *U &U _lcd_buffer `ui -> -> 20 `i `ui `ux * -> ++ _cc -> -> 1 `i `uc `ux -> -> # *U &U *U + &U _lcd_buffer * -> _rr `ux -> * -> # *U &U *U &U _lcd_buffer `ui -> -> 20 `i `ui `ux `ui `ux *U ++ _str * -> -> 1 `i `x -> -> # *U _str `i `x ]
+[e :U 10 ]
+"32
+[; ;sources/lcd_render.c: 32:     while(*str && cc < 20)
+[e $ && != -> *U _str `i -> 0 `i < -> _cc `i -> 20 `i 11  ]
+[e :U 12 ]
+"35
+[; ;sources/lcd_render.c: 35:     lcd_dirty = 1;
+[e = _lcd_dirty -> -> 1 `i `uc ]
+"36
+[; ;sources/lcd_render.c: 36: }
+[e :UE 8 ]
+}
+"38
+[; ;sources/lcd_render.c: 38: void LCD_FSM_Init(void)
+[v _LCD_FSM_Init `(v ~T0 @X0 1 ef ]
+"39
+[; ;sources/lcd_render.c: 39: {
+{
+[e :U _LCD_FSM_Init ]
+[f ]
+"40
+[; ;sources/lcd_render.c: 40:     LCD_Clear_Buffer();
+[e ( _LCD_Clear_Buffer ..  ]
+"41
+[; ;sources/lcd_render.c: 41:     state = LCD_FSM_IDLE;
+[e = _state . `E51 0 ]
+"42
+[; ;sources/lcd_render.c: 42:     r = c = 0;
+[e = _r = _c -> -> 0 `i `uc ]
+"43
+[; ;sources/lcd_render.c: 43: }
+[e :UE 13 ]
+}
+"45
+[; ;sources/lcd_render.c: 45: void LCD_Render_Task(void)
+[v _LCD_Render_Task `(v ~T0 @X0 1 ef ]
+"46
+[; ;sources/lcd_render.c: 46: {
+{
+[e :U _LCD_Render_Task ]
+[f ]
+"47
+[; ;sources/lcd_render.c: 47:     uint8_t addr;
+[v _addr `uc ~T0 @X0 1 a ]
+"49
+[; ;sources/lcd_render.c: 49:     if(!lcd_dirty)
+[e $ ! ! != -> _lcd_dirty `i -> 0 `i 15  ]
+"50
+[; ;sources/lcd_render.c: 50:         return;
+[e $UE 14  ]
+[e :U 15 ]
+"52
+[; ;sources/lcd_render.c: 52:     switch(state)
+[e $U 17  ]
+"53
+[; ;sources/lcd_render.c: 53:     {
+{
+"54
+[; ;sources/lcd_render.c: 54:         case LCD_FSM_IDLE:
+[e :U 18 ]
+"55
+[; ;sources/lcd_render.c: 55:             if(r == 0) addr = 0x80 + c;
+[e $ ! == -> _r `i -> 0 `i 19  ]
+[e = _addr -> + -> 128 `i -> _c `i `uc ]
+[e $U 20  ]
+"56
+[; ;sources/lcd_render.c: 56:             else if(r == 1) addr = 0xC0 + c;
+[e :U 19 ]
+[e $ ! == -> _r `i -> 1 `i 21  ]
+[e = _addr -> + -> 192 `i -> _c `i `uc ]
+[e $U 22  ]
+"57
+[; ;sources/lcd_render.c: 57:             else if(r == 2) addr = 0x94 + c;
+[e :U 21 ]
+[e $ ! == -> _r `i -> 2 `i 23  ]
+[e = _addr -> + -> 148 `i -> _c `i `uc ]
+[e $U 24  ]
+"58
+[; ;sources/lcd_render.c: 58:             else addr = 0xD4 + c;
+[e :U 23 ]
+[e = _addr -> + -> 212 `i -> _c `i `uc ]
+[e :U 24 ]
+[e :U 22 ]
+[e :U 20 ]
+"60
+[; ;sources/lcd_render.c: 60:             LCD_HAL_SendCommand(addr);
+[e ( _LCD_HAL_SendCommand (1 _addr ]
+"61
+[; ;sources/lcd_render.c: 61:             state = LCD_FSM_SEND_CHAR;
+[e = _state . `E51 2 ]
+"62
+[; ;sources/lcd_render.c: 62:             break;
+[e $U 16  ]
+"64
+[; ;sources/lcd_render.c: 64:         case LCD_FSM_SEND_CHAR:
+[e :U 25 ]
+"65
+[; ;sources/lcd_render.c: 65:             LCD_HAL_SendData(lcd_buffer[r][c]);
+[e ( _LCD_HAL_SendData (1 -> *U + &U *U + &U _lcd_buffer * -> _r `ux -> * -> # *U &U *U &U _lcd_buffer `ui -> -> 20 `i `ui `ux * -> _c `ux -> -> # *U &U *U + &U _lcd_buffer * -> _r `ux -> * -> # *U &U *U &U _lcd_buffer `ui -> -> 20 `i `ui `ux `ui `ux `uc ]
+"67
+[; ;sources/lcd_render.c: 67:             c++;
+[e ++ _c -> -> 1 `i `uc ]
+"68
+[; ;sources/lcd_render.c: 68:             if(c >= 20)
+[e $ ! >= -> _c `i -> 20 `i 26  ]
+"69
+[; ;sources/lcd_render.c: 69:             {
+{
+"70
+[; ;sources/lcd_render.c: 70:                 c = 0;
+[e = _c -> -> 0 `i `uc ]
+"71
+[; ;sources/lcd_render.c: 71:                 r++;
+[e ++ _r -> -> 1 `i `uc ]
+"72
+[; ;sources/lcd_render.c: 72:             }
+}
+[e :U 26 ]
+"73
+[; ;sources/lcd_render.c: 73:             if(r >= 4)
+[e $ ! >= -> _r `i -> 4 `i 27  ]
+"74
+[; ;sources/lcd_render.c: 74:             {
+{
+"75
+[; ;sources/lcd_render.c: 75:                 r = 0;
+[e = _r -> -> 0 `i `uc ]
+"76
+[; ;sources/lcd_render.c: 76:                 lcd_dirty = 0;
+[e = _lcd_dirty -> -> 0 `i `uc ]
+"77
+[; ;sources/lcd_render.c: 77:             }
+}
+[e :U 27 ]
+"79
+[; ;sources/lcd_render.c: 79:             state = LCD_FSM_IDLE;
+[e = _state . `E51 0 ]
+"80
+[; ;sources/lcd_render.c: 80:             break;
+[e $U 16  ]
+"81
+[; ;sources/lcd_render.c: 81:         case LCD_FSM_SET_ADDR:
+[e :U 28 ]
+"82
+[; ;sources/lcd_render.c: 82:             break;
+[e $U 16  ]
+"83
+[; ;sources/lcd_render.c: 83:     }
+}
+[e $U 16  ]
+[e :U 17 ]
+[e [\ -> _state `ui , $ -> . `E51 0 `ui 18
+ , $ -> . `E51 2 `ui 25
+ , $ -> . `E51 1 `ui 28
+ 16 ]
+[e :U 16 ]
+"84
+[; ;sources/lcd_render.c: 84: }
+[e :UE 14 ]
+}

@@ -1,0 +1,137 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"24 Include/datos_venta.h
+[v _DatosVenta_Init `(v ~T0 @X0 0 ef ]
+"9 sources/config_model.c
+[c E36 0 1 2 3 .. ]
+[n E36 . CFG_PRECIO1 CFG_PRECIO2 CFG_TIEMPO1 CFG_TIEMPO2  ]
+"12 Include/datos_venta.h
+[s S1 `us 1 `us 1 `us 1 `us 1 `us 1 `us 1 ]
+[n S1 . Precio1 Precio2 Tiempo1 Tiempo2 Contador1 Contador2 ]
+"27
+[v _DatosVenta_Get `(*CS1 ~T0 @X0 0 ef ]
+"30
+[v _DatosVenta_SetPrecio1 `(a ~T0 @X0 0 ef1`us ]
+"31
+[v _DatosVenta_SetPrecio2 `(a ~T0 @X0 0 ef1`us ]
+"32
+[v _DatosVenta_SetTiempo1 `(a ~T0 @X0 0 ef1`us ]
+"33
+[v _DatosVenta_SetTiempo2 `(a ~T0 @X0 0 ef1`us ]
+"40
+[v _DatosVenta_Save `(v ~T0 @X0 0 ef ]
+"4 sources/config_model.c
+[v _ConfigModel_Init `(v ~T0 @X0 1 ef ]
+"5
+{
+[e :U _ConfigModel_Init ]
+[f ]
+"6
+[e ( _DatosVenta_Init ..  ]
+"7
+[e :UE 2 ]
+}
+"9
+[v _ConfigModel_Get `(us ~T0 @X0 1 ef1`E36 ]
+"10
+{
+[e :U _ConfigModel_Get ]
+"9
+[v _id `E36 ~T0 @X0 1 r1 ]
+"10
+[f ]
+"11
+[v _d `*CS1 ~T0 @X0 1 a ]
+[e = _d ( _DatosVenta_Get ..  ]
+"13
+[e $U 5  ]
+{
+"14
+[e :U 6 ]
+[e ) . *U _d 0 ]
+[e $UE 3  ]
+"15
+[e :U 7 ]
+[e ) . *U _d 1 ]
+[e $UE 3  ]
+"16
+[e :U 8 ]
+[e ) . *U _d 2 ]
+[e $UE 3  ]
+"17
+[e :U 9 ]
+[e ) . *U _d 3 ]
+[e $UE 3  ]
+"18
+[e :U 10 ]
+[e ) -> -> 0 `i `us ]
+[e $UE 3  ]
+"19
+}
+[e $U 4  ]
+[e :U 5 ]
+[e [\ -> _id `ui , $ -> . `E36 0 `ui 6
+ , $ -> . `E36 1 `ui 7
+ , $ -> . `E36 2 `ui 8
+ , $ -> . `E36 3 `ui 9
+ 10 ]
+[e :U 4 ]
+"20
+[e :UE 3 ]
+}
+"22
+[v _ConfigModel_Set `(a ~T0 @X0 1 ef2`E36`us ]
+"23
+{
+[e :U _ConfigModel_Set ]
+"22
+[v _id `E36 ~T0 @X0 1 r1 ]
+[v _value `us ~T0 @X0 1 r2 ]
+"23
+[f ]
+"24
+[e $U 13  ]
+{
+"25
+[e :U 14 ]
+[e ) ( _DatosVenta_SetPrecio1 (1 _value ]
+[e $UE 11  ]
+"26
+[e :U 15 ]
+[e ) ( _DatosVenta_SetPrecio2 (1 _value ]
+[e $UE 11  ]
+"27
+[e :U 16 ]
+[e ) ( _DatosVenta_SetTiempo1 (1 _value ]
+[e $UE 11  ]
+"28
+[e :U 17 ]
+[e ) ( _DatosVenta_SetTiempo2 (1 _value ]
+[e $UE 11  ]
+"29
+[e :U 18 ]
+[e ) -> -> 0 `i `a ]
+[e $UE 11  ]
+"30
+}
+[e $U 12  ]
+[e :U 13 ]
+[e [\ -> _id `ui , $ -> . `E36 0 `ui 14
+ , $ -> . `E36 1 `ui 15
+ , $ -> . `E36 2 `ui 16
+ , $ -> . `E36 3 `ui 17
+ 18 ]
+[e :U 12 ]
+"31
+[e :UE 11 ]
+}
+"33
+[v _ConfigModel_Save `(v ~T0 @X0 1 ef ]
+"34
+{
+[e :U _ConfigModel_Save ]
+[f ]
+"35
+[e ( _DatosVenta_Save ..  ]
+"36
+[e :UE 19 ]
+}

@@ -1,0 +1,199 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"13 sources/LCD_Render.c
+[c E51 0 1 2 .. ]
+[n E51 . LCD_FSM_IDLE LCD_FSM_SET_ADDR LCD_FSM_SEND_CHAR  ]
+"7 Include/lcd_hal.h
+[v _LCD_HAL_SendCommand `(v ~T0 @X0 0 ef1`uc ]
+"8
+[v _LCD_HAL_SendData `(v ~T0 @X0 0 ef1`uc ]
+[v F49 `uc ~T0 @X0 -> 20 `i t ]
+"4 sources/LCD_Render.c
+[v _lcd_buffer `F49 ~T0 @X0 -> 4 `i s ]
+"5
+[v _lcd_dirty `uc ~T0 @X0 1 s ]
+[i _lcd_dirty
+-> -> 1 `i `uc
+]
+"13
+[v _state `E51 ~T0 @X0 1 s ]
+"14
+[v _r `uc ~T0 @X0 1 s ]
+[v _c `uc ~T0 @X0 1 s ]
+"16
+[v _LCD_Clear_Buffer `(v ~T0 @X0 1 ef ]
+"17
+{
+[e :U _LCD_Clear_Buffer ]
+[f ]
+"18
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 4 `i 2  ]
+[e $U 3  ]
+[e :U 2 ]
+"19
+{
+[v _j `uc ~T0 @X0 1 a ]
+[e = _j -> -> 0 `i `uc ]
+[e $ < -> _j `i -> 20 `i 5  ]
+[e $U 6  ]
+[e :U 5 ]
+"20
+[e = *U + &U *U + &U _lcd_buffer * -> _i `ux -> * -> # *U &U *U &U _lcd_buffer `ui -> -> 20 `i `ui `ux * -> _j `ux -> -> # *U &U *U + &U _lcd_buffer * -> _i `ux -> * -> # *U &U *U &U _lcd_buffer `ui -> -> 20 `i `ui `ux `ui `ux -> -> 32 `ui `uc ]
+[e ++ _j -> -> 1 `i `uc ]
+[e $ < -> _j `i -> 20 `i 5  ]
+[e :U 6 ]
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 4 `i 2  ]
+[e :U 3 ]
+}
+"22
+[e = _lcd_dirty -> -> 1 `i `uc ]
+"23
+[e :UE 1 ]
+}
+"25
+[v _LCD_Write_Buffer `(v ~T0 @X0 1 ef3`uc`uc`*Cuc ]
+"26
+{
+[e :U _LCD_Write_Buffer ]
+"25
+[v _row `uc ~T0 @X0 1 r1 ]
+[v _col `uc ~T0 @X0 1 r2 ]
+[v _str `*Cuc ~T0 @X0 1 r3 ]
+"26
+[f ]
+"27
+[e $ ! || < -> _row `i -> 1 `i > -> _row `i -> 4 `i 9  ]
+[e $UE 8  ]
+[e :U 9 ]
+"29
+[v _rr `uc ~T0 @X0 1 a ]
+[e = _rr -> - -> _row `i -> 1 `i `uc ]
+"30
+[v _cc `uc ~T0 @X0 1 a ]
+[e = _cc -> - -> _col `i -> 1 `i `uc ]
+"32
+[e $U 10  ]
+[e :U 11 ]
+"33
+[e = *U + &U *U + &U _lcd_buffer * -> _rr `ux -> * -> # *U &U *U &U _lcd_buffer `ui -> -> 20 `i `ui `ux * -> ++ _cc -> -> 1 `i `uc `ux -> -> # *U &U *U + &U _lcd_buffer * -> _rr `ux -> * -> # *U &U *U &U _lcd_buffer `ui -> -> 20 `i `ui `ux `ui `ux *U ++ _str * -> -> 1 `i `x -> -> # *U _str `i `x ]
+[e :U 10 ]
+"32
+[e $ && != -> *U _str `i -> 0 `i < -> _cc `i -> 20 `i 11  ]
+[e :U 12 ]
+"35
+[e = _lcd_dirty -> -> 1 `i `uc ]
+"36
+[e :UE 8 ]
+}
+"38
+[v _LCD_FSM_Init `(v ~T0 @X0 1 ef ]
+"39
+{
+[e :U _LCD_FSM_Init ]
+[f ]
+"40
+[e ( _LCD_Clear_Buffer ..  ]
+"41
+[e = _state . `E51 0 ]
+"42
+[e = _r = _c -> -> 0 `i `uc ]
+"43
+[e :UE 13 ]
+}
+"45
+[v _LCD_Render_Task `(v ~T0 @X0 1 ef ]
+"46
+{
+[e :U _LCD_Render_Task ]
+[f ]
+"47
+[v _addr `uc ~T0 @X0 1 a ]
+"49
+[e $ ! ! != -> _lcd_dirty `i -> 0 `i 15  ]
+"50
+[e $UE 14  ]
+[e :U 15 ]
+"52
+[e $U 17  ]
+"53
+{
+"54
+[e :U 18 ]
+"55
+[e $ ! == -> _r `i -> 0 `i 19  ]
+[e = _addr -> + -> 128 `i -> _c `i `uc ]
+[e $U 20  ]
+"56
+[e :U 19 ]
+[e $ ! == -> _r `i -> 1 `i 21  ]
+[e = _addr -> + -> 192 `i -> _c `i `uc ]
+[e $U 22  ]
+"57
+[e :U 21 ]
+[e $ ! == -> _r `i -> 2 `i 23  ]
+[e = _addr -> + -> 148 `i -> _c `i `uc ]
+[e $U 24  ]
+"58
+[e :U 23 ]
+[e = _addr -> + -> 212 `i -> _c `i `uc ]
+[e :U 24 ]
+[e :U 22 ]
+[e :U 20 ]
+"60
+[e ( _LCD_HAL_SendCommand (1 _addr ]
+"61
+[e = _state . `E51 2 ]
+"62
+[e $U 16  ]
+"64
+[e :U 25 ]
+"65
+[e ( _LCD_HAL_SendData (1 -> *U + &U *U + &U _lcd_buffer * -> _r `ux -> * -> # *U &U *U &U _lcd_buffer `ui -> -> 20 `i `ui `ux * -> _c `ux -> -> # *U &U *U + &U _lcd_buffer * -> _r `ux -> * -> # *U &U *U &U _lcd_buffer `ui -> -> 20 `i `ui `ux `ui `ux `uc ]
+"67
+[e ++ _c -> -> 1 `i `uc ]
+"68
+[e $ ! >= -> _c `i -> 20 `i 26  ]
+"69
+{
+"70
+[e = _c -> -> 0 `i `uc ]
+"71
+[e ++ _r -> -> 1 `i `uc ]
+"72
+}
+[e :U 26 ]
+"73
+[e $ ! >= -> _r `i -> 4 `i 27  ]
+"74
+{
+"75
+[e = _r -> -> 0 `i `uc ]
+"76
+[e = _lcd_dirty -> -> 0 `i `uc ]
+"77
+}
+[e :U 27 ]
+"79
+[e = _state . `E51 0 ]
+"80
+[e $U 16  ]
+"81
+[e :U 28 ]
+"82
+[e $U 16  ]
+"83
+}
+[e $U 16  ]
+[e :U 17 ]
+[e [\ -> _state `ui , $ -> . `E51 0 `ui 18
+ , $ -> . `E51 2 `ui 25
+ , $ -> . `E51 1 `ui 28
+ 16 ]
+[e :U 16 ]
+"84
+[e :UE 14 ]
+}
